@@ -4,6 +4,7 @@ let character = {
     ancestryGifts: [],
     community: '',
     communityFeature: '',
+    communityAbility: '',
     class: '',
     subclass: '',
     domains: [],
@@ -70,12 +71,56 @@ const VOIDLIGHT_DATA = {
     },
     
     communities: {
-        'Core World': 'Glittering spires and social labyrinths',
-        'Frontier Colony': 'Dangerous settlements full of opportunities',
-        'Space Station': 'Claustrophobic artificial environments',
-        'Nomad Ship': 'Constantly traveling between stars',
-        'Isolationist Commune': 'Community with unique culture and beliefs',
-        'Reclaimed Ruin': 'Home built in ancient Precursor ruins'
+        'Core World': {
+            description: 'Glittering Spires and Social Labyrinths',
+            feature: 'Institutional Leverage',
+            ability: 'When navigating bureaucracy, roll d20 as Hope die. On 10+, gain 1 Favor Token for permits or exposing flaws.'
+        },
+        'Frontier Colony': {
+            description: 'Grit, Rust, and Shared Hardship',
+            feature: 'Scrap-Savvy Ingenuity',
+            ability: 'Improvise tools from junk: Roll Fear die for effect. Once per rest, reroll by sacrificing personal item.'
+        },
+        'Void Station': {
+            description: 'Pressurized Cans in the Dark',
+            feature: 'Cross-Species Intuition',
+            ability: '3 Linguistic Tokens for negotiations. Spend 1 to reroll Hope or treat Fear as Hope. Regain by mediating disputes.'
+        },
+        'Trade Hub': {
+            description: 'Chaotic Symphony of Commerce',
+            feature: 'Market Oracle',
+            ability: 'When negotiating prices, roll Comprehend (DC12). On success, gain true intel +1 Hope. Critical: 24h Advantage on related rolls.'
+        },
+        'Research Outpost': {
+            description: 'Labs Humming Over Silent Ruins',
+            feature: 'Scientific Resonance',
+            ability: 'Once per session, attune to creature/artifact: roll Insight/Investigation vs DC14. Learn secret + advantage on related rolls.'
+        },
+        'Free Fleet': {
+            description: 'Home is the Next Jump',
+            feature: 'Voidborn Kinship',
+            ability: 'When recalling hazards or aiding fleet allies, reroll failed Hope piloting OR let ally use your Hope die result.'
+        },
+        'AgriSynth': {
+            description: 'Children of the Harvest-Mind',
+            feature: 'Nourished by Nature',
+            ability: 'Advantage on Knowledge to stabilize creatures and Survival to find/purify food in tech-supported environments.'
+        },
+        'Axiom': {
+            description: 'The Chosen of the Unbroken Chain',
+            feature: 'Scriptural Knowledge',
+            ability: 'Advantage on checks about faith history/lore and Insight to discern falsehoods in faith conversations.'
+        },
+        'Circuit': {
+            description: 'The Integrated Self',
+            feature: 'Hardware Proficiency',
+            ability: 'Advantage on Computers checks to hack/interface devices and Thievery for electronic locks/security systems.'
+        },
+        'Voidfarer': {
+            description: 'The Edge of the Abyss',
+            feature: 'Cold-Blooded',
+            ability: 'Advantage on saves vs extreme cold/vacuum and Stealth in zero-gravity/low-light environments.'
+        }
     },
     
     classes: {
@@ -244,7 +289,9 @@ function validateCommunity() {
         return false;
     }
     character.community = selected.value;
-    character.communityFeature = selected.dataset.feature;
+    const communityData = VOIDLIGHT_DATA.communities[selected.value];
+    character.communityFeature = communityData.feature;
+    character.communityAbility = communityData.ability;
     return true;
 }
 
@@ -449,6 +496,7 @@ function showCharacterSheet() {
 function populateCharacterSheet() {
     const summary = document.getElementById('characterSummary');
     const classData = VOIDLIGHT_DATA.classes[character.class];
+    const communityData = VOIDLIGHT_DATA.communities[character.community];
     
     summary.innerHTML = `
         <div class="character-info">
@@ -460,7 +508,9 @@ function populateCharacterSheet() {
                     <p><strong>Gifts:</strong> ${character.ancestryGifts.join(', ')}</p>
                     
                     <h4>Community: ${character.community}</h4>
-                    <p><strong>Environment:</strong> ${VOIDLIGHT_DATA.communities[character.community]}</p>
+                    <p><strong>Environment:</strong> ${communityData.description}</p>
+                    <p><strong>Feature:</strong> ${character.communityFeature}</p>
+                    <p><strong>Ability:</strong> ${character.communityAbility}</p>
                     
                     <h4>Class: ${character.class}</h4>
                     <p><strong>Subclass:</strong> ${character.subclass}</p>
@@ -491,7 +541,7 @@ function populateCharacterSheet() {
             </div>
             
             <h4>Background & Experience</h4>
-            <p><strong>Community:</strong> ${character.community}</p>
+            <p><strong>Community:</strong> ${character.community} - ${communityData.description}</p>
             <p><strong>Experience:</strong> ${character.experience || 'Not specified'}</p>
             <p><strong>Background:</strong> ${character.background || 'Not specified'}</p>
             
@@ -510,6 +560,7 @@ function populateCharacterSheet() {
             
             <div style="background: #f0e68c; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
                 <p><em>"In the fractured galaxy after the Great Silence, your character carries the scars of a century of isolation and the weight of their community's hopes. They are a survivor, an echo of the past and a bet on the future."</em></p>
+                <p><em>"Your community shaped you: ${communityData.description}"</em></p>
             </div>
         </div>
     `;
@@ -539,6 +590,7 @@ function resetCharacter() {
         ancestryGifts: [],
         community: '',
         communityFeature: '',
+        communityAbility: '',
         class: '',
         subclass: '',
         domains: [],
