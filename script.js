@@ -907,12 +907,69 @@ function isMobileDevice() {
            (navigator.msMaxTouchPoints > 0);
 }
 
+// Debug function to help identify issues
+function debugLog(message, data) {
+    console.log(`DEBUG: ${message}`, data);
+    
+    // Create or update debug display for mobile testing
+    let debugElement = document.getElementById('debug-display');
+    if (!debugElement) {
+        debugElement = document.createElement('div');
+        debugElement.id = 'debug-display';
+        debugElement.style.position = 'fixed';
+        debugElement.style.bottom = '10px';
+        debugElement.style.right = '10px';
+        debugElement.style.backgroundColor = 'rgba(0,0,0,0.7)';
+        debugElement.style.color = 'white';
+        debugElement.style.padding = '10px';
+        debugElement.style.borderRadius = '5px';
+        debugElement.style.maxWidth = '80%';
+        debugElement.style.maxHeight = '30%';
+        debugElement.style.overflow = 'auto';
+        debugElement.style.zIndex = '9999';
+        debugElement.style.fontSize = '12px';
+        debugElement.style.fontFamily = 'monospace';
+        document.body.appendChild(debugElement);
+    }
+    
+    const logEntry = document.createElement('div');
+    logEntry.textContent = `${message}: ${JSON.stringify(data)}`;
+    debugElement.appendChild(logEntry);
+    
+    // Keep only the last 10 messages
+    while (debugElement.childNodes.length > 10) {
+        debugElement.removeChild(debugElement.firstChild);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Add mobile class to body if on mobile device
     if (isMobileDevice()) {
         document.body.classList.add('mobile-device');
-        console.log("Mobile device detected");
+        debugLog("Mobile device detected", {});
     }
+    
+    // Add debug toggle button
+    const debugButton = document.createElement('button');
+    debugButton.textContent = "Debug";
+    debugButton.style.position = 'fixed';
+    debugButton.style.top = '10px';
+    debugButton.style.right = '10px';
+    debugButton.style.zIndex = '9999';
+    debugButton.style.backgroundColor = 'rgba(0,0,0,0.7)';
+    debugButton.style.color = 'white';
+    debugButton.style.border = 'none';
+    debugButton.style.borderRadius = '5px';
+    debugButton.style.padding = '5px 10px';
+    
+    debugButton.addEventListener('click', function() {
+        const debugDisplay = document.getElementById('debug-display');
+        if (debugDisplay) {
+            debugDisplay.style.display = debugDisplay.style.display === 'none' ? 'block' : 'none';
+        }
+    });
+    
+    document.body.appendChild(debugButton);
     // Tab navigation
     const tabs = document.querySelectorAll('.nav-tab');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -1052,9 +1109,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Add click handlers to the ancestry cards themselves for better UX
+    // Add click and touch handlers to the ancestry cards themselves for better UX
     const ancestryCards = document.querySelectorAll('.ancestry-card');
     ancestryCards.forEach(card => {
+        // Click handler
         card.addEventListener('click', function(e) {
             // Don't trigger if clicking on the button itself (let the button handler work)
             if (e.target.classList.contains('select-ancestry') || 
@@ -1066,6 +1124,29 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Card clicked for ancestry:", ancestryId);
             selectAncestry(ancestryId);
         });
+        
+        // Touch handlers for mobile
+        card.addEventListener('touchstart', function(e) {
+            // Don't prevent default here to allow scrolling
+            this.classList.add('touch-active');
+        }, { passive: true });
+        
+        card.addEventListener('touchend', function(e) {
+            this.classList.remove('touch-active');
+            
+            // Don't trigger if touching the button itself
+            if (e.target.classList.contains('select-ancestry') || 
+                e.target.closest('.select-ancestry')) {
+                return;
+            }
+            
+            // Prevent default only for card selection
+            e.preventDefault();
+            
+            const ancestryId = this.getAttribute('data-ancestry');
+            console.log("Card touched for ancestry:", ancestryId);
+            selectAncestry(ancestryId);
+        }, { passive: false });
     });
     
     // Community selection
@@ -1077,9 +1158,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Add click handlers to the community cards themselves for better UX
+    // Add click and touch handlers to the community cards themselves for better UX
     const communityCards = document.querySelectorAll('.community-card');
     communityCards.forEach(card => {
+        // Click handler
         card.addEventListener('click', function(e) {
             // Don't trigger if clicking on the button itself (let the button handler work)
             if (e.target.classList.contains('select-community') || 
@@ -1091,6 +1173,29 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Card clicked for community:", communityId);
             selectCommunity(communityId);
         });
+        
+        // Touch handlers for mobile
+        card.addEventListener('touchstart', function(e) {
+            // Don't prevent default here to allow scrolling
+            this.classList.add('touch-active');
+        }, { passive: true });
+        
+        card.addEventListener('touchend', function(e) {
+            this.classList.remove('touch-active');
+            
+            // Don't trigger if touching the button itself
+            if (e.target.classList.contains('select-community') || 
+                e.target.closest('.select-community')) {
+                return;
+            }
+            
+            // Prevent default only for card selection
+            e.preventDefault();
+            
+            const communityId = this.getAttribute('data-community');
+            console.log("Card touched for community:", communityId);
+            selectCommunity(communityId);
+        }, { passive: false });
     });
     
     // Class selection
@@ -1110,9 +1215,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Add click handlers to the class cards themselves for better UX
+    // Add click and touch handlers to the class cards themselves for better UX
     const classCards = document.querySelectorAll('.class-card');
     classCards.forEach(card => {
+        // Click handler
         card.addEventListener('click', function(e) {
             // Don't trigger if clicking on the button itself or the subclass select (let those handlers work)
             if (e.target.classList.contains('select-class') || 
@@ -1136,6 +1242,42 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Card clicked for class:", classId, "with subclass:", subclassId);
             selectClass(classId, subclassId);
         });
+        
+        // Touch handlers for mobile
+        card.addEventListener('touchstart', function(e) {
+            // Don't prevent default here to allow scrolling
+            this.classList.add('touch-active');
+        }, { passive: true });
+        
+        card.addEventListener('touchend', function(e) {
+            this.classList.remove('touch-active');
+            
+            // Don't trigger if touching the button itself or the subclass select
+            if (e.target.classList.contains('select-class') || 
+                e.target.closest('.select-class') ||
+                e.target.tagName === 'SELECT' ||
+                e.target.closest('select')) {
+                return;
+            }
+            
+            const classId = this.getAttribute('data-class');
+            const subclassSelect = document.getElementById(`${classId}-subclass`);
+            const subclassId = subclassSelect.value;
+            
+            if (!subclassId) {
+                // Focus on the subclass select to prompt the user
+                e.preventDefault();
+                subclassSelect.focus();
+                alert('Please select a subclass before continuing.');
+                return;
+            }
+            
+            // Prevent default only for card selection
+            e.preventDefault();
+            
+            console.log("Card touched for class:", classId, "with subclass:", subclassId);
+            selectClass(classId, subclassId);
+        }, { passive: false });
     });
     
     // Trait assignment drag and drop
@@ -1170,7 +1312,7 @@ function switchToTab(tabId) {
 
 // Function to select an ancestry
 function selectAncestry(ancestryId) {
-    console.log("Selecting ancestry:", ancestryId);
+    debugLog("Selecting ancestry", ancestryId);
     const ancestryData = window.ancestryData[ancestryId];
     if (!ancestryData) {
         console.error("Ancestry data not found for:", ancestryId);
@@ -1199,32 +1341,57 @@ function selectAncestry(ancestryId) {
     
     // Highlight the selected card
     document.querySelectorAll('.ancestry-card').forEach(card => {
+        // Remove selected class from all cards
         card.classList.remove('selected');
+        
         // Update the button text to "Select" for all cards
         const button = card.querySelector('.select-ancestry');
         if (button) {
-            const ancestryName = button.getAttribute('data-ancestry').split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-            button.textContent = `Select ${ancestryName}`;
+            // Format the ancestry name properly
+            let displayName = button.getAttribute('data-ancestry');
+            if (displayName.includes('-')) {
+                displayName = displayName.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            } else {
+                displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1);
+            }
+            
+            button.textContent = `Select ${displayName}`;
             button.style.backgroundColor = "var(--golden-accent)";
         }
     });
     
+    // Add selected class to the chosen card
     const selectedCard = document.querySelector(`.ancestry-card[data-ancestry="${ancestryId}"]`);
     if (selectedCard) {
         selectedCard.classList.add('selected');
+        
         // Update the button text to "Selected" for the chosen card
         const button = selectedCard.querySelector('.select-ancestry');
         if (button) {
             button.textContent = "✓ Selected";
             button.style.backgroundColor = "var(--golden-accent-dark)";
         }
+        
+        // Add touch feedback for mobile
+        if (isMobileDevice()) {
+            // Flash effect for better mobile feedback
+            selectedCard.style.transition = "background-color 0.3s";
+            selectedCard.style.backgroundColor = "rgba(212, 175, 55, 0.3)";
+            setTimeout(() => {
+                selectedCard.style.backgroundColor = "";
+            }, 300);
+        }
     }
 }
 
 // Function to select a community
 function selectCommunity(communityId) {
+    debugLog("Selecting community", communityId);
     const communityData = window.communityData[communityId];
-    if (!communityData) return;
+    if (!communityData) {
+        console.error("Community data not found for:", communityId);
+        return;
+    }
     
     character.community = communityId;
     character.communityFeature = communityData.feature;
@@ -1245,35 +1412,63 @@ function selectCommunity(communityId) {
     
     // Highlight the selected card
     document.querySelectorAll('.community-card').forEach(card => {
+        // Remove selected class from all cards
         card.classList.remove('selected');
+        
         // Update the button text to "Select" for all cards
         const button = card.querySelector('.select-community');
         if (button) {
-            const communityName = button.getAttribute('data-community').split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-            button.textContent = `Select ${communityName}`;
+            // Format the community name properly
+            let displayName = button.getAttribute('data-community');
+            if (displayName.includes('-')) {
+                displayName = displayName.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            } else {
+                displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1);
+            }
+            
+            button.textContent = `Select ${displayName}`;
             button.style.backgroundColor = "var(--golden-accent)";
         }
     });
     
+    // Add selected class to the chosen card
     const selectedCard = document.querySelector(`.community-card[data-community="${communityId}"]`);
     if (selectedCard) {
         selectedCard.classList.add('selected');
+        
         // Update the button text to "Selected" for the chosen card
         const button = selectedCard.querySelector('.select-community');
         if (button) {
             button.textContent = "✓ Selected";
             button.style.backgroundColor = "var(--golden-accent-dark)";
         }
+        
+        // Add touch feedback for mobile
+        if (isMobileDevice()) {
+            // Flash effect for better mobile feedback
+            selectedCard.style.transition = "background-color 0.3s";
+            selectedCard.style.backgroundColor = "rgba(212, 175, 55, 0.3)";
+            setTimeout(() => {
+                selectedCard.style.backgroundColor = "";
+            }, 300);
+        }
     }
 }
 
 // Function to select a class and subclass
 function selectClass(classId, subclassId) {
+    debugLog("Selecting class", {classId, subclassId});
     const classInfo = window.classData[classId];
-    if (!classInfo) return;
+    if (!classInfo) {
+        console.error("Class data not found for:", classId);
+        return;
+    }
     
     const subclassInfo = classInfo.subclasses[subclassId];
-    if (!subclassInfo) return;
+    if (!subclassInfo) {
+        console.error("Subclass data not found for:", subclassId);
+        return;
+    }
     
     character.class = classId;
     character.subclass = subclassId;
@@ -1314,7 +1509,9 @@ function selectClass(classId, subclassId) {
     
     // Highlight the selected card
     document.querySelectorAll('.class-card').forEach(card => {
+        // Remove selected class from all cards
         card.classList.remove('selected');
+        
         // Update the button text to "Select" for all cards
         const button = card.querySelector('.select-class');
         if (button) {
@@ -1324,26 +1521,44 @@ function selectClass(classId, subclassId) {
         }
     });
     
+    // Add selected class to the chosen card
     const selectedCard = document.querySelector(`.class-card[data-class="${classId}"]`);
     if (selectedCard) {
         selectedCard.classList.add('selected');
+        
         // Update the button text to "Selected" for the chosen card
         const button = selectedCard.querySelector('.select-class');
         if (button) {
             button.textContent = "✓ Selected";
             button.style.backgroundColor = "var(--golden-accent-dark)";
         }
+        
+        // Update the subclass select to show the selected subclass
+        const subclassSelect = document.getElementById(`${classId}-subclass`);
+        if (subclassSelect) {
+            subclassSelect.value = subclassId;
+        }
+        
+        // Add touch feedback for mobile
+        if (isMobileDevice()) {
+            // Flash effect for better mobile feedback
+            selectedCard.style.transition = "background-color 0.3s";
+            selectedCard.style.backgroundColor = "rgba(212, 175, 55, 0.3)";
+            setTimeout(() => {
+                selectedCard.style.backgroundColor = "";
+            }, 300);
+        }
     }
 }
 
 // Function to set up trait drag and drop with mobile touch support
 function setupTraitDragAndDrop() {
-    console.log("Setting up trait drag and drop with mobile support");
+    debugLog("Setting up trait drag and drop with mobile support", {});
     const modifiers = document.querySelectorAll('.modifier');
     const traitValues = document.querySelectorAll('.trait-value');
     
     // Make sure we found the elements
-    console.log(`Found ${modifiers.length} modifiers and ${traitValues.length} trait values`);
+    debugLog("Found elements", {modifiers: modifiers.length, traitValues: traitValues.length});
     
     // Add click/touch handlers for mobile-friendly interaction
     modifiers.forEach(modifier => {
@@ -1365,10 +1580,11 @@ function setupTraitDragAndDrop() {
         // Touch/click event for all devices
         modifier.addEventListener('click', function(e) {
             e.preventDefault(); // Prevent double events on some devices
-            console.log('Modifier clicked/touched', this.getAttribute('data-value'));
+            const modifierValue = this.getAttribute('data-value');
+            debugLog('Modifier clicked/touched', {value: modifierValue});
             
             // Store the selected modifier value for click-based assignment
-            window.selectedModifier = this.getAttribute('data-value');
+            window.selectedModifier = modifierValue;
             
             // Visual feedback
             document.querySelectorAll('.modifier').forEach(m => m.classList.remove('selected'));
@@ -1377,7 +1593,7 @@ function setupTraitDragAndDrop() {
             // Add a "selected" message for better mobile feedback
             const feedbackMsg = document.getElementById('selection-feedback');
             if (feedbackMsg) {
-                feedbackMsg.textContent = `Selected: ${this.getAttribute('data-value')}. Now tap a trait to assign.`;
+                feedbackMsg.textContent = `Selected: ${modifierValue}. Now tap a trait to assign.`;
                 feedbackMsg.style.display = 'block';
             }
         });
@@ -1418,9 +1634,15 @@ function setupTraitDragAndDrop() {
         // Click/touch event for all devices
         traitValue.addEventListener('click', function(e) {
             e.preventDefault(); // Prevent double events on some devices
-            console.log('Trait value clicked/touched');
+            const traitName = this.getAttribute('data-trait');
+            debugLog('Trait value clicked/touched', {trait: traitName});
+            
             if (window.selectedModifier) {
-                console.log('Assigning selected modifier:', window.selectedModifier);
+                debugLog('Assigning modifier to trait', {
+                    modifier: window.selectedModifier,
+                    trait: traitName
+                });
+                
                 assignTraitValue(this, window.selectedModifier);
                 window.selectedModifier = null;
                 
@@ -1431,6 +1653,20 @@ function setupTraitDragAndDrop() {
                 const feedbackMsg = document.getElementById('selection-feedback');
                 if (feedbackMsg) {
                     feedbackMsg.style.display = 'none';
+                }
+            } else {
+                debugLog('No modifier selected', {trait: traitName});
+                
+                // Show a message to select a modifier first
+                const feedbackMsg = document.getElementById('selection-feedback');
+                if (feedbackMsg) {
+                    feedbackMsg.textContent = `Please select a modifier (+2, +1, etc.) first.`;
+                    feedbackMsg.style.display = 'block';
+                    
+                    // Hide the message after 2 seconds
+                    setTimeout(() => {
+                        feedbackMsg.style.display = 'none';
+                    }, 2000);
                 }
             }
         });
@@ -1468,21 +1704,28 @@ function setupTraitDragAndDrop() {
 // Helper function to assign trait values
 function assignTraitValue(traitElement, modifierValue) {
     const traitName = traitElement.getAttribute('data-trait');
+    debugLog('Assigning trait value', {trait: traitName, value: modifierValue});
     
     // Check if this trait already has a value
     if (traitElement.textContent !== '—' && traitElement.textContent !== '') {
         // Return the current value to the pool
         const currentValue = traitElement.textContent;
+        debugLog('Returning current value to pool', {currentValue});
+        
         const unusedModifier = document.querySelector(`.modifier[data-value="${currentValue}"]:not(.assigned)`);
         if (unusedModifier) {
             unusedModifier.classList.remove('hidden');
             unusedModifier.classList.remove('assigned');
+            debugLog('Modifier returned to pool', {value: currentValue});
+        } else {
+            debugLog('Could not find modifier to return', {value: currentValue});
         }
     }
     
     // Assign the new value
     traitElement.textContent = modifierValue;
     character.traits[traitName] = modifierValue;
+    debugLog('Trait updated', {trait: traitName, value: modifierValue});
     
     // Add selected styling to the trait value
     traitElement.classList.add('selected');
@@ -1492,6 +1735,19 @@ function assignTraitValue(traitElement, modifierValue) {
     if (usedModifier) {
         usedModifier.classList.add('hidden');
         usedModifier.classList.add('assigned');
+        debugLog('Modifier marked as used', {value: modifierValue});
+    } else {
+        debugLog('Could not find modifier to mark as used', {value: modifierValue});
+    }
+    
+    // Add touch feedback for mobile
+    if (isMobileDevice()) {
+        // Flash effect for better mobile feedback
+        traitElement.style.transition = "background-color 0.3s";
+        traitElement.style.backgroundColor = "rgba(212, 175, 55, 0.3)";
+        setTimeout(() => {
+            traitElement.style.backgroundColor = "";
+        }, 300);
     }
 }
 
