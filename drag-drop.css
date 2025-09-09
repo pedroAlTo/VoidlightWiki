@@ -13,8 +13,8 @@
 }
 
 .modifier {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,12 +22,15 @@
   border: 2px solid var(--golden-accent);
   border-radius: 50%;
   font-weight: bold;
-  font-size: 1.2rem;
-  cursor: grab;
+  font-size: 1.5rem;
+  cursor: pointer;
   transition: all 0.2s ease;
+  margin: 5px;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+  user-select: none; /* Prevent text selection */
 }
 
-.modifier:hover {
+.modifier:hover, .modifier:active {
   transform: scale(1.1);
   box-shadow: 0 0 10px var(--golden-accent-light);
 }
@@ -49,23 +52,26 @@
 }
 
 .trait-value {
-  width: 60px;
-  height: 40px;
+  width: 70px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: var(--bone-white);
-  border: 2px dashed var(--golden-accent-light);
-  border-radius: 5px;
+  border: 3px dashed var(--golden-accent-light);
+  border-radius: 8px;
   font-weight: bold;
+  font-size: 1.3rem;
   cursor: pointer;
   transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+  user-select: none; /* Prevent text selection */
 }
 
 .trait-value.selected {
-  border: 2px solid var(--golden-accent);
+  border: 3px solid var(--golden-accent);
   background-color: rgba(212, 175, 55, 0.15);
-  box-shadow: 0 0 5px var(--golden-accent-light);
+  box-shadow: 0 0 8px var(--golden-accent-light);
 }
 
 .trait-value.drag-over {
@@ -83,12 +89,83 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-  padding: 10px;
+  padding: 15px;
   background-color: var(--bone-white-darker);
-  border-radius: 5px;
+  border-radius: 8px;
   transition: all 0.2s ease;
 }
 
-.trait-assignment:hover {
+.trait-assignment:hover, .trait-assignment:active {
   background-color: rgba(212, 175, 55, 0.1);
+}
+
+/* Selection feedback message */
+.selection-feedback {
+  background-color: var(--golden-accent);
+  color: var(--text-light);
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 10px 0;
+  text-align: center;
+  font-weight: bold;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+/* Mobile instructions */
+.mobile-instructions {
+  background-color: rgba(212, 175, 55, 0.2);
+  border: 2px solid var(--golden-accent);
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.mobile-instructions p {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Hide on desktop */
+@media (min-width: 769px) {
+  .mobile-instructions {
+    display: none;
+  }
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .modifier-pool {
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .modifier {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+  }
+  
+  .trait-assignment {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .trait-name {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  
+  .trait-value {
+    width: 80px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
 }

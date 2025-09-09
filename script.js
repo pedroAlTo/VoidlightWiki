@@ -899,7 +899,20 @@ const classData = {
 };
 
 // Initialize the application when the DOM is fully loaded
+// Detect if we're on a mobile device
+function isMobileDevice() {
+    return (window.innerWidth <= 768) || 
+           ('ontouchstart' in window) || 
+           (navigator.maxTouchPoints > 0) || 
+           (navigator.msMaxTouchPoints > 0);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Add mobile class to body if on mobile device
+    if (isMobileDevice()) {
+        document.body.classList.add('mobile-device');
+        console.log("Mobile device detected");
+    }
     // Tab navigation
     const tabs = document.querySelectorAll('.nav-tab');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -1323,21 +1336,21 @@ function selectClass(classId, subclassId) {
     }
 }
 
-// Function to set up trait drag and drop
+// Function to set up trait drag and drop with mobile touch support
 function setupTraitDragAndDrop() {
-    console.log("Setting up trait drag and drop");
+    console.log("Setting up trait drag and drop with mobile support");
     const modifiers = document.querySelectorAll('.modifier');
     const traitValues = document.querySelectorAll('.trait-value');
     
     // Make sure we found the elements
     console.log(`Found ${modifiers.length} modifiers and ${traitValues.length} trait values`);
     
-    // Add click handlers as a fallback for drag and drop
+    // Add click/touch handlers for mobile-friendly interaction
     modifiers.forEach(modifier => {
-        // Set draggable attribute explicitly
+        // Set draggable attribute explicitly for desktop
         modifier.setAttribute('draggable', 'true');
         
-        // Drag events
+        // Drag events for desktop
         modifier.addEventListener('dragstart', function(e) {
             console.log('Drag started', this.getAttribute('data-value'));
             e.dataTransfer.setData('text/plain', this.getAttribute('data-value'));
@@ -1349,20 +1362,41 @@ function setupTraitDragAndDrop() {
             this.classList.remove('dragging');
         });
         
-        // Click event as fallback
-        modifier.addEventListener('click', function() {
-            console.log('Modifier clicked', this.getAttribute('data-value'));
+        // Touch/click event for all devices
+        modifier.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent double events on some devices
+            console.log('Modifier clicked/touched', this.getAttribute('data-value'));
+            
             // Store the selected modifier value for click-based assignment
             window.selectedModifier = this.getAttribute('data-value');
             
             // Visual feedback
             document.querySelectorAll('.modifier').forEach(m => m.classList.remove('selected'));
             this.classList.add('selected');
+            
+            // Add a "selected" message for better mobile feedback
+            const feedbackMsg = document.getElementById('selection-feedback');
+            if (feedbackMsg) {
+                feedbackMsg.textContent = `Selected: ${this.getAttribute('data-value')}. Now tap a trait to assign.`;
+                feedbackMsg.style.display = 'block';
+            }
         });
+        
+        // Touch events for mobile
+        modifier.addEventListener('touchstart', function(e) {
+            // Prevent scrolling when touching modifiers
+            e.preventDefault();
+        }, { passive: false });
+        
+        modifier.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            // Trigger the click handler
+            this.click();
+        }, { passive: false });
     });
     
     traitValues.forEach(traitValue => {
-        // Drag events
+        // Drag events for desktop
         traitValue.addEventListener('dragover', function(e) {
             e.preventDefault();
             this.classList.add('drag-over');
@@ -1381,9 +1415,10 @@ function setupTraitDragAndDrop() {
             assignTraitValue(this, modifierValue);
         });
         
-        // Click event as fallback
-        traitValue.addEventListener('click', function() {
-            console.log('Trait value clicked');
+        // Click/touch event for all devices
+        traitValue.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent double events on some devices
+            console.log('Trait value clicked/touched');
             if (window.selectedModifier) {
                 console.log('Assigning selected modifier:', window.selectedModifier);
                 assignTraitValue(this, window.selectedModifier);
@@ -1391,9 +1426,43 @@ function setupTraitDragAndDrop() {
                 
                 // Remove selection from modifiers
                 document.querySelectorAll('.modifier').forEach(m => m.classList.remove('selected'));
+                
+                // Clear the feedback message
+                const feedbackMsg = document.getElementById('selection-feedback');
+                if (feedbackMsg) {
+                    feedbackMsg.style.display = 'none';
+                }
             }
         });
+        
+        // Touch events for mobile
+        traitValue.addEventListener('touchstart', function(e) {
+            // Don't prevent default here to allow scrolling
+        }, { passive: true });
+        
+        traitValue.addEventListener('touchend', function(e) {
+            // Prevent default only if we have a selected modifier
+            if (window.selectedModifier) {
+                e.preventDefault();
+                // Trigger the click handler
+                this.click();
+            }
+        }, { passive: false });
     });
+    
+    // Add a feedback message element if it doesn't exist
+    if (!document.getElementById('selection-feedback')) {
+        const feedbackDiv = document.createElement('div');
+        feedbackDiv.id = 'selection-feedback';
+        feedbackDiv.className = 'selection-feedback';
+        feedbackDiv.style.display = 'none';
+        
+        // Insert after the modifier pool
+        const modifierPool = document.querySelector('.modifier-pool');
+        if (modifierPool && modifierPool.parentNode) {
+            modifierPool.parentNode.insertBefore(feedbackDiv, modifierPool.nextSibling);
+        }
+    }
 }
 
 // Helper function to assign trait values

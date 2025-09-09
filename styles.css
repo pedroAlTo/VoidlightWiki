@@ -29,6 +29,11 @@ body {
   margin: 0;
 }
 
+body.mobile-device {
+  font-size: 16px; /* Ensure readable text size on mobile */
+  -webkit-text-size-adjust: 100%; /* Prevent iOS font size adjustment */
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -300,6 +305,7 @@ button:hover, .btn:hover {
 @media (max-width: 768px) {
   .container {
     padding: 10px;
+    max-width: 100%;
   }
   
   .grid {
@@ -312,6 +318,64 @@ button:hover, .btn:hover {
   
   .character-details {
     grid-template-columns: 1fr;
+  }
+  
+  /* Improved mobile navigation */
+  .nav-tabs {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .nav-tab {
+    margin: 5px;
+    padding: 12px 15px;
+    font-size: 1.1rem;
+  }
+  
+  /* Larger buttons for touch */
+  button, .btn {
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    margin: 5px;
+    min-width: 120px;
+  }
+  
+  /* Larger form elements */
+  input[type="text"],
+  input[type="number"],
+  textarea,
+  select {
+    padding: 15px;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+  
+  /* Larger card elements */
+  .card {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Larger text */
+  h1 {
+    font-size: 2.2rem;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  p {
+    font-size: 1.1rem;
+  }
+  
+  /* Fix for iOS Safari */
+  * {
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
