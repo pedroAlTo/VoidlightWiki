@@ -426,50 +426,50 @@ const classData = {
                 name: "Guardian",
                 features: {
                     foundation: {
-                        name: "Protective Stance",
-                        description: "As a reaction, reduce damage to an ally within Close range by your Strength modifier."
+                        name: "Bastion Protocol",
+                        description: "Reaction: When an ally takes damage nearby, reduce it by 1d8 + Spirit."
                     },
                     specialization: {
-                        name: "Shield Wall",
-                        description: "When using a shield, grant +1 Evasion to adjacent allies."
+                        name: "Reinforced Weave",
+                        description: "Action: Grant adjacent allies +1 Armor until your next turn."
                     },
                     mastery: {
-                        name: "Indomitable",
-                        description: "Once per long rest, when reduced to 0 HP, immediately regain 1d6 + Strength modifier HP."
+                        name: "Absorb Barrage",
+                        description: "Reaction: Redirect all damage within Near to yourself (take half)."
                     }
                 }
             },
-            striker: {
-                name: "Striker",
+            "military-officer": {
+                name: "Military Officer",
                 features: {
                     foundation: {
-                        name: "Deadly Precision",
-                        description: "Once per turn, add your Agility modifier to damage with a successful attack."
+                        name: "Tactical Overwatch",
+                        description: "Free, 1 Hope/round: Grant an ally +1d6 damage on their next attack."
                     },
                     specialization: {
-                        name: "Multiattack",
-                        description: "Make two attacks with a -2 penalty to each attack roll."
+                        name: "Field Upgrades",
+                        description: "Action: Permanently add one tag (e.g., Reliable) to an ally's weapon or armor."
                     },
                     mastery: {
-                        name: "Critical Mastery",
-                        description: "Your critical hit threshold is reduced by 2 (typically from 20 to 18-20)."
+                        name: "Drone Swarm",
+                        description: "Action: Summon 1d4 drones for 3 rounds (1d8 damage each)."
                     }
                 }
             },
-            tactician: {
-                name: "Tactician",
+            peacekeeper: {
+                name: "Peacekeeper",
                 features: {
                     foundation: {
-                        name: "Battlefield Analysis",
-                        description: "As a bonus action, identify a target's weakness. Your next attack against them has advantage."
+                        name: "De-escalate",
+                        description: "Action: Roll with advantage to pacify aggressors; on success, gain 1 Hope."
                     },
                     specialization: {
-                        name: "Coordinated Strike",
-                        description: "When you hit an enemy, the next ally to attack that enemy has advantage."
+                        name: "Temporary Alliance",
+                        description: "Action: Turn one foe into an ally for 1 hour (Presence vs. Spirit)."
                     },
                     mastery: {
-                        name: "Master Strategist",
-                        description: "At the start of combat, grant 1 Hope to each ally within Close range."
+                        name: "Restorative Justice",
+                        description: "Downtime: Reduce crime in a settlement for 1 week; entering it grants +2 Hope."
                     }
                 }
             }
@@ -492,37 +492,37 @@ const classData = {
             description: "Once per rest, improvise a device that grants advantage on a specific type of check for 10 minutes."
         },
         subclasses: {
-            mechanic: {
-                name: "Mechanic",
+            "tech-specialist": {
+                name: "Tech Specialist",
                 features: {
                     foundation: {
-                        name: "Quick Fix",
-                        description: "As an action, repair a mechanical device to restore basic functionality for 1 hour."
+                        name: "Digital Ghost",
+                        description: "Action: Advantage on hacking tests. Spend 1 Hope to bypass security without trace."
                     },
                     specialization: {
-                        name: "Overcharge",
-                        description: "Enhance a weapon or device to grant +2 to its effectiveness for 10 minutes. After this time, the device must cool down for 1 hour."
+                        name: "Firewall Architect",
+                        description: "Passive: Your installed defenses deal 1d8 damage to intruders."
                     },
                     mastery: {
-                        name: "Master Craftsman",
-                        description: "Create permanent technological devices with half the normal resources and time."
+                        name: "Unhackable Network",
+                        description: "Downtime: Build a secure network in one sector for 1 month."
                     }
                 }
             },
-            hacker: {
-                name: "Hacker",
+            "xenotech-savant": {
+                name: "Xenotech Savant",
                 features: {
                     foundation: {
-                        name: "Digital Infiltration",
-                        description: "Gain advantage on checks to bypass electronic security systems."
+                        name: "Adaptive Interface",
+                        description: "Action: Operate any alien tech with advantage; repurpose it for new functions."
                     },
                     specialization: {
-                        name: "System Override",
-                        description: "Take control of an electronic system for 10 minutes without triggering alarms."
+                        name: "Hybrid Synthesis",
+                        description: "Action: Fuse alien and human tech into dual-function devices for 24 hours."
                     },
                     mastery: {
-                        name: "Ghost in the Machine",
-                        description: "Create a digital copy of yourself that can operate independently in computer systems for up to 1 hour."
+                        name: "Precursor Resonance",
+                        description: "Action: Channel alien principles to grant nearby allies one of: +2 Armor, -2 Evasion to foes, or +2 Tech tests."
                     }
                 }
             },
@@ -530,16 +530,16 @@ const classData = {
                 name: "Medical Technician",
                 features: {
                     foundation: {
-                        name: "Emergency Treatment",
-                        description: "Stabilize a dying creature and restore 1d6 HP as an action."
+                        name: "Field Surgery",
+                        description: "Action: Heal 1d8 + Knowledge HP or install simple cybernetics. Spend 1 Stress to stabilize."
                     },
                     specialization: {
-                        name: "Medical Nanites",
-                        description: "Deploy nanites that grant a target regeneration (1 HP per turn) for 1 minute."
+                        name: "Implant Design",
+                        description: "Downtime: Create implants granting +1 to Strength or Agility tests."
                     },
                     mastery: {
-                        name: "Miracle Worker",
-                        description: "Once per long rest, restore a creature to full HP and remove all status effects."
+                        name: "Bio-Synthetic Regeneration",
+                        description: "1/arc Downtime: Revive a corpse within 1 hour; they return with implants but gain 1d6 Stress daily."
                     }
                 }
             }
@@ -636,33 +636,33 @@ const classData = {
                 name: "Assassin",
                 features: {
                     foundation: {
-                        name: "Deadly Ambush",
-                        description: "Deal an extra 1d6 damage when attacking from stealth."
+                        name: "Deadly Masquerade",
+                        description: "Action: Assume any identity; spend 1 Hope to forge untraceable credentials."
                     },
                     specialization: {
-                        name: "Poison Mastery",
-                        description: "Apply poisons with increased potency (+2 to DC) and duration."
+                        name: "Neuro-Synth Strike",
+                        description: "Action: Critical hits Stun; spend 1 Stress to add Poisoned (1d6 ongoing)."
                     },
                     mastery: {
-                        name: "Death Strike",
-                        description: "Once per long rest, make an attack that forces a target to make a Constitution save or be reduced to 0 HP."
+                        name: "Perfect Kill",
+                        description: "1/combat: Automatically crit Surprised or Helpless targets."
                     }
                 }
             },
-            thief: {
-                name: "Thief",
+            ghost: {
+                name: "Ghost",
                 features: {
                     foundation: {
-                        name: "Nimble Fingers",
-                        description: "Gain advantage on checks to pick locks or disable traps."
+                        name: "Phantom Step",
+                        description: "Action: Remove all traces of passage; spend 1 Stress to bypass obstacles with advantage. Phase Cloak once per rest: invisible until you attack or fail Stealth."
                     },
                     specialization: {
-                        name: "Second-Story Work",
-                        description: "Climbing doesn't cost extra movement, and you can jump further than normal."
+                        name: "Surveillance Evasion",
+                        description: "Passive: Gain an extra Phase Cloak use per rest."
                     },
                     mastery: {
-                        name: "Master Thief",
-                        description: "You can use a bonus action to make a Dexterity (Sleight of Hand) check, use thieves' tools, or take the Use an Object action."
+                        name: "Underworld Network",
+                        description: "Downtime: Command unseen agents across a sector for intel and favors."
                     }
                 }
             },
@@ -670,16 +670,16 @@ const classData = {
                 name: "Data Broker",
                 features: {
                     foundation: {
-                        name: "Information Network",
-                        description: "Once per session, gain specific information about a person, place, or organization."
+                        name: "Info Web",
+                        description: "Action: Study a target for 1 minute to learn one secret or gain blackmail material (GM's choice). Spend 1 Hope to ask the GM one specific question about faction plans or motivations."
                     },
                     specialization: {
-                        name: "Blackmail Material",
-                        description: "After spending time observing a target, gain advantage on social checks against them."
+                        name: "Combat Intel",
+                        description: "Free: Grant allies +1d6 damage against a studied foe."
                     },
                     mastery: {
-                        name: "Master of Secrets",
-                        description: "Once per long rest, reveal a secret about a target that grants you or an ally advantage on all interactions with them for 24 hours."
+                        name: "System Override",
+                        description: "Action: Control any automated defense or comms for 10 minutes."
                     }
                 }
             }
@@ -706,50 +706,50 @@ const classData = {
                 name: "Veil Walker",
                 features: {
                     foundation: {
-                        name: "Veil Sight",
-                        description: "See through the Veil to perceive hidden realities and dimensional anomalies."
+                        name: "Phase Step",
+                        description: "Reaction: Spend 1 Stress to evade attacks or move through walls. Once per rest, with 1 minute preparation, create a pocket dimension sanctuary for 10 minutes that protect against external hazards."
                     },
                     specialization: {
-                        name: "Dimensional Step",
-                        description: "Once per short rest, teleport up to 60 feet to a visible location."
+                        name: "Glimpse Future",
+                        description: "Action: Roll 1d6 + Instinct; on 4+, foresee an enemy's action or trap."
                     },
                     mastery: {
-                        name: "Reality Anchor",
-                        description: "Create a zone where dimensional effects are suppressed and creatures cannot teleport."
+                        name: "Causality Reverse",
+                        description: "3 Stress Action: Within Close range, undo one recent event (heal a wound or remove a trap)."
                     }
                 }
             },
-            telepath: {
-                name: "Telepath",
+            "mind-touched": {
+                name: "Mind-Touched",
                 features: {
                     foundation: {
-                        name: "Thought Detection",
-                        description: "Sense the surface thoughts of a creature within 30 feet."
+                        name: "Thought Tide",
+                        description: "Action: Spend 1 Hope to share an ally's skill for one roll; once per rest, grant mental shield to a group."
                     },
                     specialization: {
-                        name: "Mental Suggestion",
-                        description: "Implant a subtle suggestion in a target's mind that they will follow if it seems reasonable."
+                        name: "Implant Suggestion",
+                        description: "Action: Presence vs. Spirit to plant a command lasting 1 hour."
                     },
                     mastery: {
-                        name: "Mind Link",
-                        description: "Create a telepathic network among up to five willing creatures, allowing instant communication over any distance."
+                        name: "Hive Mind",
+                        description: "Action: For 10 minutes, allies share senses, skills, and HP; afterwards all take 1d6 Stress."
                     }
                 }
             },
-            psychokinetic: {
-                name: "Psychokinetic",
+            "precursor-touched": {
+                name: "Precursor Touched",
                 features: {
                     foundation: {
-                        name: "Telekinetic Push",
-                        description: "Move objects weighing up to 10 pounds with your mind."
+                        name: "Ancient Echo",
+                        description: "Action: Attune to any precursor artifact, Veil device, site, or anomaly to gain advantage on control or interpretation rolls this scene. Once per rest, channel its echoes to ask one question about that target; receive a truthful but cryptic insight."
                     },
                     specialization: {
-                        name: "Force Shield",
-                        description: "Create a barrier of psychic energy that grants +2 AC for 1 minute."
+                        name: "Collective Consciousness",
+                        description: "Action: Fuse minds into a hive for 10 minutes; upon dissolution, each takes 1d6 Stress."
                     },
                     mastery: {
-                        name: "Psychic Storm",
-                        description: "Create a storm of psychic energy in a 20-foot radius, dealing 3d6 psychic damage to all creatures in the area."
+                        name: "Cosmic Truth",
+                        description: "Action: Spend 3 Stress: Ask one specific, actionable question about a creature, object, place, or event present or encountered this arc; the answer is true. Then the GM gains 2 Fear and introduces a Veil-tied complication before scene end."
                     }
                 }
             }
@@ -772,54 +772,54 @@ const classData = {
             description: "Once per session, ask the GM one specific question about a situation and receive a truthful answer."
         },
         subclasses: {
-            "precursor-archaeologist": {
-                name: "Precursor Archaeologist",
-                features: {
-                    foundation: {
-                        name: "Ancient Knowledge",
-                        description: "Gain advantage on checks related to Precursor technology and history."
-                    },
-                    specialization: {
-                        name: "Artifact Attunement",
-                        description: "Identify the function of a Precursor artifact after studying it for 10 minutes."
-                    },
-                    mastery: {
-                        name: "Precursor Activation",
-                        description: "Activate dormant Precursor technology that others cannot use."
-                    }
-                }
-            },
             xenobiologist: {
                 name: "Xenobiologist",
                 features: {
                     foundation: {
-                        name: "Species Analysis",
-                        description: "After observing a creature for 1 minute, learn its strengths, weaknesses, and special abilities."
+                        name: "Life Reader",
+                        description: "Action: Study an organism to learn biology/behavior; spend 1 Hope to predict its actions for 1 hour."
                     },
                     specialization: {
-                        name: "Adaptive Medicine",
-                        description: "Create treatments effective for any species, even those you've never encountered before."
+                        name: "Ecosystem Decoder",
+                        description: "Free: Advantage on Survival tests in alien biomes."
                     },
                     mastery: {
-                        name: "Biological Insight",
-                        description: "Once per long rest, grant a creature resistance to a specific damage type for 1 hour by making physiological adjustments."
+                        name: "Evolutionary Forecast",
+                        description: "Downtime: Predict environmental shifts in a system for 1 week."
                     }
                 }
             },
-            historian: {
-                name: "Historian",
+            "precursor-archaeologist": {
+                name: "Precursor Archaeologist",
                 features: {
                     foundation: {
-                        name: "Historical Context",
-                        description: "Gain advantage on checks related to historical events and their significance."
+                        name: "Artifact Whisper",
+                        description: "Action: Sense an artifact's history; roll with advantage to activate Precursor tech."
                     },
                     specialization: {
-                        name: "Pattern Recognition",
-                        description: "Predict likely outcomes of political or social situations based on historical precedents."
+                        name: "Cultural Reconstructor",
+                        description: "Passive: +2 on Social tests with civilizations you've studied."
                     },
                     mastery: {
-                        name: "Forgotten Knowledge",
-                        description: "Once per session, recall a lost technique or piece of knowledge that provides a solution to a current problem."
+                        name: "Philosophy Engine",
+                        description: "Downtime: Convert Precursor wisdom into a relic-tier invention."
+                    }
+                }
+            },
+            "information-theorist": {
+                name: "Information Theorist",
+                features: {
+                    foundation: {
+                        name: "Data Storm",
+                        description: "Reaction: Reroll any decryption test; spend 1 Stress to firewall a system for 1d6 hours."
+                    },
+                    specialization: {
+                        name: "Social Algorithm",
+                        description: "Passive: Advantage on Social tests against organizations you analyze."
+                    },
+                    mastery: {
+                        name: "Quantum Network",
+                        description: "Downtime: Create an unhackable comms network across one star system for 1 month."
                     }
                 }
             }
@@ -842,37 +842,20 @@ const classData = {
             description: "Once per session, call upon a contact for information or a minor favor."
         },
         subclasses: {
-            negotiator: {
-                name: "Negotiator",
+            "cultural-attache": {
+                name: "Cultural Attaché",
                 features: {
                     foundation: {
-                        name: "Diplomatic Immunity",
-                        description: "Gain advantage on checks to avoid hostility in tense situations."
+                        name: "The Unmasking Gaze",
+                        description: "Action: Spend 3 Hope to pierce deception. The GM must reveal the 'Hidden' layer (deepest fear, secret, or agenda) of one target or situation."
                     },
                     specialization: {
-                        name: "Compromise",
-                        description: "Find a middle ground in a conflict that satisfies both parties."
+                        name: "Zone Access",
+                        description: "Action: Spend 1 Favor to enter a restricted area (temple, vault)."
                     },
                     mastery: {
-                        name: "Peace Treaty",
-                        description: "Once per long rest, end a conflict between two groups through negotiation, with both sides feeling they've won."
-                    }
-                }
-            },
-            spymaster: {
-                name: "Spymaster",
-                features: {
-                    foundation: {
-                        name: "Covert Network",
-                        description: "Maintain a network of informants in any populated area you've visited."
-                    },
-                    specialization: {
-                        name: "Dead Drop",
-                        description: "Exchange information or items securely without direct contact."
-                    },
-                    mastery: {
-                        name: "Master of Disguise",
-                        description: "Create a perfect disguise that can fool even close associates of the person you're impersonating."
+                        name: "Instinctive Translation",
+                        description: "Free Action: Communicate fluently with any species; roll Presence to overcome alien language barriers."
                     }
                 }
             },
@@ -880,16 +863,33 @@ const classData = {
                 name: "Trade Negotiator",
                 features: {
                     foundation: {
-                        name: "Market Analysis",
-                        description: "Accurately determine the true value of goods and identify the best places to buy or sell."
+                        name: "Market Savant",
+                        description: "Reaction: Reroll a bartering or appraisal test; on success, gain 1 Favor token."
                     },
                     specialization: {
-                        name: "Favorable Deal",
-                        description: "Get a 20% discount on purchases or 20% premium on sales once per day."
+                        name: "Contract Binding",
+                        description: "Downtime: Spend 2 Favor tokens to forge a binding agreement; violators take 1d6 Stress."
                     },
                     mastery: {
-                        name: "Trade Agreement",
-                        description: "Establish a lasting trade relationship between two groups that benefits both and provides you with a steady income."
+                        name: "Sector Alliance",
+                        description: "Downtime: Forge a trade alliance; gain +1 Hope per active alliance."
+                    }
+                }
+            },
+            "political-operative": {
+                name: "Political Operative",
+                features: {
+                    foundation: {
+                        name: "Influence Stockpile",
+                        description: "Passive: Start with 1 Favor. Succeed on Deception or Intimidation to gain 1 Favor."
+                    },
+                    specialization: {
+                        name: "Debt Enforcement",
+                        description: "Action: Spend Favor to compel targets (Spirit save to resist). Max favor tokens upgrade to 5."
+                    },
+                    mastery: {
+                        name: "Power Leverage",
+                        description: "Downtime: Spend 3 Favor to sway a faction's decision or trigger regime change; you take 1d6 Stress after."
                     }
                 }
             }
