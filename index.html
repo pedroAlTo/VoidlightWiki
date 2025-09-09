@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voidlight Character Creation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Voidlight: Chronicles of the Stellar Veil</h1>
+            <p>Character Creation System</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="form-section">
+            <ul class="nav-tabs">
+                <li class="nav-tab active" data-tab="ancestry">1. Ancestry</li>
+                <li class="nav-tab" data-tab="community">2. Community</li>
+                <li class="nav-tab" data-tab="class">3. Class</li>
+                <li class="nav-tab" data-tab="traits">4. Traits</li>
+                <li class="nav-tab" data-tab="experience">5. Experience</li>
+                <li class="nav-tab" data-tab="domains">6. Domains</li>
+                <li class="nav-tab" data-tab="wealth">7. Wealth & Reputation</li>
+                <li class="nav-tab" data-tab="equipment">8. Equipment</li>
+                <li class="nav-tab" data-tab="summary">Character Sheet</li>
+            </ul>
+
+            <!-- Ancestry Tab -->
+            <div id="ancestry" class="tab-content active">
+                <h2>Step 1: Choose Your Ancestry</h2>
+                <p>Your ancestry is your character's fundamental biological and cultural heritage. It determines your innate capabilities, grants you unique gifts, and positions you within the complex social tapestry of the post-Silence galaxy.</p>
+                
+                <div class="grid">
+                    <div class="card ancestry-card" data-ancestry="human">
+                        <div class="card-header">
+                            <h3 class="card-title">Human</h3>
+                        </div>
+                        <p>The adaptable survivors, scattered and diversified across the galaxy.</p>
+                        <div class="ancestry-gifts">
+                            <h4>Ancestry Gifts:</h4>
+                            <p><strong>Adaptive Spirit:</strong> Once per session, when you fail an action roll, spend 2 Hope to gain advantage on your next roll of the same type.</p>
+                            <p><strong>Cultural Bridge:</strong> During a rest, mark a Stress to ask the GM one question about a group's motivations or customs.</p>
+                        </div>
+                        <button class="btn select-ancestry" data-ancestry="human" onclick="selectAncestry('human')">Select Human</button>
+                    </div>
+
+                    <div class="card ancestry-card" data-ancestry="zephyrian">
+                        <div class="card-header">
+                            <h3 class="card-title">Zephyrian</h3>
+                        </div>
+                        <p>Stardust dancers, psychically sensitive and empathic beings.</p>
+                        <div class="ancestry-gifts">
+                            <h4>Ancestry Gifts:</h4>
+                            <p><strong>Veil Sensitivity:</strong> You automatically sense strong Veil phenomena and emotional states within Very Close range.</p>
+                            <p><strong>Emotional Resonance:</strong> Once per scene, you may convert 1 Stress from yourself or an ally into 1 Hope.</p>
+                        </div>
+                        <button class="btn select-ancestry" data-ancestry="zephyrian" onclick="selectAncestry('zephyrian')">Select Zephyrian</button>
+                    </div>
+
+                    <div class="card ancestry-card" data-ancestry="kryllian">
+                        <div class="card-header">
+                            <h3 class="card-title">Kryllian</h3>
+                        </div>
+                        <p>The unbreakable forge, four-armed natural engineers.</p>
+                        <div class="ancestry-gifts">
+                            <h4>Ancestry Gifts:</h4>
+                            <p><strong>Master Craftsman:</strong> When making rolls related to crafting or repairing, mark a Stress to gain advantage.</p>
+                            <p><strong>Structural Intuition:</strong> Once per session, mark a Stress to ask the GM about a system's most significant weakness.</p>
+                        </div>
+                        <button class="btn select-ancestry" data-ancestry="kryllian" onclick="selectAncestry('kryllian')">Select Kryllian</button>
+                    </div>
+
+                    <div class="card ancestry-card" data-ancestry="ethereal">
+                        <div class="card-header">
+                            <h3 class="card-title">Ethereal</h3>
+                        </div>
+                        <p>Ghosts in the machine, energy beings with temporal perception.</p>
+                        <div class="ancestry-gifts">
+                            <h4>Ancestry Gifts:</h4>
+                            <p><strong>Phase Shift:</strong> Once per scene, mark a Stress to become incorporeal until the end of your next turn, allowing you to pass through solid objects and become immune to physical attacks.</p>
+                            <p><strong>Temporal Perception:</strong> You can sense temporal anomalies and distortions within Close range. Once per session, you can ask the GM about the most likely immediate consequence of a proposed action.</p>
+                        </div>
+                        <button class="btn select-ancestry" data-ancestry="ethereal" onclick="selectAncestry('ethereal')">Select Ethereal</button>
+                    </div>
+
+                    <div class="card ancestry-card" data-ancestry="synthetic">
+                        <div class="card-header">
+                            <h3 class="card-title">Synthetic</h3>
+                        </div>
+                        <p>Liberated minds, self-aware AIs seeking purpose.</p>
+                        <div class="ancestry-gifts">
+                            <h4>Ancestry Gifts:</h4>
+                            <p><strong>Modular Consciousness:</strong> Once per long rest, you can temporarily download a new skill or knowledge set. Choose a trait; you gain advantage on rolls using that trait until your next long rest.</p>
+                            <p><strong>Digital Interface:</strong> You can directly interface with electronic systems and networks. You have advantage on rolls to hack, operate, or understand technological devices.</p>
+                        </div>
+                        <button class="btn select-ancestry" data-ancestry="synthetic" onclick="selectAncestry('synthetic')">Select Synthetic</button>
+                    </div>
+
+                    <div class="card ancestry-card" data-ancestry="rift-spinner">
+                        <div class="card-header">
+                            <h3 class="card-title">Rift Spinner</h3>
+                        </div>
+                        <p>Time weavers, arachnids who manipulate causality.</p>
+                        <div class="ancestry-gifts">
+                            <h4>Ancestry Gifts:</h4>
+                            <p><strong>Chrono-Gift:</strong> Once per session, after any roll within Close range, spend 2 Hope to force a reroll.</p>
+                            <p><strong>Wall Weaver:</strong> You can move on vertical or inverted surfaces as normal ground. While touching a surface, you sense vibrations through it, gaining +2 on Perception checks to detect moving creatures within Close range that are also in contact with it.</p>
+                        </div>
+                        <button class="btn select-ancestry" data-ancestry="rift-spinner" onclick="selectAncestry('rift-spinner')">Select Rift Spinner</button>
+                    </div>
+
+                    <div class="card ancestry-card" data-ancestry="celestari">
+                        <div class="card-header">
+                            <h3 class="card-title">Celestari</h3>
+                        </div>
+                        <p>Descendants of stars, radiant beings with cosmic grace.</p>
+                        <div class="ancestry-gifts">
+                            <h4>Ancestry Gifts:</h4>
+                            <p><strong>Stellar Meditation:</strong> Once per long rest, meditate for 10 minutes to mark a Stress and gain 2 Hope.</p>
+                            <p><strong>Celestial Grace:</strong> Your unarmed attacks deal d6 magic damage. Once per session, heal the same damage dealt to nearby allies.</p>
+                        </div>
+                        <button class="btn select-ancestry" data-ancestry="celestari" onclick="selectAncestry('celestari')">Select Celestari</button>
+                    </div>
+
+                    <div class="card ancestry-card" data-ancestry="kryx">
+                        <div class="card-header">
+                            <h3 class="card-title">Kryx</h3>
+                        </div>
+                        <p>Voices of the hunt, powerful and honor-based pack culture.</p>
+                        <div class="ancestry-gifts">
+                            <h4>Ancestry Gifts:</h4>
+                            <p><strong>Pack Intuition:</strong> When an ally within Very Close range is targeted by an attack, mark a Stress to gain advantage on your next attack against that foe.</p>
+                            <p><strong>Biolume Howl:</strong> Your unarmed attacks deal d6 magic damage. Once per session, mark a Stress to make your target Dizzied and gain 1 Hope.</p>
+                        </div>
+                        <button class="btn select-ancestry" data-ancestry="kryx" onclick="selectAncestry('kryx')">Select Kryx</button>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <div id="selected-ancestry-display" class="golden-border hidden">
+                        <h3>Selected Ancestry: <span id="selected-ancestry-name"></span></h3>
+                        <div id="selected-ancestry-details"></div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button id="to-community" class="btn">Continue to Community</button>
+                </div>
+            </div>
+
+            <!-- Community Tab -->
+            <div id="community" class="tab-content">
+                <h2>Step 2: Define Your Community</h2>
+                <p>If ancestry is your character's seed, community is the soil in which it germinated. It's the environment that shaped you during your formative years, the crucible where your beliefs, prejudices, and fundamental skills were forged.</p>
+                
+                <div class="grid">
+                    <div class="card community-card" data-community="core-world">
+                        <div class="card-header">
+                            <h3 class="card-title">Core World</h3>
+                        </div>
+                        <p>Glittering Spires and Social Labyrinths</p>
+                        <p>Vast data-nets, towering arcologies, and complex social hierarchies define life here. You know how to work the system.</p>
+                        <div class="community-feature">
+                            <h4>Feature: Institutional Leverage</h4>
+                            <p>When navigating bureaucracy or social labyrinths, roll a d20 as your Hope die. On success (10+), gain 1 Favor Token. Spend Tokens to auto-pass permits or expose institutional flaws.</p>
+                        </div>
+                        <button class="btn select-community" data-community="core-world">Select Core World</button>
+                    </div>
+
+                    <div class="card community-card" data-community="frontier-colony">
+                        <div class="card-header">
+                            <h3 class="card-title">Frontier Colony</h3>
+                        </div>
+                        <p>Grit, Rust, and Shared Hardship</p>
+                        <p>Neighbors who'd share their last water ration. Practical ingenuity is your creed.</p>
+                        <div class="community-feature">
+                            <h4>Feature: Scrap-Savvy Ingenuity</h4>
+                            <p>Improvise tools from junk: Roll your Fear die (e.g., d6/d8) for effect. On 1-3, it breaks spectacularly. Once per rest, reroll if you sacrifice a personal item.</p>
+                        </div>
+                        <button class="btn select-community" data-community="frontier-colony">Select Frontier Colony</button>
+                    </div>
+
+                    <div class="card community-card" data-community="void-station">
+                        <div class="card-header">
+                            <h3 class="card-title">Void Station</h3>
+                        </div>
+                        <p>Pressurized Cans in the Dark</p>
+                        <p>A pressurized can hurtling through nothing. Claustrophobic? Maybe. But you breathed recycled air with a dozen species.</p>
+                        <div class="community-feature">
+                            <h4>Feature: Cross-Species Intuition</h4>
+                            <p>When negotiating with aliens or adapting tech, you have 3 Linguistic Tokens. Spend 1 to reroll Hope OR treat Fear as Hope for negotiations. Regain all by mediating a faction dispute or 1 after long rest.</p>
+                        </div>
+                        <button class="btn select-community" data-community="void-station">Select Void Station</button>
+                    </div>
+
+                    <div class="card community-card" data-community="trade-hub">
+                        <div class="card-header">
+                            <h3 class="card-title">Trade Hub</h3>
+                        </div>
+                        <p>The Chaotic Symphony of Commerce</p>
+                        <p>The chaotic symphony of the bazaar. Smells of spice, ozone, and desperation. Your market intuition sniffs profit (or disaster) a parsec away.</p>
+                        <div class="community-feature">
+                            <h4>Feature: Market Oracle</h4>
+                            <p>When negotiating prices, gamble resources on rumors: Roll Comprehend (DC12). On success, you gain true intel +1 Hope. Critical: Reveal a secret granting 24h Advantage on related rolls.</p>
+                        </div>
+                        <button class="btn select-community" data-community="trade-hub">Select Trade Hub</button>
+                    </div>
+
+                    <div class="card community-card" data-community="research-outpost">
+                        <div class="card-header">
+                            <h3 class="card-title">Research Outpost</h3>
+                        </div>
+                        <p>Labs Humming Over Silent Ruins</p>
+                        <p>The pursuit of knowing. Scientific method is your scripture — hypothesis, test, analyze.</p>
+                        <div class="community-feature">
+                            <h4>Feature: Scientific Resonance</h4>
+                            <p>Your lab's instruments can detect echoes of ancient technologies. Once per session, invoke Resonance to attune to a creature or artifact: roll Insight or Investigation against DC 14. On success, learn one factual secret and gain advantage on research or social rolls involving that subject.</p>
+                        </div>
+                        <button class="btn select-community" data-community="research-outpost">Select Research Outpost</button>
+                    </div>
+
+                    <div class="card community-card" data-community="free-fleet">
+                        <div class="card-header">
+                            <h3 class="card-title">Free Fleet</h3>
+                        </div>
+                        <p>Home is the Next Jump</p>
+                        <p>Stellar navigation is in your bones — you navigate pulsar fields like others walk city streets.</p>
+                        <div class="community-feature">
+                            <h4>Feature: Voidborn Kinship</h4>
+                            <p>When recalling stellar hazards or aiding fleet allies, reroll a failed Hope piloting check OR let an ally in your system use your Hope die result as their own.</p>
+                        </div>
+                        <button class="btn select-community" data-community="free-fleet">Select Free Fleet</button>
+                    </div>
+
+                    <div class="card community-card" data-community="agrisynth">
+                        <div class="card-header">
+                            <h3 class="card-title">AgriSynth</h3>
+                        </div>
+                        <p>Children of the Harvest-Mind</p>
+                        <p>Born beneath the soft, pulsing glow of nutrient lamps, your first breath drawn from air scrubbed by great AgriSynth processors.</p>
+                        <div class="community-feature">
+                            <h4>Feature: Nourished by Nature</h4>
+                            <p>You have advantage on Knowledge checks to stabilize creatures near death and on Survival checks to find or purify food and water in technologically-supported environments.</p>
+                        </div>
+                        <button class="btn select-community" data-community="agrisynth">Select AgriSynth</button>
+                    </div>
+
+                    <div class="card community-card" data-community="axiom">
+                        <div class="card-header">
+                            <h3 class="card-title">Axiom</h3>
+                        </div>
+                        <p>The Chosen of the Unbroken Chain</p>
+                        <p>Your life is a series of rituals, prayers, and proclamations. You are a member of Axiom, bound by unassailable dogma.</p>
+                        <div class="community-feature">
+                            <h4>Feature: Scriptural Knowledge</h4>
+                            <p>You have advantage on checks related to the history, lore, or internal workings of your faith, and on Insight checks to discern falsehoods in conversations about matters of faith or doctrine.</p>
+                        </div>
+                        <button class="btn select-community" data-community="axiom">Select Axiom</button>
+                    </div>
+
+                    <div class="card community-card" data-community="circuit">
+                        <div class="card-header">
+                            <h3 class="card-title">Circuit</h3>
+                        </div>
+                        <p>The Integrated Self</p>
+                        <p>You chose to become more. You are Circuit, a person who has willingly merged with cybernetics, augmenting mind and body with technology.</p>
+                        <div class="community-feature">
+                            <h4>Feature: Hardware Proficiency</h4>
+                            <p>You have advantage on Computers checks to hack, interface with, or reprogram any device with a digital component, as well as on Thievery checks involving electronic locks or disabling security systems.</p>
+                        </div>
+                        <button class="btn select-community" data-community="circuit">Select Circuit</button>
+                    </div>
+
+                    <div class="card community-card" data-community="voidfarer">
+                        <div class="card-header">
+                            <h3 class="card-title">Voidfarer</h3>
+                        </div>
+                        <p>The Edge of the Abyss</p>
+                        <p>Your home is the void. Born on a drifting asteroid, derelict station, or frozen moon at the very edge of known space.</p>
+                        <div class="community-feature">
+                            <h4>Feature: Cold-Blooded</h4>
+                            <p>You have advantage on saving throws to resist damage from extreme cold or vacuum exposure, as well as on Stealth checks made to hide in shadows or behind cover in zero-gravity or low-light environments.</p>
+                        </div>
+                        <button class="btn select-community" data-community="voidfarer">Select Voidfarer</button>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <div id="selected-community-display" class="golden-border hidden">
+                        <h3>Selected Community: <span id="selected-community-name"></span></h3>
+                        <div id="selected-community-details"></div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button id="back-to-ancestry" class="btn btn-secondary">Back to Ancestry</button>
+                    <button id="to-class" class="btn">Continue to Class</button>
+                </div>
+            </div>
+
+            <!-- Class Tab -->
+            <div id="class" class="tab-content">
+                <h2>Step 3: Select Your Class and Subclass</h2>
+                <p>Your class is your profession, your vocation, the path you've chosen in the vast darkness of the galaxy. It determines your main abilities, combat capabilities, special powers, and general function within a group of adventurers.</p>
+                
+                <div class="grid">
+                    <div class="card class-card" data-class="soldier">
+                        <div class="card-header">
+                            <h3 class="card-title">Soldier</h3>
+                        </div>
+                        <p>The hardened combatant, master of weapons and tactics</p>
+                        <div class="class-details">
+                            <p><strong>Primary Role:</strong> Damage, Defense</p>
+                            <p><strong>Domains:</strong> Kinetic, Synthesis</p>
+                            <p><strong>Starting Evasion:</strong> 12</p>
+                            <p><strong>Starting Hit Points:</strong> 8</p>
+                            <p><strong>Hope Feature:</strong> Combat Focus (3 Hope) - Gain advantage on all attack rolls until the end of your next turn.</p>
+                            <p><strong>Class Feature:</strong> Tactical Expertise - Once per combat, reposition an ally or enemy within Close range.</p>
+                        </div>
+                        <div class="subclass-options">
+                            <h4>Subclass Options:</h4>
+                            <select class="subclass-select" id="soldier-subclass">
+                                <option value="">Select a Subclass</option>
+                                <option value="guardian">Guardian</option>
+                                <option value="striker">Striker</option>
+                                <option value="tactician">Tactician</option>
+                            </select>
+                        </div>
+                        <button class="btn select-class" data-class="soldier">Select Soldier</button>
+                    </div>
+
+                    <div class="card class-card" data-class="engineer">
+                        <div class="card-header">
+                            <h3 class="card-title">Engineer</h3>
+                        </div>
+                        <p>The technical genius, capable of building, repairing, and hacking anything</p>
+                        <div class="class-details">
+                            <p><strong>Primary Role:</strong> Support, Control</p>
+                            <p><strong>Domains:</strong> Tech, Synthesis</p>
+                            <p><strong>Starting Evasion:</strong> 11</p>
+                            <p><strong>Starting Hit Points:</strong> 6</p>
+                            <p><strong>Hope Feature:</strong> Technical Miracle (3 Hope) - Instantly repair a broken device or create a simple tool from available materials.</p>
+                            <p><strong>Class Feature:</strong> Jury Rig - Once per rest, improvise a device that grants advantage on a specific type of check for 10 minutes.</p>
+                        </div>
+                        <div class="subclass-options">
+                            <h4>Subclass Options:</h4>
+                            <select class="subclass-select" id="engineer-subclass">
+                                <option value="">Select a Subclass</option>
+                                <option value="mechanic">Mechanic</option>
+                                <option value="hacker">Hacker</option>
+                                <option value="medical-technician">Medical Technician</option>
+                            </select>
+                        </div>
+                        <button class="btn select-class" data-class="engineer">Select Engineer</button>
+                    </div>
+
+                    <div class="card class-card" data-class="pilot">
+                        <div class="card-header">
+                            <h3 class="card-title">Pilot</h3>
+                        </div>
+                        <p>The navigation ace, one with their ship, seeing paths where others see chaos</p>
+                        <div class="class-details">
+                            <p><strong>Primary Role:</strong> Mobility, Control</p>
+                            <p><strong>Domains:</strong> Void, Tech</p>
+                            <p><strong>Starting Evasion:</strong> 11</p>
+                            <p><strong>Starting Hit Points:</strong> 6</p>
+                            <p><strong>Hope Feature:</strong> Veil Surge (3 Hope) - Gain advantage on piloting tests and ignore one Severe Damage until your next rest.</p>
+                            <p><strong>Class Feature:</strong> Stellar Instinct - Advantage on piloting/navigation tests. Once per session, reroll one failed Void-related test; if you spend Hope on navigation, add +1d8.</p>
+                        </div>
+                        <div class="subclass-options">
+                            <h4>Subclass Options:</h4>
+                            <select class="subclass-select" id="pilot-subclass">
+                                <option value="">Select a Subclass</option>
+                                <option value="void-runner">Void Runner</option>
+                                <option value="combat-ace">Combat Ace</option>
+                                <option value="system-jockey">System Jockey</option>
+                            </select>
+                        </div>
+                        <button class="btn select-class" data-class="pilot">Select Pilot</button>
+                    </div>
+
+                    <div class="card class-card" data-class="scoundrel">
+                        <div class="card-header">
+                            <h3 class="card-title">Scoundrel</h3>
+                        </div>
+                        <p>The ghost in the shadows, expert in stealth, subterfuge, and lethal precision</p>
+                        <div class="class-details">
+                            <p><strong>Primary Role:</strong> Damage, Stealth</p>
+                            <p><strong>Domains:</strong> Social, Void</p>
+                            <p><strong>Starting Evasion:</strong> 12</p>
+                            <p><strong>Starting Hit Points:</strong> 5</p>
+                            <p><strong>Hope Feature:</strong> Perfect Strike (3 Hope) - Deal maximum damage with an attack and ignore target's armor.</p>
+                            <p><strong>Class Feature:</strong> Shadow Step - Once per rest, become invisible for one round or until you attack.</p>
+                        </div>
+                        <div class="subclass-options">
+                            <h4>Subclass Options:</h4>
+                            <select class="subclass-select" id="scoundrel-subclass">
+                                <option value="">Select a Subclass</option>
+                                <option value="assassin">Assassin</option>
+                                <option value="thief">Thief</option>
+                                <option value="data-broker">Data Broker</option>
+                            </select>
+                        </div>
+                        <button class="btn select-class" data-class="scoundrel">Select Scoundrel</button>
+                    </div>
+
+                    <div class="card class-card" data-class="mystic">
+                        <div class="card-header">
+                            <h3 class="card-title">Mystic</h3>
+                        </div>
+                        <p>The Veil's channel, bending reality with the power of their mind</p>
+                        <div class="class-details">
+                            <p><strong>Primary Role:</strong> Psionic Power, Support</p>
+                            <p><strong>Domains:</strong> Neural, Social</p>
+                            <p><strong>Starting Evasion:</strong> 10</p>
+                            <p><strong>Starting Hit Points:</strong> 5</p>
+                            <p><strong>Hope Feature:</strong> Veil Surge (3 Hope) - Double the effect of your next psionic power.</p>
+                            <p><strong>Class Feature:</strong> Mind Touch - Communicate telepathically with a willing creature within Close range.</p>
+                        </div>
+                        <div class="subclass-options">
+                            <h4>Subclass Options:</h4>
+                            <select class="subclass-select" id="mystic-subclass">
+                                <option value="">Select a Subclass</option>
+                                <option value="veil-walker">Veil Walker</option>
+                                <option value="telepath">Telepath</option>
+                                <option value="psychokinetic">Psychokinetic</option>
+                            </select>
+                        </div>
+                        <button class="btn select-class" data-class="mystic">Select Mystic</button>
+                    </div>
+
+                    <div class="card class-card" data-class="scholar">
+                        <div class="card-header">
+                            <h3 class="card-title">Scholar</h3>
+                        </div>
+                        <p>The guardian of knowledge, unraveling the secrets of the past</p>
+                        <div class="class-details">
+                            <p><strong>Primary Role:</strong> Investigation, Support</p>
+                            <p><strong>Domains:</strong> Tech, Social</p>
+                            <p><strong>Starting Evasion:</strong> 10</p>
+                            <p><strong>Starting Hit Points:</strong> 5</p>
+                            <p><strong>Hope Feature:</strong> Eureka Moment (3 Hope) - Instantly recall a crucial piece of information or solve a complex puzzle.</p>
+                            <p><strong>Class Feature:</strong> Analytical Mind - Once per session, ask the GM one specific question about a situation and receive a truthful answer.</p>
+                        </div>
+                        <div class="subclass-options">
+                            <h4>Subclass Options:</h4>
+                            <select class="subclass-select" id="scholar-subclass">
+                                <option value="">Select a Subclass</option>
+                                <option value="precursor-archaeologist">Precursor Archaeologist</option>
+                                <option value="xenobiologist">Xenobiologist</option>
+                                <option value="historian">Historian</option>
+                            </select>
+                        </div>
+                        <button class="btn select-class" data-class="scholar">Select Scholar</button>
+                    </div>
+
+                    <div class="card class-card" data-class="diplomat">
+                        <div class="card-header">
+                            <h3 class="card-title">Diplomat</h3>
+                        </div>
+                        <p>The peace weaver, master of words and social networks</p>
+                        <div class="class-details">
+                            <p><strong>Primary Role:</strong> Negotiation, Support</p>
+                            <p><strong>Domains:</strong> Social, Synthesis</p>
+                            <p><strong>Starting Evasion:</strong> 10</p>
+                            <p><strong>Starting Hit Points:</strong> 5</p>
+                            <p><strong>Hope Feature:</strong> Perfect Words (3 Hope) - Automatically succeed on a social interaction check.</p>
+                            <p><strong>Class Feature:</strong> Network of Contacts - Once per session, call upon a contact for information or a minor favor.</p>
+                        </div>
+                        <div class="subclass-options">
+                            <h4>Subclass Options:</h4>
+                            <select class="subclass-select" id="diplomat-subclass">
+                                <option value="">Select a Subclass</option>
+                                <option value="negotiator">Negotiator</option>
+                                <option value="spymaster">Spymaster</option>
+                                <option value="trade-negotiator">Trade Negotiator</option>
+                            </select>
+                        </div>
+                        <button class="btn select-class" data-class="diplomat">Select Diplomat</button>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <div id="selected-class-display" class="golden-border hidden">
+                        <h3>Selected Class: <span id="selected-class-name"></span></h3>
+                        <h4>Subclass: <span id="selected-subclass-name"></span></h4>
+                        <div id="selected-class-details"></div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button id="back-to-community" class="btn btn-secondary">Back to Community</button>
+                    <button id="to-traits" class="btn">Continue to Traits</button>
+                </div>
+            </div>
+
+            <!-- Traits Tab -->
+            <div id="traits" class="tab-content">
+                <h2>Step 4: Assign Your Traits</h2>
+                <p>Traits are the six fundamental statistics that define your character's innate and trained capabilities. These numerical values are what you'll use to perform most actions in the game.</p>
+                <p>You have a set of six modifiers to assign to your six traits: <strong>+2, +1, +1, +0, +0, -1</strong>. Each modifier must be assigned to a different trait.</p>
+
+                <div class="form-section">
+                    <h3>Trait Assignments</h3>
+                    <p>Drag and drop the modifiers to assign them to traits:</p>
+                    
+                    <div class="trait-modifiers">
+                        <div class="modifier-pool">
+                            <div class="modifier" data-value="+2" draggable="true">+2</div>
+                            <div class="modifier" data-value="+1" draggable="true">+1</div>
+                            <div class="modifier" data-value="+1" draggable="true">+1</div>
+                            <div class="modifier" data-value="+0" draggable="true">+0</div>
+                            <div class="modifier" data-value="+0" draggable="true">+0</div>
+                            <div class="modifier" data-value="-1" draggable="true">-1</div>
+                        </div>
+                    </div>
+
+                    <div class="trait-assignments">
+                        <div class="trait-assignment">
+                            <div class="trait-name">Agility (Sprint, Leap, Maneuver, acrobatics)</div>
+                            <div class="trait-value" data-trait="agility">—</div>
+                        </div>
+                        <div class="trait-assignment">
+                            <div class="trait-name">Strength (Lift, Smash, Grapple, Climb)</div>
+                            <div class="trait-value" data-trait="strength">—</div>
+                        </div>
+                        <div class="trait-assignment">
+                            <div class="trait-name">Finesse (Control, Hide, Tinker, Pilot)</div>
+                            <div class="trait-value" data-trait="finesse">—</div>
+                        </div>
+                        <div class="trait-assignment">
+                            <div class="trait-name">Knowledge (Recall, Analyze, Comprehend, Tech)</div>
+                            <div class="trait-value" data-trait="knowledge">—</div>
+                        </div>
+                        <div class="trait-assignment">
+                            <div class="trait-name">Instinct (Perceive, Sense, Navigate, Investigate)</div>
+                            <div class="trait-value" data-trait="instinct">—</div>
+                        </div>
+                        <div class="trait-assignment">
+                            <div class="trait-name">Presence (Charm, Perform, Deceive, Influence)</div>
+                            <div class="trait-value" data-trait="presence">—</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button id="reset-traits" class="btn btn-secondary">Reset Traits</button>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button id="back-to-class" class="btn btn-secondary">Back to Class</button>
+                    <button id="to-experience" class="btn">Continue to Experience</button>
+                </div>
+            </div>
+
+            <!-- Experience Tab -->
+            <div id="experience" class="tab-content">
+                <h2>Step 5: Create Your Experience</h2>
+                <p>If traits are the "what" of your character's abilities, experiences are the "why." They're the defining moments of your past that have shaped you.</p>
+                <p>Define a key moment in your character's life. This experience is linked to one of your six traits and provides narrative context for your ability in that area.</p>
+
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="experience-title">Experience Title:</label>
+                        <input type="text" id="experience-title" placeholder="e.g., 'Survived the Siege of Elysium Station'">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="experience-trait">Associated Trait:</label>
+                        <select id="experience-trait">
+                            <option value="">Select a Trait</option>
+                            <option value="agility">Agility</option>
+                            <option value="strength">Strength</option>
+                            <option value="finesse">Finesse</option>
+                            <option value="knowledge">Knowledge</option>
+                            <option value="instinct">Instinct</option>
+                            <option value="presence">Presence</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="experience-description">Description:</label>
+                        <textarea id="experience-description" rows="4" placeholder="Describe the experience in detail. How did it shape your character?"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <div id="experience-display" class="golden-border hidden">
+                        <h3>Your Experience: <span id="display-experience-title"></span></h3>
+                        <p><strong>Associated Trait:</strong> <span id="display-experience-trait"></span></p>
+                        <p id="display-experience-description"></p>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button id="save-experience" class="btn btn-secondary">Save Experience</button>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button id="back-to-traits" class="btn btn-secondary">Back to Traits</button>
+                    <button id="to-domains" class="btn">Continue to Domains</button>
+                </div>
+            </div>
+
+            <!-- Domains Tab -->
+            <div id="domains" class="tab-content">
+                <h2>Step 6: Select Domain Powers</h2>
+                <p>Domains are areas of specialization that grant your character unique abilities and powers. Your class gives you access to two specific Domains.</p>
+                <p>At level 1, you can choose 2 level 1 powers from your class domains.</p>
+
+                <div id="domain-selection-area">
+                    <div class="form-section">
+                        <h3>Available Domain Powers</h3>
+                        <p>Select 2 level 1 powers from your class domains:</p>
+                        
+                        <div id="domain-powers-container" class="grid">
+                            <!-- Domain powers will be populated here based on class selection -->
+                            <p id="no-class-selected" class="text-center">Please select a class first to see available domain powers.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <div id="selected-powers-display" class="golden-border hidden">
+                            <h3>Selected Powers</h3>
+                            <div id="selected-powers-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button id="back-to-experience" class="btn btn-secondary">Back to Experience</button>
+                    <button id="to-wealth" class="btn">Continue to Wealth & Reputation</button>
+                </div>
+            </div>
+
+            <!-- Wealth & Reputation Tab -->
+            <div id="wealth" class="tab-content">
+                <h2>Step 7: Set Wealth and Reputation Levels</h2>
+                <p>In the fractured economy of the post-Silence galaxy, wealth is more than just credits in your account; it's your leverage, your safety net, and your ticket to the next opportunity.</p>
+
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="wealth-level">Wealth Level:</label>
+                        <select id="wealth-level">
+                            <option value="0">0 - Hand-to-mouth existence</option>
+                            <option value="1" selected>1 - Stable, modest existence (Default)</option>
+                            <option value="2">2 - Comfortable, with some luxuries</option>
+                            <option value="3">3 - Wealthy, with significant resources</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reputation-level">Reputation Level:</label>
+                        <select id="reputation-level">
+                            <option value="0" selected>0 - Unknown (Default)</option>
+                            <option value="1">1 - Locally known</option>
+                            <option value="2">2 - Regionally respected</option>
+                            <option value="-1">-1 - Locally infamous</option>
+                            <option value="-2">-2 - Regionally notorious</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button id="back-to-domains" class="btn btn-secondary">Back to Domains</button>
+                    <button id="to-equipment" class="btn">Continue to Equipment</button>
+                </div>
+            </div>
+
+            <!-- Equipment Tab -->
+            <div id="equipment" class="tab-content">
+                <h2>Step 8: Select Your Equipment</h2>
+                <p>For initial equipment you can select:</p>
+                <ul>
+                    <li>2 tier points for weapons (e.g., 2 tier 1 cost weapons or 1 tier 2 cost weapon)</li>
+                    <li>2 tier points for armor and equipment (same system applies)</li>
+                </ul>
+
+                <div class="form-section">
+                    <h3>Weapons</h3>
+                    <p>Remaining weapon tier points: <span id="weapon-points-remaining">2</span></p>
+                    
+                    <div class="equipment-selection">
+                        <div class="grid">
+                            <div class="card equipment-card" data-type="weapon" data-tier="1" data-name="Plasma Pistol">
+                                <div class="card-header">
+                                    <h3 class="card-title">Plasma Pistol</h3>
+                                    <span class="tier-badge">Tier 1</span>
+                                </div>
+                                <p>Standard sidearm with decent stopping power. 1d6 damage, Close range.</p>
+                                <button class="btn select-equipment">Select</button>
+                            </div>
+                            
+                            <div class="card equipment-card" data-type="weapon" data-tier="1" data-name="Vibro Knife">
+                                <div class="card-header">
+                                    <h3 class="card-title">Vibro Knife</h3>
+                                    <span class="tier-badge">Tier 1</span>
+                                </div>
+                                <p>Molecular-edged blade that vibrates at high frequency. 1d6 damage, Very Close range.</p>
+                                <button class="btn select-equipment">Select</button>
+                            </div>
+                            
+                            <div class="card equipment-card" data-type="weapon" data-tier="1" data-name="Pulse Rifle">
+                                <div class="card-header">
+                                    <h3 class="card-title">Pulse Rifle</h3>
+                                    <span class="tier-badge">Tier 1</span>
+                                </div>
+                                <p>Standard infantry weapon with good range. 1d8 damage, Far range.</p>
+                                <button class="btn select-equipment">Select</button>
+                            </div>
+                            
+                            <div class="card equipment-card" data-type="weapon" data-tier="2" data-name="Heavy Blaster">
+                                <div class="card-header">
+                                    <h3 class="card-title">Heavy Blaster</h3>
+                                    <span class="tier-badge">Tier 2</span>
+                                </div>
+                                <p>Powerful energy weapon with devastating impact. 2d6 damage, Close range.</p>
+                                <button class="btn select-equipment">Select</button>
+                            </div>
+                            
+                            <div class="card equipment-card" data-type="weapon" data-tier="2" data-name="Sniper Rifle">
+                                <div class="card-header">
+                                    <h3 class="card-title">Sniper Rifle</h3>
+                                    <span class="tier-badge">Tier 2</span>
+                                </div>
+                                <p>Long-range precision weapon. 1d10 damage, Extreme range, advantage on aimed shots.</p>
+                                <button class="btn select-equipment">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="mt-3">Armor & Equipment</h3>
+                    <p>Remaining armor/equipment tier points: <span id="armor-points-remaining">2</span></p>
+                    
+                    <div class="equipment-selection">
+                        <div class="grid">
+                            <div class="card equipment-card" data-type="armor" data-tier="1" data-name="Light Combat Vest">
+                                <div class="card-header">
+                                    <h3 class="card-title">Light Combat Vest</h3>
+                                    <span class="tier-badge">Tier 1</span>
+                                </div>
+                                <p>Basic protection that doesn't restrict movement. +1 Armor, no penalties.</p>
+                                <button class="btn select-equipment">Select</button>
+                            </div>
+                            
+                            <div class="card equipment-card" data-type="armor" data-tier="1" data-name="Stealth Suit">
+                                <div class="card-header">
+                                    <h3 class="card-title">Stealth Suit</h3>
+                                    <span class="tier-badge">Tier 1</span>
+                                </div>
+                                <p>Adaptive camouflage for stealth operations. +0 Armor, advantage on stealth checks.</p>
+                                <button class="btn select-equipment">Select</button>
+                            </div>
+                            
+                            <div class="card equipment-card" data-type="equipment" data-tier="1" data-name="Multi-Tool">
+                                <div class="card-header">
+                                    <h3 class="card-title">Multi-Tool</h3>
+                                    <span class="tier-badge">Tier 1</span>
+                                </div>
+                                <p>Swiss army knife of the future. Advantage on repair and technical checks.</p>
+                                <button class="btn select-equipment">Select</button>
+                            </div>
+                            
+                            <div class="card equipment-card" data-type="armor" data-tier="2" data-name="Combat Armor">
+                                <div class="card-header">
+                                    <h3 class="card-title">Combat Armor</h3>
+                                    <span class="tier-badge">Tier 2</span>
+                                </div>
+                                <p>Full body protection for serious combat. +2 Armor, -1 to Agility checks.</p>
+                                <button class="btn select-equipment">Select</button>
+                            </div>
+                            
+                            <div class="card equipment-card" data-type="equipment" data-tier="2" data-name="Medical Kit">
+                                <div class="card-header">
+                                    <h3 class="card-title">Medical Kit</h3>
+                                    <span class="tier-badge">Tier 2</span>
+                                </div>
+                                <p>Advanced medical supplies. Heal 2d6 HP per use, 3 uses per rest.</p>
+                                <button class="btn select-equipment">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <div id="selected-equipment-display" class="golden-border">
+                        <h3>Selected Equipment</h3>
+                        <h4>Weapons:</h4>
+                        <ul id="selected-weapons-list">
+                            <li>No weapons selected</li>
+                        </ul>
+                        <h4>Armor & Equipment:</h4>
+                        <ul id="selected-armor-list">
+                            <li>No armor or equipment selected</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button id="back-to-wealth" class="btn btn-secondary">Back to Wealth & Reputation</button>
+                    <button id="to-summary" class="btn">View Character Sheet</button>
+                </div>
+            </div>
+
+            <!-- Character Sheet Tab -->
+            <div id="summary" class="tab-content">
+                <h2>Character Sheet</h2>
+                
+                <div class="character-sheet">
+                    <div class="character-header">
+                        <div>
+                            <h2 class="character-name" id="sheet-character-name">Character Name</h2>
+                            <p id="sheet-ancestry-class">Ancestry • Class (Subclass)</p>
+                        </div>
+                        <div>
+                            <p><strong>Community:</strong> <span id="sheet-community">Community</span></p>
+                            <p><strong>Wealth:</strong> <span id="sheet-wealth">1</span> • <strong>Reputation:</strong> <span id="sheet-reputation">0</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="golden-divider"></div>
+                    
+                    <div class="character-details">
+                        <div class="detail-section">
+                            <h3>Traits</h3>
+                            <div id="sheet-traits">
+                                <p><strong>Agility:</strong> <span id="sheet-agility">—</span></p>
+                                <p><strong>Strength:</strong> <span id="sheet-strength">—</span></p>
+                                <p><strong>Finesse:</strong> <span id="sheet-finesse">—</span></p>
+                                <p><strong>Knowledge:</strong> <span id="sheet-knowledge">—</span></p>
+                                <p><strong>Instinct:</strong> <span id="sheet-instinct">—</span></p>
+                                <p><strong>Presence:</strong> <span id="sheet-presence">—</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3>Ancestry Gifts</h3>
+                            <div id="sheet-ancestry-gifts">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3>Community Feature</h3>
+                            <div id="sheet-community-feature">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3>Class Features</h3>
+                            <div id="sheet-class-features">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3>Domain Powers</h3>
+                            <div id="sheet-domain-powers">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3>Experience</h3>
+                            <div id="sheet-experience">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h3>Equipment</h3>
+                            <div id="sheet-equipment">
+                                <h4>Weapons:</h4>
+                                <ul id="sheet-weapons">
+                                    <!-- Will be populated by JavaScript -->
+                                </ul>
+                                <h4>Armor & Equipment:</h4>
+                                <ul id="sheet-armor">
+                                    <!-- Will be populated by JavaScript -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="golden-divider"></div>
+                    
+                    <div class="character-stats">
+                        <div class="stat-block">
+                            <h3>Combat Stats</h3>
+                            <p><strong>Hit Points:</strong> <span id="sheet-hit-points">—</span></p>
+                            <p><strong>Evasion:</strong> <span id="sheet-evasion">—</span></p>
+                            <p><strong>Armor:</strong> <span id="sheet-armor-value">—</span></p>
+                        </div>
+                        
+                        <div class="stat-block">
+                            <h3>Resources</h3>
+                            <p><strong>Hope:</strong> <span id="sheet-hope">3</span></p>
+                            <p><strong>Stress:</strong> <span id="sheet-stress">0</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group mt-3">
+                    <button id="back-to-equipment" class="btn btn-secondary">Back to Equipment</button>
+                    <button id="print-character" class="btn">Print Character Sheet</button>
+                    <button id="save-character" class="btn">Save Character</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container text-center">
+            <p>Voidlight Character Creation System • Based on the Voidlight: Chronicles of the Stellar Veil RPG</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
