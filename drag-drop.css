@@ -1,0 +1,94 @@
+/* Drag and Drop Styles */
+.trait-modifiers {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.modifier-pool {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.modifier {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bone-white-darker);
+  border: 2px solid var(--golden-accent);
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: grab;
+  transition: all 0.2s ease;
+}
+
+.modifier:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px var(--golden-accent-light);
+}
+
+.modifier.dragging {
+  opacity: 0.5;
+}
+
+.modifier.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.modifier.selected {
+  background-color: var(--golden-accent);
+  color: var(--text-light);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px var(--golden-accent);
+}
+
+.trait-value {
+  width: 60px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bone-white);
+  border: 2px dashed var(--golden-accent-light);
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.trait-value.selected {
+  border: 2px solid var(--golden-accent);
+  background-color: rgba(212, 175, 55, 0.15);
+  box-shadow: 0 0 5px var(--golden-accent-light);
+}
+
+.trait-value.drag-over {
+  background-color: rgba(212, 175, 55, 0.2);
+  border: 2px solid var(--golden-accent);
+  transform: scale(1.1);
+}
+
+.trait-assignments {
+  margin-top: 20px;
+}
+
+.trait-assignment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: var(--bone-white-darker);
+  border-radius: 5px;
+  transition: all 0.2s ease;
+}
+
+.trait-assignment:hover {
+  background-color: rgba(212, 175, 55, 0.1);
+}

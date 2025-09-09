@@ -1,4 +1,5 @@
 // Voidlight Character Creation - Main Script
+console.log("Voidlight Character Creation Script - Updated Version");
 
 // Character data object to store all selections
 const character = {
@@ -1038,11 +1039,43 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Add click handlers to the ancestry cards themselves for better UX
+    const ancestryCards = document.querySelectorAll('.ancestry-card');
+    ancestryCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Don't trigger if clicking on the button itself (let the button handler work)
+            if (e.target.classList.contains('select-ancestry') || 
+                e.target.closest('.select-ancestry')) {
+                return;
+            }
+            
+            const ancestryId = this.getAttribute('data-ancestry');
+            console.log("Card clicked for ancestry:", ancestryId);
+            selectAncestry(ancestryId);
+        });
+    });
+    
     // Community selection
     const communityButtons = document.querySelectorAll('.select-community');
     communityButtons.forEach(button => {
         button.addEventListener('click', function() {
             const communityId = this.getAttribute('data-community');
+            selectCommunity(communityId);
+        });
+    });
+    
+    // Add click handlers to the community cards themselves for better UX
+    const communityCards = document.querySelectorAll('.community-card');
+    communityCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Don't trigger if clicking on the button itself (let the button handler work)
+            if (e.target.classList.contains('select-community') || 
+                e.target.closest('.select-community')) {
+                return;
+            }
+            
+            const communityId = this.getAttribute('data-community');
+            console.log("Card clicked for community:", communityId);
             selectCommunity(communityId);
         });
     });
@@ -1060,6 +1093,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
+            selectClass(classId, subclassId);
+        });
+    });
+    
+    // Add click handlers to the class cards themselves for better UX
+    const classCards = document.querySelectorAll('.class-card');
+    classCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Don't trigger if clicking on the button itself or the subclass select (let those handlers work)
+            if (e.target.classList.contains('select-class') || 
+                e.target.closest('.select-class') ||
+                e.target.tagName === 'SELECT' ||
+                e.target.closest('select')) {
+                return;
+            }
+            
+            const classId = this.getAttribute('data-class');
+            const subclassSelect = document.getElementById(`${classId}-subclass`);
+            const subclassId = subclassSelect.value;
+            
+            if (!subclassId) {
+                // Focus on the subclass select to prompt the user
+                subclassSelect.focus();
+                alert('Please select a subclass before continuing.');
+                return;
+            }
+            
+            console.log("Card clicked for class:", classId, "with subclass:", subclassId);
             selectClass(classId, subclassId);
         });
     });
@@ -1129,7 +1190,9 @@ function selectAncestry(ancestryId) {
         // Update the button text to "Select" for all cards
         const button = card.querySelector('.select-ancestry');
         if (button) {
-            button.textContent = `Select ${button.getAttribute('data-ancestry').charAt(0).toUpperCase() + button.getAttribute('data-ancestry').slice(1)}`;
+            const ancestryName = button.getAttribute('data-ancestry').split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            button.textContent = `Select ${ancestryName}`;
+            button.style.backgroundColor = "var(--golden-accent)";
         }
     });
     
@@ -1262,21 +1325,44 @@ function selectClass(classId, subclassId) {
 
 // Function to set up trait drag and drop
 function setupTraitDragAndDrop() {
+    console.log("Setting up trait drag and drop");
     const modifiers = document.querySelectorAll('.modifier');
     const traitValues = document.querySelectorAll('.trait-value');
     
+    // Make sure we found the elements
+    console.log(`Found ${modifiers.length} modifiers and ${traitValues.length} trait values`);
+    
+    // Add click handlers as a fallback for drag and drop
     modifiers.forEach(modifier => {
+        // Set draggable attribute explicitly
+        modifier.setAttribute('draggable', 'true');
+        
+        // Drag events
         modifier.addEventListener('dragstart', function(e) {
+            console.log('Drag started', this.getAttribute('data-value'));
             e.dataTransfer.setData('text/plain', this.getAttribute('data-value'));
             this.classList.add('dragging');
         });
         
         modifier.addEventListener('dragend', function() {
+            console.log('Drag ended');
             this.classList.remove('dragging');
+        });
+        
+        // Click event as fallback
+        modifier.addEventListener('click', function() {
+            console.log('Modifier clicked', this.getAttribute('data-value'));
+            // Store the selected modifier value for click-based assignment
+            window.selectedModifier = this.getAttribute('data-value');
+            
+            // Visual feedback
+            document.querySelectorAll('.modifier').forEach(m => m.classList.remove('selected'));
+            this.classList.add('selected');
         });
     });
     
     traitValues.forEach(traitValue => {
+        // Drag events
         traitValue.addEventListener('dragover', function(e) {
             e.preventDefault();
             this.classList.add('drag-over');
@@ -1291,31 +1377,53 @@ function setupTraitDragAndDrop() {
             this.classList.remove('drag-over');
             
             const modifierValue = e.dataTransfer.getData('text/plain');
-            const traitName = this.getAttribute('data-trait');
-            
-            // Check if this trait already has a value
-            if (this.textContent !== '—' && this.textContent !== '') {
-                // Return the current value to the pool
-                const currentValue = this.textContent;
-                const unusedModifier = document.querySelector(`.modifier[data-value="${currentValue}"]:not(.assigned)`);
-                if (unusedModifier) {
-                    unusedModifier.classList.remove('hidden');
-                    unusedModifier.classList.remove('assigned');
-                }
-            }
-            
-            // Assign the new value
-            this.textContent = modifierValue;
-            character.traits[traitName] = modifierValue;
-            
-            // Hide the used modifier
-            const usedModifier = document.querySelector(`.modifier[data-value="${modifierValue}"]:not(.assigned)`);
-            if (usedModifier) {
-                usedModifier.classList.add('hidden');
-                usedModifier.classList.add('assigned');
+            console.log('Drop received with value:', modifierValue);
+            assignTraitValue(this, modifierValue);
+        });
+        
+        // Click event as fallback
+        traitValue.addEventListener('click', function() {
+            console.log('Trait value clicked');
+            if (window.selectedModifier) {
+                console.log('Assigning selected modifier:', window.selectedModifier);
+                assignTraitValue(this, window.selectedModifier);
+                window.selectedModifier = null;
+                
+                // Remove selection from modifiers
+                document.querySelectorAll('.modifier').forEach(m => m.classList.remove('selected'));
             }
         });
     });
+}
+
+// Helper function to assign trait values
+function assignTraitValue(traitElement, modifierValue) {
+    const traitName = traitElement.getAttribute('data-trait');
+    
+    // Check if this trait already has a value
+    if (traitElement.textContent !== '—' && traitElement.textContent !== '') {
+        // Return the current value to the pool
+        const currentValue = traitElement.textContent;
+        const unusedModifier = document.querySelector(`.modifier[data-value="${currentValue}"]:not(.assigned)`);
+        if (unusedModifier) {
+            unusedModifier.classList.remove('hidden');
+            unusedModifier.classList.remove('assigned');
+        }
+    }
+    
+    // Assign the new value
+    traitElement.textContent = modifierValue;
+    character.traits[traitName] = modifierValue;
+    
+    // Add selected styling to the trait value
+    traitElement.classList.add('selected');
+    
+    // Hide the used modifier
+    const usedModifier = document.querySelector(`.modifier[data-value="${modifierValue}"]:not(.assigned)`);
+    if (usedModifier) {
+        usedModifier.classList.add('hidden');
+        usedModifier.classList.add('assigned');
+    }
 }
 
 // Function to reset traits
