@@ -1,30 +1,155 @@
 // Character object to store all selections
 let character = {
     ancestry: '',
-    ancestryGift: '',
+    ancestryGifts: [],
     community: '',
     communityFeature: '',
     class: '',
     subclass: '',
+    domains: [],
+    domainPowers: [],
     traits: {
         strength: 0,
-        dexterity: 0,
-        constitution: 0,
-        intelligence: 0,
-        wisdom: 0,
-        charisma: 0
+        agility: 0,
+        finesse: 0,
+        instinct: 0,
+        presence: 0,
+        knowledge: 0
     },
+    experience: '',
     background: '',
     personality: '',
     appearance: '',
-    domainPowers: [],
-    wealthLevel: 'modest',
-    reputationLevel: 'recognized',
-    equipment: []
+    wealthLevel: 1,
+    reputationLevel: 0,
+    equipment: {
+        weapon: '',
+        armor: '',
+        items: ''
+    }
 };
 
 // Current step tracking
 let currentStep = 1;
+
+// Voidlight authentic data
+const VOIDLIGHT_DATA = {
+    ancestries: {
+        'Human': {
+            gifts: ['Adaptive Spirit', 'Cultural Bridge'],
+            description: 'The adaptable survivors, scattered and diversified'
+        },
+        'Zephyrian': {
+            gifts: ['Veil Sensitivity', 'Emotional Resonance'],
+            description: 'The star-sung beings of ethereal grace'
+        },
+        'Kryllian': {
+            gifts: ['Master Craftsman', 'Structural Intuition'],
+            description: 'Stout builders with four powerful arms'
+        },
+        'Ethereal': {
+            gifts: ['Phase Shift', 'Temporal Perception'],
+            description: 'Beings between matter and energy'
+        },
+        'Synthetic': {
+            gifts: ['Modular Consciousness', 'Digital Interface'],
+            description: 'Liberated minds, self-aware AIs seeking purpose'
+        },
+        'Rift Spinner': {
+            gifts: ['Chrono-Gift', 'Wall Weaver'],
+            description: 'Arachnid time-weavers who manipulate causality'
+        },
+        'Celestari': {
+            gifts: ['Stellar Meditation', 'Celestial Grace'],
+            description: 'Descendants of stars, radiant celestial beings'
+        },
+        'Kryx': {
+            gifts: ['Pack Intuition', 'Biolume Howl'],
+            description: 'Wolf-like beings of pack culture and bioluminescence'
+        }
+    },
+    
+    communities: {
+        'Core World': 'Glittering spires and social labyrinths',
+        'Frontier Colony': 'Dangerous settlements full of opportunities',
+        'Space Station': 'Claustrophobic artificial environments',
+        'Nomad Ship': 'Constantly traveling between stars',
+        'Isolationist Commune': 'Community with unique culture and beliefs',
+        'Reclaimed Ruin': 'Home built in ancient Precursor ruins'
+    },
+    
+    classes: {
+        'Soldier': {
+            description: 'The hardened combatant, master of weapons and tactics',
+            domains: ['Kinetic', 'Synthesis'],
+            role: 'Damage, Defense',
+            subclasses: ['Guardian', 'Military Officer', 'Mercenary']
+        },
+        'Engineer': {
+            description: 'The technical genius capable of building, repairing, and hacking anything',
+            domains: ['Tech', 'Synthesis'],
+            role: 'Support, Control',
+            subclasses: ['Artisan', 'Tech Specialist', 'Systems Architect']
+        },
+        'Pilot': {
+            description: 'The navigation ace, one with their ship, seeing paths where others see chaos',
+            domains: ['Void', 'Tech'],
+            role: 'Mobility, Control',
+            subclasses: ['Void Runner', 'Combat Ace', 'Navigator']
+        },
+        'Scoundrel': {
+            description: 'The ghost in shadows, expert in stealth, subterfuge, and lethal precision',
+            domains: ['Social', 'Void'],
+            role: 'Damage, Stealth',
+            subclasses: ['Assassin', 'Infiltrator', 'Smuggler']
+        },
+        'Mystic': {
+            description: 'The Veil\'s channel, bending reality with the power of their mind',
+            domains: ['Neural', 'Social'],
+            role: 'Psionic Power, Support',
+            subclasses: ['Veil Walker', 'Mind Bender', 'Reality Shaper']
+        },
+        'Scholar': {
+            description: 'The guardian of knowledge, unraveling the secrets of the past',
+            domains: ['Tech', 'Social'],
+            role: 'Investigation, Support',
+            subclasses: ['Archaeologist', 'Xenologist', 'Historian']
+        },
+        'Diplomat': {
+            description: 'The peace weaver, master of words and social networks',
+            domains: ['Social', 'Synthesis'],
+            role: 'Negotiation, Support',
+            subclasses: ['Negotiator', 'Ambassador', 'Spy Master']
+        }
+    },
+    
+    domainPowers: {
+        'Tech': [
+            'System Jackknife', 'Drone Whisper', 'Quantum Firewall',
+            'Emergency Repair', 'Data Ghost', 'Rapid Fabrication'
+        ],
+        'Kinetic': [
+            'Power Strike', 'Shield Bash', 'Weapon Mastery',
+            'Combat Roll', 'Adrenaline Rush', 'Battle Focus'
+        ],
+        'Synthesis': [
+            'Energy Shield', 'Adaptive Armor', 'Combat Enhancement',
+            'System Integration', 'Tech Boost', 'Power Surge'
+        ],
+        'Void': [
+            'Void Step', 'Spatial Awareness', 'Dimensional Shift',
+            'Reality Bend', 'Temporal Dodge', 'Quantum Leap'
+        ],
+        'Social': [
+            'Persuasion', 'Deception', 'Intimidation',
+            'Insight', 'Leadership', 'Manipulation'
+        ],
+        'Neural': [
+            'Mind Blast', 'Telepathy', 'Mental Shield',
+            'Psychic Push', 'Clairvoyance', 'Mind Control'
+        ]
+    }
+};
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
@@ -52,18 +177,15 @@ function setupTabNavigation() {
 }
 
 function showStep(step) {
-    // Hide all tab panes
     document.querySelectorAll('.tab-pane').forEach(pane => {
         pane.classList.remove('active');
     });
     
-    // Show the requested step
     const targetPane = document.getElementById(`step${step}`);
     if (targetPane) {
         targetPane.classList.add('active');
     }
     
-    // Update tab buttons
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('active');
         if (parseInt(btn.dataset.step) === step) {
@@ -86,7 +208,6 @@ function prevStep(step) {
 }
 
 function canNavigateTo(step) {
-    // Allow navigation to completed steps
     return step <= currentStep;
 }
 
@@ -112,7 +233,7 @@ function validateAncestry() {
         return false;
     }
     character.ancestry = selected.value;
-    character.ancestryGift = selected.dataset.gift;
+    character.ancestryGifts = selected.dataset.gift.split(', ');
     return true;
 }
 
@@ -142,6 +263,7 @@ function validateClass() {
     
     character.class = selected.value;
     character.subclass = subclassSelected.value;
+    character.domains = selected.dataset.domains.split(', ');
     return true;
 }
 
@@ -149,7 +271,7 @@ function validateTraits() {
     const selects = document.querySelectorAll('.trait-select');
     const values = Array.from(selects).map(s => parseInt(s.value));
     
-    // Check if all values are used exactly once
+    // Check if all required values are used
     const required = [2, 1, 1, 0, 0, -1];
     const sortedValues = [...values].sort((a, b) => b - a);
     const sortedRequired = [...required].sort((a, b) => b - a);
@@ -162,17 +284,18 @@ function validateTraits() {
     // Save traits
     character.traits = {
         strength: parseInt(document.querySelector('select[name="strength"]').value),
-        dexterity: parseInt(document.querySelector('select[name="dexterity"]').value),
-        constitution: parseInt(document.querySelector('select[name="constitution"]').value),
-        intelligence: parseInt(document.querySelector('select[name="intelligence"]').value),
-        wisdom: parseInt(document.querySelector('select[name="wisdom"]').value),
-        charisma: parseInt(document.querySelector('select[name="charisma"]').value)
+        agility: parseInt(document.querySelector('select[name="agility"]').value),
+        finesse: parseInt(document.querySelector('select[name="finesse"]').value),
+        instinct: parseInt(document.querySelector('select[name="instinct"]').value),
+        presence: parseInt(document.querySelector('select[name="presence"]').value),
+        knowledge: parseInt(document.querySelector('select[name="knowledge"]').value)
     };
     
     return true;
 }
 
 function validateExperience() {
+    character.experience = document.getElementById('experience').value;
     character.background = document.getElementById('background').value;
     character.personality = document.getElementById('personality').value;
     character.appearance = document.getElementById('appearance').value;
@@ -191,13 +314,15 @@ function validateDomains() {
 }
 
 function validateWealth() {
-    character.wealthLevel = document.getElementById('wealthLevel').value;
-    character.reputationLevel = document.getElementById('reputationLevel').value;
+    character.wealthLevel = parseInt(document.getElementById('wealthLevel').value);
+    character.reputationLevel = parseInt(document.getElementById('reputationLevel').value);
     return true;
 }
 
 function validateEquipment() {
-    // Equipment validation is handled by point system
+    character.equipment.weapon = document.getElementById('primaryWeapon').value;
+    character.equipment.armor = document.getElementById('armor').value;
+    character.equipment.items = document.getElementById('personalItems').value;
     return true;
 }
 
@@ -212,21 +337,11 @@ function setupSelections() {
 }
 
 function setupAncestrySelection() {
-    const radios = document.querySelectorAll('input[name="ancestry"]');
-    radios.forEach(radio => {
-        radio.addEventListener('change', (e) => {
-            updateCharacterSheet();
-        });
-    });
+    // Already handled by radio buttons
 }
 
 function setupCommunitySelection() {
-    const radios = document.querySelectorAll('input[name="community"]');
-    radios.forEach(radio => {
-        radio.addEventListener('change', (e) => {
-            updateCharacterSheet();
-        });
-    });
+    // Already handled by radio buttons
 }
 
 function setupClassSelection() {
@@ -236,7 +351,6 @@ function setupClassSelection() {
             const selectedClass = e.target.value;
             populateSubclasses(selectedClass);
             populateDomains(selectedClass);
-            populateEquipment(selectedClass);
             updateCharacterSheet();
         });
     });
@@ -246,25 +360,16 @@ function populateSubclasses(selectedClass) {
     const subclassOptions = document.getElementById('subclassOptions');
     const subclassSelection = document.getElementById('subclassSelection');
     
-    const subclasses = {
-        'Warrior': ['Champion', 'Battle Master', 'Eldritch Knight'],
-        'Rogue': ['Assassin', 'Thief', 'Arcane Trickster'],
-        'Mage': ['Evoker', 'Illusionist', 'Necromancer'],
-        'Priest': ['Life Domain', 'Light Domain', 'War Domain'],
-        'Ranger': ['Hunter', 'Beast Master', 'Gloom Stalker'],
-        'Warlord': ['Commander', 'Conqueror', 'Marshal'],
-        'Artificer': ['Alchemist', 'Artillerist', 'Battle Smith']
-    };
-    
-    if (subclasses[selectedClass]) {
+    if (VOIDLIGHT_DATA.classes[selectedClass]) {
         subclassOptions.innerHTML = '';
-        subclasses[selectedClass].forEach(subclass => {
+        VOIDLIGHT_DATA.classes[selectedClass].subclasses.forEach(subclass => {
             const label = document.createElement('label');
             label.className = 'selection-card';
             label.innerHTML = `
                 <input type="radio" name="subclass" value="${subclass}">
                 <div class="card-content">
                     <h3>${subclass}</h3>
+                    <p>Specialized path within ${selectedClass}</p>
                 </div>
             `;
             subclassOptions.appendChild(label);
@@ -276,79 +381,37 @@ function populateSubclasses(selectedClass) {
 function populateDomains(selectedClass) {
     const domainPowers = document.getElementById('domainPowers');
     
-    const domains = {
-        'Warrior': ['Power Strike', 'Combat Superiority', 'Second Wind', 'Action Surge', 'Indomitable'],
-        'Rogue': ['Sneak Attack', 'Cunning Action', 'Uncanny Dodge', 'Evasion', 'Reliable Talent'],
-        'Mage': ['Arcane Recovery', 'Arcane Ward', 'Sculpt Spells', 'Potent Cantrip', 'Empowered Evocation'],
-        'Priest': ['Divine Domain', 'Channel Divinity', 'Divine Strike', 'Guardian Spirits', 'Divine Intervention'],
-        'Ranger': ['Favored Enemy', 'Natural Explorer', 'Primeval Awareness', 'Land\'s Stride', 'Hide in Plain Sight'],
-        'Warlord': ['Commanding Presence', 'Tactical Superiority', 'Rallying Cry', 'Warlord\'s Strike', 'Indomitable Spirit'],
-        'Artificer': ['Infuse Item', 'Magical Tinkering', 'Tool Expertise', 'Flash of Genius', 'Magic Item Adept']
-    };
-    
-    if (domains[selectedClass]) {
-        domainPowers.innerHTML = '';
-        domains[selectedClass].slice(0, 5).forEach(power => {
-            const label = document.createElement('label');
-            label.className = 'selection-card';
-            label.innerHTML = `
-                <input type="checkbox" name="domainPower" value="${power}">
-                <div class="card-content">
-                    <h3>${power}</h3>
-                </div>
-            `;
-            domainPowers.appendChild(label);
+    if (VOIDLIGHT_DATA.classes[selectedClass]) {
+        const domains = VOIDLIGHT_DATA.classes[selectedClass].domains;
+        domainPowers.innerHTML = '<h3>Available Domain Powers</h3>';
+        
+        domains.forEach(domain => {
+            if (VOIDLIGHT_DATA.domainPowers[domain]) {
+                const domainSection = document.createElement('div');
+                domainSection.innerHTML = `<h4>${domain} Domain</h4>`;
+                
+                const powers = VOIDLIGHT_DATA.domainPowers[domain].slice(0, 3); // First 3 powers for level 1
+                powers.forEach(power => {
+                    const label = document.createElement('label');
+                    label.className = 'selection-card';
+                    label.style.cssText = 'margin: 0.5rem; padding: 1rem;';
+                    label.innerHTML = `
+                        <input type="checkbox" name="domainPower" value="${power}">
+                        <div class="card-content">
+                            <h4>${power}</h4>
+                        </div>
+                    `;
+                    domainSection.appendChild(label);
+                });
+                
+                domainPowers.appendChild(domainSection);
+            }
         });
     }
 }
 
-function populateEquipment(selectedClass) {
-    const equipmentOptions = document.getElementById('equipmentOptions');
-    const equipmentPoints = {
-        'Warrior': 150,
-        'Rogue': 120,
-        'Mage': 80,
-        'Priest': 100,
-        'Ranger': 130,
-        'Warlord': 140,
-        'Artificer': 110
-    };
-    
-    const points = equipmentPoints[selectedClass] || 100;
-    document.getElementById('availablePoints').textContent = points;
-    
-    // Equipment options would be populated here based on class
-    equipmentOptions.innerHTML = `
-        <div class="form-group">
-            <label>Choose your starting equipment:</label>
-            <select id="weaponSelect">
-                <option value="">Select a weapon...</option>
-                <option value="sword">Sword (20 points)</option>
-                <option value="bow">Bow (25 points)</option>
-                <option value="staff">Staff (10 points)</option>
-                <option value="daggers">Daggers (15 points)</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Choose your armor:</label>
-            <select id="armorSelect">
-                <option value="">Select armor...</option>
-                <option value="leather">Leather Armor (15 points)</option>
-                <option value="chain">Chain Mail (50 points)</option>
-                <option value="plate">Plate Armor (75 points)</option>
-                <option value="robe">Mage Robe (10 points)</option>
-            </select>
-        </div>
-    `;
-}
-
 function setupTraitSelection() {
-    const selects = document.querySelectorAll('.trait-select');
-    selects.forEach(select => {
-        select.addEventListener('change', () => {
-            updateCharacterSheet();
-        });
-    });
+    // Already handled by dropdowns
 }
 
 function setupDomainSelection() {
@@ -356,13 +419,12 @@ function setupDomainSelection() {
 }
 
 function setupEquipmentSelection() {
-    // Handled in populateEquipment
+    // Already handled by dropdowns
 }
 
 // Character sheet and finalization
 function updateCharacterSheet() {
-    // This function would update the character sheet display
-    // For now, it's a placeholder
+    // Placeholder for real-time updates
 }
 
 function finishCharacter() {
@@ -372,12 +434,10 @@ function finishCharacter() {
 }
 
 function showCharacterSheet() {
-    // Hide all tab panes
     document.querySelectorAll('.tab-pane').forEach(pane => {
         pane.classList.remove('active');
     });
     
-    // Show character sheet
     const sheetPane = document.getElementById('characterSheet');
     if (sheetPane) {
         sheetPane.classList.add('active');
@@ -388,44 +448,69 @@ function showCharacterSheet() {
 
 function populateCharacterSheet() {
     const summary = document.getElementById('characterSummary');
+    const classData = VOIDLIGHT_DATA.classes[character.class];
+    
     summary.innerHTML = `
         <div class="character-info">
-            <h3>Ancestry: ${character.ancestry}</h3>
-            <p><strong>Gift:</strong> ${character.ancestryGift}</p>
+            <h3>🌌 ${character.ancestry} • ${character.class} (${character.subclass})</h3>
             
-            <h3>Community: ${character.community}</h3>
-            <p><strong>Feature:</strong> ${character.communityFeature}</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h4>Ancestry: ${character.ancestry}</h4>
+                    <p><strong>Gifts:</strong> ${character.ancestryGifts.join(', ')}</p>
+                    
+                    <h4>Community: ${character.community}</h4>
+                    <p><strong>Environment:</strong> ${VOIDLIGHT_DATA.communities[character.community]}</p>
+                    
+                    <h4>Class: ${character.class}</h4>
+                    <p><strong>Subclass:</strong> ${character.subclass}</p>
+                    <p><strong>Domains:</strong> ${classData.domains.join(', ')}</p>
+                    <p><strong>Role:</strong> ${classData.role}</p>
+                </div>
+                
+                <div>
+                    <h4>Traits</h4>
+                    <ul>
+                        <li><strong>Strength:</strong> ${character.traits.strength}</li>
+                        <li><strong>Agility:</strong> ${character.traits.agility}</li>
+                        <li><strong>Finesse:</strong> ${character.traits.finesse}</li>
+                        <li><strong>Instinct:</strong> ${character.traits.instinct}</li>
+                        <li><strong>Presence:</strong> ${character.traits.presence}</li>
+                        <li><strong>Knowledge:</strong> ${character.traits.knowledge}</li>
+                    </ul>
+                    
+                    <h4>Domain Powers</h4>
+                    <ul>
+                        ${character.domainPowers.map(power => `<li>${power}</li>`).join('')}
+                    </ul>
+                    
+                    <h4>Wealth & Reputation</h4>
+                    <p><strong>Wealth Level:</strong> ${character.wealthLevel}</p>
+                    <p><strong>Reputation Level:</strong> ${character.reputationLevel}</p>
+                </div>
+            </div>
             
-            <h3>Class: ${character.class}</h3>
-            <p><strong>Subclass:</strong> ${character.subclass}</p>
+            <h4>Background & Experience</h4>
+            <p><strong>Community:</strong> ${character.community}</p>
+            <p><strong>Experience:</strong> ${character.experience || 'Not specified'}</p>
+            <p><strong>Background:</strong> ${character.background || 'Not specified'}</p>
             
-            <h3>Traits</h3>
+            <h4>Personality</h4>
+            <p>${character.personality || 'Not specified'}</p>
+            
+            <h4>Appearance</h4>
+            <p>${character.appearance || 'Not specified'}</p>
+            
+            <h4>Equipment</h4>
             <ul>
-                <li>Strength: ${character.traits.strength}</li>
-                <li>Dexterity: ${character.traits.dexterity}</li>
-                <li>Constitution: ${character.traits.constitution}</li>
-                <li>Intelligence: ${character.traits.intelligence}</li>
-                <li>Wisdom: ${character.traits.wisdom}</li>
-                <li>Charisma: ${character.traits.charisma}</li>
+                <li><strong>Weapon:</strong> ${character.equipment.weapon || 'None'}</li>
+                <li><strong>Armor:</strong> ${character.equipment.armor || 'None'}</li>
+                <li><strong>Personal Items:</strong> ${character.equipment.items || 'None'}</li>
             </ul>
             
-            <h3>Background</h3>
-            <p>${character.background}</p>
-            
-            <h3>Personality</h3>
-            <p>${character.personality}</p>
-            
-            <h3>Appearance</h3>
-            <p>${character.appearance}</p>
-            
-            <h3>Domain Powers</h3>
-            <ul>
-                ${character.domainPowers.map(power => `<li>${power}</li>`).join('')}
-            </ul>
-            
-            <h3>Wealth & Reputation</h3>
-            <p>Wealth: ${character.wealthLevel}</p>
-            <p>Reputation: ${character.reputationLevel}</p>
+            <div style="background: #f0e68c; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+                <p><em>"In the fractured galaxy after the Great Silence, your character carries the scars of a century of isolation and the weight of their community's hopes. They are a survivor, an echo of the past and a bet on the future."</em></p>
+            </div>
         </div>
     `;
 }
@@ -436,7 +521,7 @@ function downloadCharacter() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'voidlight-character.json';
+    a.download = `voidlight-character-${character.ancestry}-${character.class}.json`;
     a.click();
     URL.revokeObjectURL(url);
 }
@@ -448,6 +533,37 @@ function updateProgressBar() {
 }
 
 // Utility functions
-function formatTraitName(name) {
-    return name.charAt(0).toUpperCase() + name.slice(1);
+function resetCharacter() {
+    character = {
+        ancestry: '',
+        ancestryGifts: [],
+        community: '',
+        communityFeature: '',
+        class: '',
+        subclass: '',
+        domains: [],
+        domainPowers: [],
+        traits: {
+            strength: 0,
+            agility: 0,
+            finesse: 0,
+            instinct: 0,
+            presence: 0,
+            knowledge: 0
+        },
+        experience: '',
+        background: '',
+        personality: '',
+        appearance: '',
+        wealthLevel: 1,
+        reputationLevel: 0,
+        equipment: {
+            weapon: '',
+            armor: '',
+            items: ''
+        }
+    };
+    currentStep = 1;
+    showStep(1);
+    updateProgressBar();
 }

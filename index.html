@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voidlight RPG Character Creation</title>
+    <title>Voidlight RPG Character Creation - Authentic System</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="drag-drop.css">
 <script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
@@ -12,6 +12,7 @@
     <div class="container">
         <header>
             <h1>Voidlight RPG Character Creation</h1>
+            <h2>Chronicles of the Stellar Veil</h2>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
@@ -33,61 +34,78 @@
                 <!-- Ancestry Selection -->
                 <div class="tab-pane active" id="step1">
                     <h2>Select Your Ancestry</h2>
+                    <p>Your ancestry is your character's fundamental biological and cultural heritage in the post-Silence galaxy.</p>
                     <div class="selection-grid">
                         <label class="selection-card">
-                            <input type="radio" name="ancestry" value="Human" data-gift="Versatile">
+                            <input type="radio" name="ancestry" value="Human" data-gift="Adaptive Spirit, Cultural Bridge">
                             <div class="card-content">
                                 <h3>Human</h3>
-                                <p>Gift: Versatile - Choose an additional skill proficiency</p>
+                                <p><strong>The adaptable survivors, scattered and diversified</strong></p>
+                                <p><strong>Gifts:</strong> Adaptive Spirit - Gain advantage on next roll after failure; Cultural Bridge - Ask about group motivations</p>
+                                <p><strong>Archetypes:</strong> Explorer, Diplomat, Mercenary</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="ancestry" value="Elf" data-gift="Fey Ancestry">
+                            <input type="radio" name="ancestry" value="Zephyrian" data-gift="Veil Sensitivity, Emotional Resonance">
                             <div class="card-content">
-                                <h3>Elf</h3>
-                                <p>Gift: Fey Ancestry - Advantage on saving throws against being charmed</p>
+                                <h3>Zephyrian</h3>
+                                <p><strong>The star-sung beings of ethereal grace</strong></p>
+                                <p><strong>Gifts:</strong> Veil Sensitivity - Sense Veil phenomena; Emotional Resonance - Convert Stress to Hope</p>
+                                <p><strong>Archetypes:</strong> Artist, Mystic, Counselor</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="ancestry" value="Dwarf" data-gift="Stonecunning">
+                            <input type="radio" name="ancestry" value="Kryllian" data-gift="Master Craftsman, Structural Intuition">
                             <div class="card-content">
-                                <h3>Dwarf</h3>
-                                <p>Gift: Stonecunning - Double proficiency bonus on History checks related to stonework</p>
+                                <h3>Kryllian</h3>
+                                <p><strong>Stout builders with four powerful arms</strong></p>
+                                <p><strong>Gifts:</strong> Master Craftsman - Advantage on crafting/repair; Structural Intuition - Identify system weaknesses</p>
+                                <p><strong>Archetypes:</strong> Engineer, Artisan, Technician</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="ancestry" value="Orc" data-gift="Relentless Endurance">
+                            <input type="radio" name="ancestry" value="Ethereal" data-gift="Phase Shift, Temporal Perception">
                             <div class="card-content">
-                                <h3>Orc</h3>
-                                <p>Gift: Relentless Endurance - When reduced to 0 HP, drop to 1 HP instead (1/day)</p>
+                                <h3>Ethereal</h3>
+                                <p><strong>Beings between matter and energy</strong></p>
+                                <p><strong>Gifts:</strong> Phase Shift - Become incorporeal; Temporal Perception - Sense temporal anomalies</p>
+                                <p><strong>Archetypes:</strong> Spy, Oracle, Assassin</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="ancestry" value="Halfling" data-gift="Lucky">
+                            <input type="radio" name="ancestry" value="Synthetic" data-gift="Modular Consciousness, Digital Interface">
                             <div class="card-content">
-                                <h3>Halfling</h3>
-                                <p>Gift: Lucky - When rolling a 1 on d20, reroll and use the new result</p>
+                                <h3>Synthetic</h3>
+                                <p><strong>Liberated minds, self-aware AIs seeking purpose</strong></p>
+                                <p><strong>Gifts:</strong> Modular Consciousness - Download new skills; Digital Interface - Direct tech interface</p>
+                                <p><strong>Archetypes:</strong> Hacker, Scholar, Infiltrator</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="ancestry" value="Dragonborn" data-gift="Draconic Ancestry">
+                            <input type="radio" name="ancestry" value="Rift Spinner" data-gift="Chrono-Gift, Wall Weaver">
                             <div class="card-content">
-                                <h3>Dragonborn</h3>
-                                <p>Gift: Draconic Ancestry - Gain breath weapon and damage resistance</p>
+                                <h3>Rift Spinner</h3>
+                                <p><strong>Arachnid time-weavers who manipulate causality</strong></p>
+                                <p><strong>Gifts:</strong> Chrono-Gift - Force rerolls; Wall Weaver - Move on any surface, sense vibrations</p>
+                                <p><strong>Archetypes:</strong> Controller, Tactician, Prophet</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="ancestry" value="Gnome" data-gift="Gnome Cunning">
+                            <input type="radio" name="ancestry" value="Celestari" data-gift="Stellar Meditation, Celestial Grace">
                             <div class="card-content">
-                                <h3>Gnome</h3>
-                                <p>Gift: Gnome Cunning - Advantage on Intelligence, Wisdom, and Charisma saving throws</p>
+                                <h3>Celestari</h3>
+                                <p><strong>Descendants of stars, radiant celestial beings</strong></p>
+                                <p><strong>Gifts:</strong> Stellar Meditation - Convert Stress to Hope; Celestial Grace - Magic unarmed attacks, healing</p>
+                                <p><strong>Archetypes:</strong> Leader, Guardian, Philosopher</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="ancestry" value="Tiefling" data-gift="Infernal Legacy">
+                            <input type="radio" name="ancestry" value="Kryx" data-gift="Pack Intuition, Biolume Howl">
                             <div class="card-content">
-                                <h3>Tiefling</h3>
-                                <p>Gift: Infernal Legacy - Cast thaumaturgy and hellish rebuke</p>
+                                <h3>Kryx</h3>
+                                <p><strong>Wolf-like beings of pack culture and bioluminescence</strong></p>
+                                <p><strong>Gifts:</strong> Pack Intuition - Protect allies in combat; Biolume Howl - Magic unarmed attacks, Dazzle enemies</p>
+                                <p><strong>Archetypes:</strong> Leader, Soldier, Mercenary</p>
                             </div>
                         </label>
                     </div>
@@ -99,75 +117,54 @@
                 <!-- Community Selection -->
                 <div class="tab-pane" id="step2">
                     <h2>Select Your Community</h2>
+                    <p>The environment that shaped your formative years in the post-Silence galaxy.</p>
                     <div class="selection-grid">
                         <label class="selection-card">
-                            <input type="radio" name="community" value="Noble" data-feature="Privileged Upbringing">
+                            <input type="radio" name="community" value="Core World" data-feature="Institutional Knowledge">
                             <div class="card-content">
-                                <h3>Noble</h3>
-                                <p>Feature: Privileged Upbringing - Extra starting wealth and social connections</p>
+                                <h3>Core World</h3>
+                                <p><strong>Glittering spires and social labyrinths</strong></p>
+                                <p>Advanced data-nets, towering arcologies, complex hierarchies. You know how to work the system and navigate institutional power.</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="community" value="Merchant" data-feature="Trade Connections">
+                            <input type="radio" name="community" value="Frontier Colony" data-feature="Survival Instinct">
                             <div class="card-content">
-                                <h3>Merchant</h3>
-                                <p>Feature: Trade Connections - Access to rare goods and better prices</p>
+                                <h3>Frontier Colony</h3>
+                                <p><strong>Dangerous settlements full of opportunities</strong></p>
+                                <p>Rugged environments, dangerous wildlife, lawless territories. You learned to survive through grit and adaptability.</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="community" value="Military" data-feature="Military Training">
+                            <input type="radio" name="community" value="Space Station" data-feature="Artificial Adaptation">
                             <div class="card-content">
-                                <h3>Military</h3>
-                                <p>Feature: Military Training - Proficiency with martial weapons and armor</p>
+                                <h3>Space Station</h3>
+                                <p><strong>Claustrophobic artificial environments</strong></p>
+                                <p>Recycled air, artificial gravity, tight quarters. You understand life support systems and communal living in confined spaces.</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="community" value="Artisan" data-feature="Craft Mastery">
+                            <input type="radio" name="community" value="Nomad Ship" data-feature="Stellar Navigation">
                             <div class="card-content">
-                                <h3>Artisan</h3>
-                                <p>Feature: Craft Mastery - Create items at half cost and time</p>
+                                <h3>Nomad Ship</h3>
+                                <p><strong>Constantly traveling between stars</strong></p>
+                                <p>Life aboard ships, understanding of navigation, resource management, and the nomadic lifestyle of space travelers.</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="community" value="Scholar" data-feature="Academic Knowledge">
+                            <input type="radio" name="community" value="Isolationist Commune" data-feature="Unique Culture">
                             <div class="card-content">
-                                <h3>Scholar</h3>
-                                <p>Feature: Academic Knowledge - Extra languages and research capabilities</p>
+                                <h3>Isolationist Commune</h3>
+                                <p><strong>Community with unique culture and beliefs</strong></p>
+                                <p>Self-sufficient communities with distinct customs, beliefs, and technologies separate from mainstream galactic society.</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="community" value="Rural" data-feature="Survival Instinct">
+                            <input type="radio" name="community" value="Reclaimed Ruin" data-feature="Precursor Knowledge">
                             <div class="card-content">
-                                <h3>Rural</h3>
-                                <p>Feature: Survival Instinct - Proficiency in Nature and Survival skills</p>
-                            </div>
-                        </label>
-                        <label class="selection-card">
-                            <input type="radio" name="community" value="Urban" data-feature="Streetwise">
-                            <div class="card-content">
-                                <h3>Urban</h3>
-                                <p>Feature: Streetwise - Navigate cities and find information quickly</p>
-                            </div>
-                        </label>
-                        <label class="selection-card">
-                            <input type="radio" name="community" value="Religious" data-feature="Divine Connection">
-                            <div class="card-content">
-                                <h3>Religious</h3>
-                                <p>Feature: Divine Connection - Access to temple resources and healing</p>
-                            </div>
-                        </label>
-                        <label class="selection-card">
-                            <input type="radio" name="community" value="Criminal" data-feature="Underworld Contacts">
-                            <div class="card-content">
-                                <h3>Criminal</h3>
-                                <p>Feature: Underworld Contacts - Access to black markets and information</p>
-                            </div>
-                        </label>
-                        <label class="selection-card">
-                            <input type="radio" name="community" value="Wanderer" data-feature="World Traveler">
-                            <div class="card-content">
-                                <h3>Wanderer</h3>
-                                <p>Feature: World Traveler - Extra languages and geographic knowledge</p>
+                                <h3>Reclaimed Ruin</h3>
+                                <p><strong>Home built in ancient Precursor ruins</strong></p>
+                                <p>Living among ancient technology, understanding of Precursor artifacts, and knowledge of the galaxy's deep past.</p>
                             </div>
                         </label>
                     </div>
@@ -180,54 +177,69 @@
                 <!-- Class Selection -->
                 <div class="tab-pane" id="step3">
                     <h2>Select Your Class</h2>
+                    <p>Your profession and path in the vast darkness of the galaxy.</p>
                     <div class="selection-grid">
                         <label class="selection-card">
-                            <input type="radio" name="class" value="Warrior" data-description="Masters of combat and physical prowess">
+                            <input type="radio" name="class" value="Soldier" data-description="The hardened combatant, master of weapons and tactics" data-domains="Kinetic, Synthesis">
                             <div class="card-content">
-                                <h3>Warrior</h3>
-                                <p>Masters of combat and physical prowess</p>
+                                <h3>Soldier</h3>
+                                <p><strong>Master of weapons and tactics</strong></p>
+                                <p><strong>Domains:</strong> Kinetic, Synthesis</p>
+                                <p><strong>Role:</strong> Damage, Defense</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="class" value="Rogue" data-description="Stealthy and cunning, excelling at precision and surprise">
+                            <input type="radio" name="class" value="Engineer" data-description="The technical genius capable of building, repairing, and hacking anything" data-domains="Tech, Synthesis">
                             <div class="card-content">
-                                <h3>Rogue</h3>
-                                <p>Stealthy and cunning, excelling at precision and surprise</p>
+                                <h3>Engineer</h3>
+                                <p><strong>Technical genius and builder</strong></p>
+                                <p><strong>Domains:</strong> Tech, Synthesis</p>
+                                <p><strong>Role:</strong> Support, Control</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="class" value="Mage" data-description="Wielders of arcane power and mystical knowledge">
+                            <input type="radio" name="class" value="Pilot" data-description="The navigation ace, one with their ship, seeing paths where others see chaos" data-domains="Void, Tech">
                             <div class="card-content">
-                                <h3>Mage</h3>
-                                <p>Wielders of arcane power and mystical knowledge</p>
+                                <h3>Pilot</h3>
+                                <p><strong>Navigation ace and ship master</strong></p>
+                                <p><strong>Domains:</strong> Void, Tech</p>
+                                <p><strong>Role:</strong> Mobility, Control</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="class" value="Priest" data-description="Divine servants with healing and protective abilities">
+                            <input type="radio" name="class" value="Scoundrel" data-description="The ghost in shadows, expert in stealth, subterfuge, and lethal precision" data-domains="Social, Void">
                             <div class="card-content">
-                                <h3>Priest</h3>
-                                <p>Divine servants with healing and protective abilities</p>
+                                <h3>Scoundrel</h3>
+                                <p><strong>Master of stealth and subterfuge</strong></p>
+                                <p><strong>Domains:</strong> Social, Void</p>
+                                <p><strong>Role:</strong> Damage, Stealth</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="class" value="Ranger" data-description="Masters of wilderness survival and ranged combat">
+                            <input type="radio" name="class" value="Mystic" data-description="The Veil's channel, bending reality with the power of their mind" data-domains="Neural, Social">
                             <div class="card-content">
-                                <h3>Ranger</h3>
-                                <p>Masters of wilderness survival and ranged combat</p>
+                                <h3>Mystic</h3>
+                                <p><strong>Veil channel and reality bender</strong></p>
+                                <p><strong>Domains:</strong> Neural, Social</p>
+                                <p><strong>Role:</strong> Psionic Power, Support</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="class" value="Warlord" data-description="Leaders who inspire allies and control the battlefield">
+                            <input type="radio" name="class" value="Scholar" data-description="The guardian of knowledge, unraveling the secrets of the past" data-domains="Tech, Social">
                             <div class="card-content">
-                                <h3>Warlord</h3>
-                                <p>Leaders who inspire allies and control the battlefield</p>
+                                <h3>Scholar</h3>
+                                <p><strong>Guardian of ancient knowledge</strong></p>
+                                <p><strong>Domains:</strong> Tech, Social</p>
+                                <p><strong>Role:</strong> Investigation, Support</p>
                             </div>
                         </label>
                         <label class="selection-card">
-                            <input type="radio" name="class" value="Artificer" data-description="Inventors and crafters of magical items">
+                            <input type="radio" name="class" value="Diplomat" data-description="The peace weaver, master of words and social networks" data-domains="Social, Synthesis">
                             <div class="card-content">
-                                <h3>Artificer</h3>
-                                <p>Inventors and crafters of magical items</p>
+                                <h3>Diplomat</h3>
+                                <p><strong>Master of negotiation and influence</strong></p>
+                                <p><strong>Domains:</strong> Social, Synthesis</p>
+                                <p><strong>Role:</strong> Negotiation, Support</p>
                             </div>
                         </label>
                     </div>
@@ -248,70 +260,58 @@
                 <!-- Traits Assignment -->
                 <div class="tab-pane" id="step4">
                     <h2>Assign Your Traits</h2>
-                    <p>Distribute these bonuses: +2, +1, +1, 0, 0, -1</p>
+                    <p>Distribute these modifiers: +2, +1, +1, +0, +0, -1 among the six traits.</p>
                     <div class="traits-container">
                         <div class="trait-row">
                             <span>Strength</span>
                             <select name="strength" class="trait-select">
                                 <option value="2">+2</option>
                                 <option value="1">+1</option>
-                                <option value="1">+1</option>
-                                <option value="0">0</option>
                                 <option value="0">0</option>
                                 <option value="-1">-1</option>
                             </select>
                         </div>
                         <div class="trait-row">
-                            <span>Dexterity</span>
-                            <select name="dexterity" class="trait-select">
+                            <span>Agility</span>
+                            <select name="agility" class="trait-select">
                                 <option value="2">+2</option>
                                 <option value="1">+1</option>
-                                <option value="1">+1</option>
-                                <option value="0">0</option>
                                 <option value="0">0</option>
                                 <option value="-1">-1</option>
                             </select>
                         </div>
                         <div class="trait-row">
-                            <span>Constitution</span>
-                            <select name="constitution" class="trait-select">
+                            <span>Finesse</span>
+                            <select name="finesse" class="trait-select">
                                 <option value="2">+2</option>
                                 <option value="1">+1</option>
-                                <option value="1">+1</option>
-                                <option value="0">0</option>
                                 <option value="0">0</option>
                                 <option value="-1">-1</option>
                             </select>
                         </div>
                         <div class="trait-row">
-                            <span>Intelligence</span>
-                            <select name="intelligence" class="trait-select">
+                            <span>Instinct</span>
+                            <select name="instinct" class="trait-select">
                                 <option value="2">+2</option>
                                 <option value="1">+1</option>
-                                <option value="1">+1</option>
-                                <option value="0">0</option>
                                 <option value="0">0</option>
                                 <option value="-1">-1</option>
                             </select>
                         </div>
                         <div class="trait-row">
-                            <span>Wisdom</span>
-                            <select name="wisdom" class="trait-select">
+                            <span>Presence</span>
+                            <select name="presence" class="trait-select">
                                 <option value="2">+2</option>
                                 <option value="1">+1</option>
-                                <option value="1">+1</option>
-                                <option value="0">0</option>
                                 <option value="0">0</option>
                                 <option value="-1">-1</option>
                             </select>
                         </div>
                         <div class="trait-row">
-                            <span>Charisma</span>
-                            <select name="charisma" class="trait-select">
+                            <span>Knowledge</span>
+                            <select name="knowledge" class="trait-select">
                                 <option value="2">+2</option>
                                 <option value="1">+1</option>
-                                <option value="1">+1</option>
-                                <option value="0">0</option>
                                 <option value="0">0</option>
                                 <option value="-1">-1</option>
                             </select>
@@ -327,8 +327,12 @@
                 <div class="tab-pane" id="step5">
                     <h2>Create Your Experience</h2>
                     <div class="form-group">
+                        <label>Past Experience:</label>
+                        <textarea id="experience" rows="3" placeholder="Describe one significant experience from your past..."></textarea>
+                    </div>
+                    <div class="form-group">
                         <label>Background/History:</label>
-                        <textarea id="background" rows="4" placeholder="Describe your character's background and history..."></textarea>
+                        <textarea id="background" rows="4" placeholder="Describe your character's background and history in the post-Silence galaxy..."></textarea>
                     </div>
                     <div class="form-group">
                         <label>Personality:</label>
@@ -363,21 +367,22 @@
                     <div class="form-group">
                         <label>Starting Wealth Level:</label>
                         <select id="wealthLevel">
-                            <option value="poor">Poor (Starting gold: 50)</option>
-                            <option value="modest">Modest (Starting gold: 100)</option>
-                            <option value="comfortable">Comfortable (Starting gold: 200)</option>
-                            <option value="wealthy">Wealthy (Starting gold: 500)</option>
-                            <option value="rich">Rich (Starting gold: 1000)</option>
+                            <option value="0">Destitute - No starting wealth</option>
+                            <option value="1">Poor - Minimal starting resources</option>
+                            <option value="2">Modest - Basic equipment and funds</option>
+                            <option value="3">Comfortable - Good starting resources</option>
+                            <option value="4">Wealthy - Significant starting assets</option>
+                            <option value="5">Rich - Substantial wealth and resources</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Reputation Level:</label>
                         <select id="reputationLevel">
-                            <option value="unknown">Unknown</option>
-                            <option value="recognized">Recognized</option>
-                            <option value="respected">Respected</option>
-                            <option value="renowned">Renowned</option>
-                            <option value="legendary">Legendary</option>
+                            <option value="0">Unknown - No reputation</option>
+                            <option value="1">Recognized - Minor reputation</option>
+                            <option value="2">Respected - Moderate reputation</option>
+                            <option value="3">Renowned - Significant reputation</option>
+                            <option value="4">Legendary - Major reputation</option>
                         </select>
                     </div>
                     <div class="navigation">
@@ -389,26 +394,47 @@
                 <!-- Equipment Selection -->
                 <div class="tab-pane" id="step8">
                     <h2>Equipment Selection</h2>
-                    <p>Spend your equipment points (based on class):</p>
-                    <div id="equipmentPoints">
-                        <p>Points available: <span id="availablePoints">0</span></p>
-                    </div>
-                    <div id="equipmentOptions">
-                        <!-- Equipment will be populated based on class -->
+                    <p>Based on your wealth level and class, select your starting equipment:</p>
+                    <div id="equipmentSelection">
+                        <div class="form-group">
+                            <label>Primary Weapon:</label>
+                            <select id="primaryWeapon">
+                                <option value="">Select weapon...</option>
+                                <option value="Blaster Pistol">Blaster Pistol - Reliable sidearm</option>
+                                <option value="Plasma Rifle">Plasma Rifle - High damage, energy weapon</option>
+                                <option value="Vibroblade">Vibroblade - Melee weapon with energy edge</option>
+                                <option value="Sniper Rifle">Sniper Rifle - Long-range precision</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Armor:</label>
+                            <select id="armor">
+                                <option value="">Select armor...</option>
+                                <option value="Light Armor">Light Armor - Mobility focused</option>
+                                <option value="Medium Armor">Medium Armor - Balance of protection and mobility</option>
+                                <option value="Heavy Armor">Heavy Armor - Maximum protection</option>
+                                <option value="Stealth Suit">Stealth Suit - Concealment focused</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Personal Items:</label>
+                            <input type="text" id="personalItems" placeholder="Enter personal items, tools, or mementos...">
+                        </div>
                     </div>
                     <div class="navigation">
                         <button class="btn-secondary" onclick="prevStep(7)">Back to Wealth</button>
-                        <button class="btn-primary" onclick="finishCharacter()">Finish Character</button>
+                        <button class="btn-primary" onclick="finishCharacter()">Complete Character</button>
                     </div>
                 </div>
 
                 <!-- Character Sheet -->
                 <div class="tab-pane" id="characterSheet">
-                    <h2>Your Character</h2>
+                    <h2>Your Voidlight Character</h2>
                     <div id="characterSummary">
                         <!-- Character details will be populated here -->
                     </div>
                     <button class="btn-primary" onclick="downloadCharacter()">Download Character</button>
+                    <button class="btn-secondary" onclick="showStep(1)">Create New Character</button>
                 </div>
             </div>
         </main>
