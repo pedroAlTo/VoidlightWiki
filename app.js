@@ -133,10 +133,19 @@ const VoidlightData = {
       {name: "Vibro-Sword", damage: "d8+3 physical", slots: 2, tier: 2, features: "Vibration"}
     ],
     armor: [
-      {name: "Environmental Suit", protection: "3 slots", slots: 1, tier: 1, features: "Life Support, Flexible"},
-      {name: "Combat Armor", protection: "3 slots", slots: 1, tier: 2, features: "Resilient"},
-      {name: "Stealth Armor", protection: "4 slots", slots: 2, tier: 2, features: "Flexible, Cloaking"},
-      {name: "Power Armor", protection: "8 slots", slots: 2, tier: 3, features: "Very Heavy, Powered"}
+      {name: "Frontier Vest", slots: 3, damageThreshold: "5/11", as: 3, features: "Flexible", proficiency: "Common", tier: 1},
+      {name: "Environmental Suit", slots: 3, damageThreshold: "4/8", as: 3, features: "Life Support, Flexible", proficiency: "Common", tier: 1},
+      {name: "Mesh Armor", slots: 4, damageThreshold: "5/10", as: 3, features: "Self-Repair", proficiency: "Common", tier: 2},
+      {name: "Pilot's Jacket", slots: 3, damageThreshold: "5/11", as: 4, features: "Life Support, Flexible", proficiency: "Common", tier: 2},
+      {name: "Spacer's Suit", slots: 3, damageThreshold: "4/8", as: 3, features: "Life Support, Flexible", proficiency: "Common", tier: 1},
+      {name: "Stealth Armor", slots: 4, damageThreshold: "7/16", as: 4, features: "Flexible, Cloaking", proficiency: "Military", tier: 3},
+      {name: "Smart Fabric Armor", slots: 5, damageThreshold: "8/16", as: 4, features: "Flexible, Self-Repair", proficiency: "Military", tier: 3},
+      {name: "Infiltrator Suit", slots: 4, damageThreshold: "7/14", as: 4, features: "Flexible, Cloaking", proficiency: "Military", tier: 2},
+      {name: "Special Forces Suit", slots: 5, damageThreshold: "9/18", as: 5, features: "Flexible, Resilient", proficiency: "Military", tier: 3},
+      {name: "Tactical Armor", slots: 5, damageThreshold: "10/20", as: 5, features: "Resilient, Tactical", proficiency: "Military", tier: 3},
+      {name: "Powered Armor", slots: 6, damageThreshold: "13/28", as: 5, features: "Heavy, Powered", proficiency: "Military", tier: 4},
+      {name: "Assault Armor", slots: 5, damageThreshold: "11/22", as: 5, features: "Resilient, Assault", proficiency: "Military", tier: 3},
+      {name: "Marine Armor", slots: 5, damageThreshold: "12/24", as: 5, features: "Resilient, Environmental", proficiency: "Military", tier: 4}
     ]
   },
   
@@ -511,9 +520,17 @@ function renderEquipment() {
   html += '</tbody></table></div>';
   
   // Armor
-  html += '<div class="equipment-category" style="margin-top: 2rem;"><h3>Armor</h3><table><thead><tr><th>Name</th><th>Protection</th><th>Tier</th><th>Features</th></tr></thead><tbody>';
+  html += '<div class="equipment-category" style="margin-top: 2rem;"><h3>Armor</h3><table><thead><tr><th>Name</th><th>Slots</th><th>Damage Thre</th><th>A.S.</th><th>Features</th><th>Proficiency</th><th>Tier Cost</th></tr></thead><tbody>';
   VoidlightData.equipment.armor.forEach(armor => {
-    html += `<tr><td>${armor.name}</td><td>${armor.protection}</td><td>${armor.tier}</td><td>${armor.features}</td></tr>`;
+    html += `<tr>
+      <td>${armor.name}</td>
+      <td>${armor.slots}</td>
+      <td>${armor.damageThreshold || ''}</td>
+      <td>${armor.as || ''}</td>
+      <td>${armor.features}</td>
+      <td>${armor.proficiency || ''}</td>
+      <td>${armor.tier}</td>
+    </tr>`;
   });
   html += '</tbody></table></div>';
   
