@@ -422,8 +422,8 @@ function renderDomains() {
   let html = '';
 
   Object.keys(VoidlightData.domainPowers).forEach(domain => {
-    // Normalize domain name for file (e.g., Neural -> neural)
-    const iconName = domain.toLowerCase().replace(/\s+/g, '');
+    // Capitalize first letter of domain name for file (e.g., Neural -> Neural)
+    const iconName = domain.charAt(0).toUpperCase() + domain.slice(1).toLowerCase().replace(/\s+/g, '');
     html += `
       <div class="domain-section" style="margin-bottom: 2rem;">
         <div style="display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.5rem; position: relative;">
