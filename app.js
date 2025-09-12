@@ -1333,7 +1333,7 @@ function updateCharactersList() {
                     return `<li><strong>${item.name}</strong> (Weapon): ${item.damage}, Tier ${item.tier}, ${item.features}</li>`;
                   } else {
                     // Armor
-                    return `<li><strong>${item.name}</strong> (Armor): ${item.protection}, Tier ${item.tier}, ${item.features}</li>`;
+                    return `<li><strong>${item.name}</strong> (Armor): Slots ${item.slots}, Threshold ${item.damageThreshold || '-'}, A.S. ${item.as || '-'}, ${item.features}, ${item.proficiency || '-'}, Tier ${item.tier}</li>`;
                   }                } else {
                   // Unknown item
                   return `<li>${eq.name}</li>`;
