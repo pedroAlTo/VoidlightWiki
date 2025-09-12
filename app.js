@@ -1011,7 +1011,9 @@ function updateEquipmentLists() {
         <input type="checkbox" id="armor_${index}">
         <div class="equipment-details">
           <div class="equipment-name">${armor.name}</div>
-          <div class="equipment-stats">Tier ${armor.tier} • ${armor.features}</div>
+          <div class="equipment-stats">
+            Threshold: ${armor.damageThreshold || '-'} • A.S.: ${armor.as || '-'} • ${armor.features} • ${armor.proficiency || '-'} • Tier ${armor.tier}
+          </div>
         </div>
       </div>
     `;
