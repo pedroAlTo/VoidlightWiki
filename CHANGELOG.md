@@ -21,6 +21,10 @@ This document provides a history of significant changes to the VoidLight Wiki re
   - Standardized image naming convention for consistency
   - Ensured all domain images follow the same capitalization pattern
 
+- **Trait Name Fix** (PR #2): Changed trait name from 'Spellcast' to 'Finesse'
+  - Updated the label in the character creation interface
+  - Ensured consistency between UI labels and internal code references
+
 ### Original Character Creation Tool (September 9, 2025)
 
 #### Initial Development
