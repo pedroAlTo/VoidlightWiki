@@ -60,7 +60,9 @@
     <header class="header">
         <div class="header-content">
             <div class="logo">
-                <img src="img/Voidlight_Logo.png" alt="Voidlight Logo" style="max-width: 190px; width: 100%; height: auto; display: block; margin: 0 auto;" />
+                                <a href="#" id="logoHome" style="display:block;">
+                                    <img src="img/Voidlight_Logo.png" alt="Voidlight Logo" style="max-width: 190px; width: 100%; height: auto; display: block; margin: 0 auto;" />
+                                </a>
             </div>
             
             <!-- Main Navigation Tabs -->
@@ -87,6 +89,8 @@
     </header>
 
     <!-- Main Container -->
+    <!-- Breadcrumbs -->
+    <nav id="breadcrumbs" class="breadcrumbs" style="width:100%; background:#f7f6f1; color:#181c22; font-size:1.05rem; padding:0.5rem 1.5rem; margin:0; border-bottom:1px solid #e6e2c7; display:none;"></nav>
     <main class="main-container">
         
         <!-- Wiki Tab Content -->
@@ -408,10 +412,17 @@
                         <h3>Step 5: Experiences</h3>
                         <p class="instruction">Define key moments from your character's past</p>
                         <div class="form-group">
-                            <label class="form-label">Experience</label>
-                            <input type="text" id="experience1" class="form-control" placeholder="A moment that shaped you..." required>
+                            <label class="form-label">Experience 1</label>
+                            <input type="text" id="experience1" class="form-control" placeholder="A moment that shaped you...">
                         </div>
-                        <div id="experienceValidation" class="validation-message"></div>
+                        <div class="form-group">
+                            <label class="form-label">Experience 2</label>
+                            <input type="text" id="experience2" class="form-control" placeholder="Another defining experience...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Experience 3</label>
+                            <input type="text" id="experience3" class="form-control" placeholder="A third formative moment...">
+                        </div>
                     </div>
 
                     <!-- Step 6: Domain Powers -->

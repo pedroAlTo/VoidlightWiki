@@ -254,6 +254,8 @@ function initializeApp() {
     renderWikiContent();
     setupCharacterCreator();
     setupCharacterManager();
+    setupLogoNavigation();
+    setupBreadcrumbs();
   // setupAdminPanel();
     loadSavedCharacters();
     
@@ -264,6 +266,85 @@ function initializeApp() {
 }
 
 // Tab Navigation - Fixed
+// Logo Navigation
+function setupLogoNavigation() {
+  const logo = document.getElementById('logoHome');
+  if (logo) {
+    logo.style.cursor = 'pointer';
+    logo.addEventListener('click', function(e) {
+      e.preventDefault();
+      switchTab('wiki');
+      updateBreadcrumbs('wiki');
+    });
+  }
+}
+
+// Breadcrumbs
+function setupBreadcrumbs() {
+  // Initial render
+  updateBreadcrumbs('wiki');
+
+  // Listen for tab and wiki section changes
+  document.querySelectorAll('.tab-btn, .tab-btn-mobile').forEach(btn => {
+    btn.addEventListener('click', function() {
+      updateBreadcrumbs(this.getAttribute('data-tab'));
+    });
+  });
+  document.querySelectorAll('.wiki-nav-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      updateBreadcrumbs('wiki', this.getAttribute('data-section'));
+    });
+  });
+}
+
+function updateBreadcrumbs(tab, wikiSection) {
+  const bc = document.getElementById('breadcrumbs');
+  if (!bc) return;
+  let crumbs = [];
+  if (tab === 'wiki') {
+    crumbs.push('<span class="bc-link" data-tab="wiki">Wiki</span>');
+    if (wikiSection) {
+      // Find button label
+      const btn = document.querySelector('.wiki-nav-btn[data-section="' + wikiSection + '"]');
+      if (btn) crumbs.push('<span class="bc-link" data-tab="wiki" data-section="' + wikiSection + '">' + btn.textContent + '</span>');
+    }
+  } else if (tab === 'creator') {
+    crumbs.push('<span class="bc-link" data-tab="creator">Character Creator</span>');
+  } else if (tab === 'manager') {
+    crumbs.push('<span class="bc-link" data-tab="manager">Character Manager</span>');
+  }
+  bc.innerHTML = crumbs.join(' <span style="color:#aaa">/</span> ');
+  bc.style.display = crumbs.length > 0 ? 'block' : 'none';
+
+  // Clickable crumbs
+  bc.querySelectorAll('.bc-link').forEach(link => {
+    link.style.cursor = 'pointer';
+    link.addEventListener('click', function() {
+      const t = this.getAttribute('data-tab');
+      const s = this.getAttribute('data-section');
+      switchTab(t);
+      if (t === 'wiki' && s) {
+        // Show correct wiki section
+        document.querySelectorAll('.wiki-nav-btn').forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute('data-section') === s) btn.classList.add('active');
+        });
+        document.querySelectorAll('.wiki-section').forEach(sec => {
+          sec.classList.remove('active');
+          sec.style.display = 'none';
+        });
+        const target = document.getElementById(s);
+        if (target) {
+          target.classList.add('active');
+          target.style.display = 'block';
+        }
+        updateBreadcrumbs('wiki', s);
+      } else {
+        updateBreadcrumbs(t);
+      }
+    });
+  });
+}
 function setupTabNavigation() {
   const tabButtons = document.querySelectorAll('.tab-btn, .tab-btn-mobile');
   
@@ -479,24 +560,36 @@ function renderDomains() {
   const container = document.getElementById('domainsContent');
   if (!container) return;
   
-  let html = '';
+  // Define your domain header colors here. Update these hex values as desired.
+  const domainHeaderColors = {
+    Tech: '#0a4a57',
+    Synthesis: '#00440aff',
+    Social: '#4b0038ff',
+    Neural: '#684e00ff',
+    Kinetic: '#570000ff',
+    Void: '#000203ff',
+    // Add more as needed
+  };
 
-  Object.keys(VoidlightData.domainPowers).forEach(domain => {
-    // Capitalize first letter of domain name for file (e.g., Neural -> Neural)
+  let html = '';
+  const domainKeys = Object.keys(VoidlightData.domainPowers);
+  domainKeys.forEach((domain, idx) => {
     const iconName = domain.charAt(0).toUpperCase() + domain.slice(1).toLowerCase().replace(/\s+/g, '');
+    const imgId = `domain-img-${idx}`;
+    const titleId = `domain-title-${idx}`;
+    const bgColor = domainHeaderColors[domain] || '#0a4a57';
     html += `
       <div class="domain-section" style="margin-bottom: 2rem;">
-        <div style="display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.5rem; position: relative;">
+        <div id="${titleId}" class="domain-title-strip" style="display: flex; align-items: center; border-radius: 12px 12px 0 0; min-height: 60px; background: ${bgColor}; color: #fff; position: relative; margin-bottom: 0.5rem;">
           <span style="display: block; width: 41px; height: 60px; overflow: hidden; position: absolute; left: 10px; top: -5px; z-index: 2; border-radius: 0 0 8px 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); background: transparent;">
-            <img src="img/${iconName}.png" alt="${domain} icon" style="width: 41px; height: 70px; margin-top: -10px; display: block; background: transparent;" />
+            <img id="${imgId}" src="img/${iconName}.png" alt="${domain} icon" style="width: 41px; height: 70px; margin-top: -10px; display: block; background: transparent;" />
           </span>
-          <div style="margin-left: 66px;">
-            <h3 style="margin: 0; font-size: 2rem; font-weight: 700; letter-spacing: -1px; display: inline-block; vertical-align: middle;">${domain} Domain</h3>
+          <div style="margin-left: 66px; width: 100%;">
+            <h3 style="margin: 0; font-size: 2rem; font-weight: 700; letter-spacing: -1px; display: inline-block; vertical-align: middle; color: #fff;">${domain} Domain</h3>
           </div>
         </div>
         <div class="powers-list" style="display: grid; gap: 1rem;">
     `;
-
     VoidlightData.domainPowers[domain].forEach(power => {
       html += `
         <div class="power-card" style="padding: 1rem; border: 1px solid #e6e2c7; border-radius: 12px; background: rgba(255,255,255,0.95); box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
@@ -508,10 +601,8 @@ function renderDomains() {
         </div>
       `;
     });
-
     html += '</div></div>';
   });
-  
   container.innerHTML = html;
 }
 
