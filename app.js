@@ -39,33 +39,75 @@ const VoidlightData = {
   },
   
   ancestries: [
-    {name: "Humans", description: "The adaptable survivors, scattered and diversified across the galaxy", gifts: ["Adaptive Spirit", "Cultural Bridge"], archetypes: ["Explorer", "Diplomat", "Mercenary"]},
-    {name: "Zephyrians", description: "Stardust dancers, psychically sensitive and empathic beings", gifts: ["Veil Sensitivity", "Emotional Resonance"], archetypes: ["Mystic", "Artist", "Counselor"]},
-    {name: "Kryllians", description: "The unbreakable forge, four-armed natural engineers", gifts: ["Master Craftsman", "Structural Intuition"], archetypes: ["Engineer", "Soldier", "Architect"]},
-    {name: "Ethereals", description: "Ghosts in the machine, energy beings with temporal perception", gifts: ["Phase Shift", "Temporal Perception"], archetypes: ["Spy", "Oracle", "Assassin"]},
-    {name: "Synthetics", description: "Liberated minds, self-aware AIs seeking purpose", gifts: ["Modular Consciousness", "Digital Interface"], archetypes: ["Hacker", "Scholar", "Infiltrator"]},
-    {name: "Rift Spinners", description: "Time weavers, arachnids who manipulate causality", gifts: ["Chrono-Gift", "Wall Weaver"], archetypes: ["Controller", "Tactician", "Prophet"]},
-    {name: "Celestari", description: "Descendants of stars, radiant beings with cosmic grace", gifts: ["Stellar Meditation", "Celestial Grace"], archetypes: ["Leader", "Guardian", "Philosopher"]},
-    {name: "Kryx", description: "Voices of the hunt, powerful and honor-based pack culture", gifts: ["Pack Intuition", "Biolume Howl"], archetypes: ["Leader", "Soldier", "Mercenary", "Explorer"]}
+  {name: "Humans", description: "The adaptable survivors, scattered and diversified across the galaxy", gifts: ["<p><b>Adaptive Spirit:</b>Once per session, when you fail an action roll, spend 2 Hope to gain advantage on your next roll of the same type</p>", "<p><b>Cultural Bridge:</b>During a rest, mark a Stress to ask the GM one question about a group's motivations or customs.</p>"], archetypes: ["Explorer", "Diplomat", "Mercenary"]},
+  {name: "Zephyrians", description: "Stardust dancers, psychically sensitive and empathic beings", gifts: ["<p><b>Veil Sensitivity:</b>You automatically sense strong Veil phenomena and emotional states within Very Close range.</p>", "<p><b>Emotional Resonance:</b>Once per scene, you may convert 1 Stress from yourself or an ally into 1 Hope.</p>"], archetypes: ["Mystic", "Artist", "Counselor"]},
+  {name: "Kryllians", description: "The unbreakable forge, four-armed natural engineers", gifts: ["<p><b>Master Craftsman:</b>When making rolls related to crafting or repairing, mark a Stress to gain advantage.</p>", "<p><b>Structural Intuition:</b>Once per session, mark a Stress to ask the GM about a system's most significant weakness.</p>"], archetypes: ["Engineer", "Soldier", "Architect"]},
+  {name: "Ethereals", description: "Ghosts in the machine, energy beings with temporal perception", gifts: ["<p><b>Phase Shift:</b>Once per scene, mark a Stress to become incorporeal until the end of your next turn, allowing you to pass through solid objects and become immune to physical attacks.</p>", "<p><b>Temporal Perception:</b>You can sense temporal anomalies and distortions within Close range. Once per session, you can ask the GM about the most likely immediate consequence of a proposed action.</p>"], archetypes: ["Spy", "Oracle", "Assassin"]},
+  {name: "Synthetics", description: "Liberated minds, self-aware AIs seeking purpose", gifts: ["<p><b>Modular Consciousness:</b>Once per long rest, you can temporarily download a new skill or knowledge set. Choose a trait; you can spend a hope to gain a +1 on rolls using that trait until your next long rest.</p>", "<p><b>Digital Interface:</b>You can directly interface with electronic systems and networks. You have advantage on rolls to hack, operate, or understand technological devices.</p>"], archetypes: ["Hacker", "Scholar", "Infiltrator"]},
+  {name: "Rift Spinners", description: "Time weavers, arachnids who manipulate causality", gifts: ["<p><b>Chrono-Gift:</b>Once per session, after any roll within Close range, spend 2 Hope to force a reroll.</p>", "<p><b>Wall Weaver:</b>You can move on vertical or inverted surfaces as normal ground. While touching a surface, you sense vibrations through it, gaining +2 on Perception checks to detect moving creatures within Close range that are also in contact with it. This does not apply to creatures not touching the surface.</p>"], archetypes: ["Controller", "Tactician", "Prophet"]},
+  {name: "Celestari", description: "Descendants of stars, radiant beings with cosmic grace", gifts: ["<p><b>Stellar Meditation:</b>Once per long rest, meditate for 10 minutes to mark a Stress and gain 2 Hope.</p>", "<p><b>Celestial Grace:</b>Your unarmed attacks deal d6 magic damage. Once per session, heal the same damage dealt to nearby allies.</p>"], archetypes: ["Leader", "Guardian", "Philosopher"]},
+  {name: "Kryx", description: "Voices of the hunt, powerful and honor-based pack culture", gifts: ["<p><b>Pack Intuition:</b>When an ally within Very Close range is targeted by an attack, mark a Stress to gain advantage on your next attack against that foe.</p>", "<p><b>Biolume Howl:</b>Your unarmed attacks deal d6 magic damage. Once per session, mark a Stress to make your target Dizzied and gain 1 Hope.</p>"], archetypes: ["Leader", "Soldier", "Mercenary", "Explorer"]}
   ],
   
-  communities: [
-    {name: "Core World", description: "Glittering spires and social labyrinths - vast data-nets, towering arcologies, complex hierarchies", benefit: "Institutional Leverage"},
-    {name: "Frontier Colony", description: "Grit, rust, and shared hardship - practical ingenuity in harsh conditions", benefit: "Scrap-Savvy Ingenuity"},
-    {name: "Void Station", description: "Pressurized cans in the dark - recycled air with dozens of species", benefit: "Cross-Species Intuition"},
-    {name: "Trade Hub", description: "Chaotic symphony of commerce - spice, ozone, and desperation", benefit: "Market Oracle"},
-    {name: "Research Outpost", description: "Labs humming over silent ruins - pursuit of knowledge", benefit: "Scientific Resonance"},
-    {name: "Free Fleet", description: "Home is the next jump - stellar navigation in your bones", benefit: "Voidborn Kinship"}
+communities: [
+    {name: "Core World", description: "Glittering spires and social labyrinths - vast data-nets, towering arcologies, complex hierarchies", benefit: "<p><b>Institutional Leverage:</b> When navigating bureaucracy or social labyrinths, roll a d20 as your Hope die. On success (10+), gain 1 Favor Token. Spend Tokens to auto-pass permits or expose institutional flaws. If playing with Diplomat also add 1 favor token to your max tokens.</p>"},
+    {name: "Frontier Colony", description: "Grit, rust, and shared hardship - practical ingenuity in harsh conditions", benefit: "<p><b>Scrap-Savvy Ingenuity:</b> Improvise tools from junk: Roll your Fear die (e.g., d6/d8) for effect. On 1-3, it breaks spectacularly. Once per rest, reroll if you sacrifice a personal item.</p>"},
+    {name: "Void Station", description: "Pressurized cans in the dark - recycled air with dozens of species", benefit: "<p><b>Cross-Species Intuition:</b> When negotiating with aliens or adapting tech, you have 3 Linguistic Tokens. Spend 1 to reroll Hope OR treat Fear as Hope for negotiations. Regain all by mediating a faction dispute or 1 after long rest.</p>"},
+    {name: "Trade Hub", description: "Chaotic symphony of commerce - spice, ozone, and desperation", benefit: "<p><b>Market Oracle:</b> When negotiating prices, gamble resources on rumors: Roll Comprehend (DC12). On success, you gain true intel +1 Hope. Critical: Reveal a secret granting 24h Advantage on related rolls.</p>"},
+    {name: "Research Outpost", description: "Labs humming over silent ruins - pursuit of knowledge", benefit: "<p><b>Scientific Resonance:</b> Your lab's instruments can detect echoes of ancient technologies. Once per session, invoke Resonance to attune to a creature or artifact: roll Insight or Investigation (player's choice) against DC 14. On success, learn one factual secret and gain advantage on research or social rolls involving that subject.</p>"},
+    {name: "Free Fleet", description: "Home is the next jump - stellar navigation in your bones", benefit: "<p><b>Voidborn Kinship:</b> When recalling stellar hazards or aiding fleet allies, reroll a failed Hope piloting check OR let an ally in your system use your Hope die result as their own.</p>"}
   ],
   
   classes: [
-    {name: "Soldier", description: "Hardened combatants who master weapons and tactics", domains: ["Kinetic", "Synthesis"], startingHP: 7, startingEvasion: 9, subclasses: ["Guardian", "Military Officer", "Peacekeeper"]},
-    {name: "Engineer", description: "Technical geniuses who build, repair and hack anything", domains: ["Tech", "Synthesis"], startingHP: 7, startingEvasion: 9, subclasses: ["Tech Specialist", "Xenotech Savant", "Medical Technician"]},
-    {name: "Pilot", description: "Navigation aces who dance starships through Veil storms", domains: ["Void", "Tech"], startingHP: 6, startingEvasion: 11, subclasses: ["Void Runner", "Combat Ace", "System Jockey"]},
-    {name: "Scoundrel", description: "Ghosts of the underbelly: masters of stealth and subterfuge", domains: ["Void", "Social"], startingHP: 6, startingEvasion: 12, subclasses: ["Assassin", "Ghost", "Data Broker"]},
-    {name: "Mystic", description: "Veil-touched beings bending reality with psionic force", domains: ["Neural", "Social"], startingHP: 6, startingEvasion: 10, subclasses: ["Veil Walker", "Mind-Touched", "Precursor Touched"]},
-    {name: "Scholar", description: "Guardians of knowledge who unravel ancient secrets", domains: ["Tech", "Social"], startingHP: 5, startingEvasion: 10, subclasses: ["Xenobiologist", "Precursor Archaeologist", "Information Theorist"]},
-    {name: "Diplomat", description: "Peace weavers whose words can sway fleets", domains: ["Social", "Synthesis"], startingHP: 6, startingEvasion: 10, subclasses: ["Cultural Attaché", "Trade Negotiator", "Political Operative"]}
+    {name: "Pilot", description: "Masters of navigation, threading ships through treacherous Veil currents", domains: ["Void", "Tech"], startingHP: 6, startingEvasion: 11, hopeFeature: "Veil Surge (3 Hope) - Gain advantage on piloting tests and ignore one Severe Damage until next rest", classFeature: "Stellar Instinct - Advantage on piloting/navigation tests; once per session reroll failed Void-related test", subclasses: [
+      {name: "Void Runner", feature: "Pathfinder's Sense - Detect safe routes/resources in deep space, spend 1 Hope to bypass spatial hazards"},
+      {name: "Combat Ace", feature: "Tactical Grace - When piloting, spend 1 Stress for advantage on Evasion for 1 round"},
+      {name: "System Jockey", feature: "Orbital Whisperer - Reroll docking/navigation test, spend 1 Hope to scan defenses"}
+    ],
+    proficiency: "Military at Tier 2, Experimental at Tier 5: Armour (light/medium), Weapons (Pistols/Rifles/Heavy), Weapon/armor mods (all), Augmentations (physical/sensory/neural/stealth), Other equipment (Communication/Utility)"
+    },
+    {name: "Engineer", description: "Salvaged poets jury-rigging Precursor tech into miraculous solutions", domains: ["Tech", "Synthesis"], startingHP: 7, startingEvasion: 9, hopeFeature: "Scrap Genius (3 Hope) - Create temporary device that works flawlessly for one scene", classFeature: "Technical Intuition - Advantage on repair/diagnosis tests; once per session spend 1 Stress to improvise perfect fix", subclasses: [
+      {name: "Tech Specialist", feature: "Digital Ghost - Advantage on hacking, spend 1 Hope to bypass security without trace"},
+      {name: "Xenotech Savant", feature: "Adaptive Interface - Operate alien tech with advantage, repurpose for new functions"},
+      {name: "Medical Technician", feature: "Field Surgery - Heal 1d8+Knowledge HP or install cybernetics, spend 1 Stress to stabilize"}
+    ],
+    proficiency: "Military at Tier 2, Experimental at Tier 5: Armour (all), Weapons (Pistol/Rifles), Weapon/armor mods (all), Augmentations (all), Other equipment (all)"
+    },
+    {name: "Diplomat", description: "Peace weavers mastering words, social networks and galactic politics", domains: ["Social", "Synthesis"], startingHP: 6, startingEvasion: 10, hopeFeature: "Power of Suggestion (3 Hope) - Plant idea, create opening, or gather intelligence", classFeature: "Cultural Lens - Advantage on Social tests; gain Favor Tokens on success; gain 1 per long rest", subclasses: [
+      {name: "Cultural Attaché", feature: "Unmasking Gaze - Spend 3 Hope to reveal hidden layer of target/situation"},
+      {name: "Trade Negotiator", feature: "Market Savant - Reroll bartering/appraisal test, gain 1 Favor on success"},
+      {name: "Political Operative", feature: "Influence Stockpile - Start with 1 Favor, gain 1 on Deception/Intimidation success"}
+    ],
+    proficiency: "Military at Tier 2, Experimental at Tier 5: Armour (light), Weapons (melee/pistol), Weapon mods (weapons), Augmentations (Neural/Sensory), Other equipment (Communication/Utility)"
+    },
+    {name: "Scholar", description: "Galactic detectives chasing lost truths through cosmic mysteries", domains: ["Tech", "Social"], startingHP: 5, startingEvasion: 10, hopeFeature: "Eureka Moment (3 Hope) - Auto-succeed on research/analysis test and uncover hidden connections", classFeature: "Pattern Weaver - Advantage on Knowledge analysis; once per session spend 1 Stress for hidden truth; Research Projects during long rest", subclasses: [
+      {name: "Xenobiologist", feature: "Life Reader - Study organism to learn biology/behavior, spend 1 Hope to predict actions"},
+      {name: "Precursor Archaeologist", feature: "Artifact Whisper - Sense artifact's history, advantage on Precursor tech activation"},
+      {name: "Information Theorist", feature: "Data Storm - Reroll decryption test, spend 1 Stress to firewall system"}
+    ],
+    proficiency: "Military at Tier 2, Experimental at Tier 5: Armour (light), Weapons (Pistol), Augmentations (Neural/Sensory), Other equipment (all)"
+    },
+    {name: "Soldier", description: "Unbreakable walls standing between refugees and the void's darkness", domains: ["Kinetic", "Synthesis"], startingHP: 7, startingEvasion: 9, hopeFeature: "Combat Surge (2 Hope) - After hitting, deal +1d6 extra damage", classFeature: "Combat Focus - Use escalating dice (d4→d8) for damage/attack bonuses and ally advantages", subclasses: [
+      {name: "Guardian", feature: "Bastion Protocol - When ally takes nearby damage, reduce by 1d8+Spirit"},
+      {name: "Military Officer", feature: "Tactical Overwatch - Spend 1 Hope to grant ally +1d6 damage"},
+      {name: "Peacekeeper", feature: "De-escalate - Advantage to pacify aggressors, gain 1 Hope on success"}
+    ],
+    proficiency: "Military at Tier 2, Experimental at Tier 5: Armour (all), Weapons (all), Weapon/armor mods (all), Augmentations (physical/sensory), Other equipment (Communication/Utility)"
+    },
+    {name: "Mystic", description: "Veil channels bending reality with the power of mind", domains: ["Neural", "Social"], startingHP: 6, startingEvasion: 10, hopeFeature: "Reality Unfold (3 Hope) - Advantage on all rolls until rolling with Fear, then take 1d4 Stress", classFeature: "Psychic Resonance - Once per round when rolling Mystic feature, reroll one die (gain 1 stress if lower)", subclasses: [
+      {name: "Veil Walker", feature: "Phase Step - Spend 1 Stress to evade attacks/move through walls"},
+      {name: "Mind-Touched", feature: "Thought Tide - Spend 1 Hope to share ally's skill for one roll"},
+      {name: "Precursor Touched", feature: "Ancient Echo - Attune to Precursor artifact/site for advantage on control/interpretation"}
+    ],
+    proficiency: "Military at Tier 2, Experimental at Tier 5: Armour (light), Weapons (melee/pistol), Augmentations (Neural/Sensory), Other equipment (Communication)"
+    },
+    {name: "Scoundrel", description: "Ghosts in machines slipping through security with charm and paranoia", domains: ["Void", "Social"], startingHP: 6, startingEvasion: 12, hopeFeature: "Vanishing Act (3 Hope) - Disappear from sight/sound for 1 minute, immune to tracking", classFeature: "Shadow Operative - Advantage on Stealth; reroll failed Evasion; Sneak Attack +1d6 with advantage", subclasses: [
+      {name: "Assassin", feature: "Deadly Masquerade - Assume any identity, spend 1 Hope for untraceable credentials"},
+      {name: "Ghost", feature: "Phantom Step - Remove passage traces, spend 1 Stress for advantage on obstacles"},
+      {name: "Data Broker", feature: "Info Web - Study target for secret/blackmail, spend 1 Hope for specific intel"}
+    ],
+    proficiency: "Military at Tier 2, Experimental at Tier 5: Armour (light), Weapons (Melee/Pistol/Rifles), Weapon mods (weapons), Augmentations (physical/sensory/stealth), Other equipment (Communication/Utility)"
+    }
   ],
   
   domainPowers: {
@@ -400,7 +442,6 @@ function renderClasses() {
   let html = '<div class="classes-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; justify-items: center; align-items: stretch; width: 100%;">';
 
   VoidlightData.classes.forEach(cls => {
-    // Banner image filename: Banner_XXXXX.png where XXXXX is uppercase class name
     const bannerName = cls.name.toUpperCase();
     html += `
       <div class="card" style="box-sizing: border-box; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden; display: flex; flex-direction: column; min-width: 0; max-width: 1035px; width: 100%;">
@@ -408,12 +449,22 @@ function renderClasses() {
           <img src="img/Banner_${bannerName}.png" alt="${cls.name} Banner" style="width: 100%; height: auto; display: block;" />
         </div>
         <div class="card-body" style="padding: 2rem; flex: 1 1 auto;">
-          <p style="font-size: 1.2rem; margin-bottom: 1.2rem;">${cls.description}</p>
-          <div class="class-details" style="font-size: 1.1rem;">
-            <p><strong>Domains:</strong> ${cls.domains.join(', ')}</p>
+          <h3 style="margin-top: 0;">${cls.name}</h3>
+          <p style="font-size: 1.1rem; font-style: italic; margin-bottom: 1rem;">${cls.description}</p>
+          <div class="class-details" style="font-size: 1.05rem;">
+            <p><strong>Domains:</strong> ${cls.domains.join(' & ')}</p>
             <p><strong>Starting HP:</strong> ${cls.startingHP}</p>
             <p><strong>Starting Evasion:</strong> ${cls.startingEvasion}</p>
-            <p><strong>Subclasses:</strong> ${cls.subclasses.join(', ')}</p>
+            <p><strong>Hope Feature:</strong> ${cls.hopeFeature || '-'}</p>
+            <p><strong>Class Feature:</strong> ${cls.classFeature || '-'}</p>
+            <div style="margin-bottom: 0.5rem;"><strong>Subclasses & Foundation:</strong>
+              <ul style="margin: 0.5rem 0 0 1.2rem;">
+                ${Array.isArray(cls.subclasses) && typeof cls.subclasses[0] === 'object'
+                  ? cls.subclasses.map(sub => `<li><b>${sub.name}:</b> ${sub.feature}</li>`).join('')
+                  : (cls.subclasses || []).join(', ')}
+              </ul>
+            </div>
+            <p><strong>Proficiency:</strong> ${cls.proficiency || '-'}</p>
           </div>
         </div>
       </div>
@@ -684,10 +735,16 @@ function goToStep(stepNum) {
 }
 
 function updateCreatorUI() {
-  // Update progress
+  // Update progress and completed step color
   document.querySelectorAll('.progress-step').forEach(step => {
     const stepNum = parseInt(step.getAttribute('data-step'));
     step.classList.toggle('active', stepNum === currentStep);
+    // Add completed class for finished steps
+    if (stepNum < currentStep) {
+      step.classList.add('completed');
+    } else {
+      step.classList.remove('completed');
+    }
   });
   
   // Update steps - Hide all first
@@ -707,10 +764,49 @@ function updateCreatorUI() {
   const prevBtn = document.getElementById('prevStep');
   const nextBtn = document.getElementById('nextStep');
   const finishBtn = document.getElementById('finishCharacter');
-  
+
   if (prevBtn) prevBtn.style.display = currentStep === 1 ? 'none' : 'block';
   if (nextBtn) nextBtn.style.display = currentStep === 8 ? 'none' : 'block';
   if (finishBtn) finishBtn.style.display = currentStep === 8 ? 'block' : 'none';
+
+  // Button green if step valid
+  let valid = validateCurrentStep();
+  if (nextBtn) {
+    if (valid && currentStep < 8) {
+      nextBtn.classList.add('btn-green');
+    } else {
+      nextBtn.classList.remove('btn-green');
+    }
+  }
+  if (finishBtn) {
+    if (valid && currentStep === 8) {
+      finishBtn.classList.add('btn-green');
+    } else {
+      finishBtn.classList.remove('btn-green');
+    }
+  }
+// Add styles for completed step circles (light green) and green button
+const style = document.createElement('style');
+style.innerHTML = `
+.progress-step.completed {
+  background: #d2f7df !important;
+  border-color: #3ec96b !important;
+}
+.progress-step.completed .step-circle {
+  background: #3ec96b !important;
+  color: #fff !important;
+}
+.progress-step.active {
+  border-color: #3ec96b !important;
+}
+.btn-green {
+  background: #3ec96b !important;
+  color: #fff !important;
+  border-color: #3ec96b !important;
+  transition: background 0.2s;
+}
+`;
+document.head.appendChild(style);
   
   // Update specific step content
   updateStepContent();
@@ -743,7 +839,10 @@ function populateCreatorSelects() {
       option.textContent = ancestry.name;
       ancestrySelect.appendChild(option);
     });
-    ancestrySelect.addEventListener('change', updateAncestryDescription);
+    ancestrySelect.addEventListener('change', function() {
+      updateAncestryDescription();
+      updateCreatorUI();
+    });
   }
   
   // Communities
@@ -755,7 +854,10 @@ function populateCreatorSelects() {
       option.textContent = community.name;
       communitySelect.appendChild(option);
     });
-    communitySelect.addEventListener('change', updateCommunityDescription);
+    communitySelect.addEventListener('change', function() {
+      updateCommunityDescription();
+      updateCreatorUI();
+    });
   }
   
   // Classes
@@ -767,7 +869,10 @@ function populateCreatorSelects() {
       option.textContent = cls.name;
       classSelect.appendChild(option);
     });
-    classSelect.addEventListener('change', updateClassDescription);
+    classSelect.addEventListener('change', function() {
+      updateClassDescription();
+      updateCreatorUI();
+    });
   }
 }
 
@@ -779,7 +884,7 @@ function updateAncestryDescription() {
   if (selected && description) {
     description.innerHTML = `
       <p>${selected.description}</p>
-      <p><strong>Gifts:</strong> ${selected.gifts.join(', ')}</p>
+  <p><strong>Gifts:</strong> ${selected.gifts.join('')}</p>
       <p><strong>Common Archetypes:</strong> ${selected.archetypes.join(', ')}</p>
     `;
   } else if (description) {
@@ -809,23 +914,64 @@ function updateClassDescription() {
   const selected = VoidlightData.classes.find(c => c.name === select.value);
   
   if (selected && description) {
-    description.innerHTML = `
-      <p>${selected.description}</p>
-      <p><strong>Domains:</strong> ${selected.domains.join(', ')}</p>
-      <p><strong>Starting HP:</strong> ${selected.startingHP}</p>
-      <p><strong>Starting Evasion:</strong> ${selected.startingEvasion}</p>
-    `;
-    
-    // Enable and populate subclasses
+    // Only update the main subclassSelect dropdown and show the feature below
     if (subclassSelect) {
       subclassSelect.disabled = false;
+      const prevValue = subclassSelect.value;
       subclassSelect.innerHTML = '<option value="">Select Subclass</option>';
       selected.subclasses.forEach(sub => {
         const option = document.createElement('option');
-        option.value = sub;
-        option.textContent = sub;
+        option.value = sub.name;
+        option.textContent = sub.name;
         subclassSelect.appendChild(option);
       });
+      // Restore previous selection if possible
+      if (prevValue && Array.from(subclassSelect.options).some(opt => opt.value === prevValue)) {
+        subclassSelect.value = prevValue;
+      } else {
+        subclassSelect.value = '';
+      }
+      // Always update feature display and button color on change
+      if (!subclassSelect._hasListener) {
+        subclassSelect.addEventListener('change', function() {
+          updateClassDescription();
+          updateCreatorUI();
+        });
+        subclassSelect._hasListener = true;
+      }
+    }
+
+    // Find the selected foundation feature
+    let foundationFeatureHtml = '';
+    if (subclassSelect && subclassSelect.value) {
+      const sub = selected.subclasses.find(s => s.name === subclassSelect.value);
+      if (sub) {
+        foundationFeatureHtml = `<div id="foundationFeature" style="margin-top:1em;"><strong>Foundation Feature:</strong> <b>${sub.name}:</b> ${sub.feature}</div>`;
+      }
+    } else {
+      foundationFeatureHtml = '<div id="foundationFeature" style="margin-top:1em;"></div>';
+    }
+
+    // Render class info (without foundation feature)
+    description.innerHTML = `
+      <p>${selected.description}</p>
+      <p><strong>Domains:</strong> ${selected.domains.join(' & ')}</p>
+      <p><strong>Starting HP:</strong> ${selected.startingHP}</p>
+      <p><strong>Starting Evasion:</strong> ${selected.startingEvasion}</p>
+      <p><strong>Hope Feature:</strong> ${selected.hopeFeature || '-'}</p>
+      <p><strong>Class Feature:</strong> ${selected.classFeature || '-'}</p>
+      <p><strong>Proficiency:</strong> ${selected.proficiency || '-'}</p>
+    `;
+
+    // Insert foundation feature below the subclass dropdown in the DOM
+    if (subclassSelect && subclassSelect.parentElement) {
+      let featureDiv = document.getElementById('foundationFeature');
+      if (!featureDiv) {
+        featureDiv = document.createElement('div');
+        featureDiv.id = 'foundationFeature';
+        subclassSelect.parentElement.appendChild(featureDiv);
+      }
+      featureDiv.outerHTML = foundationFeatureHtml;
     }
   } else {
     if (description) description.innerHTML = '';
@@ -843,20 +989,30 @@ function updateSubclassList() {
   
   if (selected && subclassSelect) {
     subclassSelect.disabled = false;
+    const prevValue = subclassSelect.value;
     subclassSelect.innerHTML = '<option value="">Select Subclass</option>';
     selected.subclasses.forEach(sub => {
       const option = document.createElement('option');
-      option.value = sub;
-      option.textContent = sub;
+      option.value = sub.name;
+      option.textContent = sub.name;
       subclassSelect.appendChild(option);
     });
+    // Restore previous selection if possible
+    if (prevValue && Array.from(subclassSelect.options).some(opt => opt.value === prevValue)) {
+      subclassSelect.value = prevValue;
+    } else {
+      subclassSelect.value = '';
+    }
   }
 }
 
 function setupCreatorValidation() {
   // Traits validation
   document.querySelectorAll('.trait-select').forEach(select => {
-    select.addEventListener('change', validateTraits);
+    select.addEventListener('change', function() {
+      validateTraits();
+      updateCreatorUI();
+    });
   });
 }
 
@@ -1293,6 +1449,10 @@ function updateCharactersList() {
   
   let html = '';
   savedCharacters.forEach((character, index) => {
+    // Find class and subclass data
+    const classData = VoidlightData.classes.find(c => c.name === character.class);
+    const subclassData = classData && character.subclass ? classData.subclasses.find(s => s.name === character.subclass) : null;
+
     html += `
       <div class="character-card" style="border: 1px solid #e6e2c7; border-radius: 12px; background: #fff; margin-bottom: 2rem; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
         <div style="display: flex; justify-content: space-between; align-items: flex-start;">
@@ -1308,6 +1468,20 @@ function updateCharactersList() {
           <div><strong>Reputation:</strong> ${character.reputation !== undefined ? character.reputation : '-'}</div>
         </div>
         <div style="margin-top: 1rem;">
+          <strong>Class Attributes:</strong>
+          <ul style="margin: 0.3rem 0 0.7rem 1.2rem;">
+            <li><strong>Description:</strong> ${classData ? classData.description : '-'}</li>
+            <li><strong>Domains:</strong> ${classData ? classData.domains.join(' & ') : '-'}</li>
+            <li><strong>Starting HP:</strong> ${classData ? classData.startingHP : '-'}</li>
+            <li><strong>Starting Evasion:</strong> ${classData ? classData.startingEvasion : '-'}</li>
+            <li><strong>Hope Feature:</strong> ${classData ? classData.hopeFeature : '-'}</li>
+            <li><strong>Class Feature:</strong> ${classData ? classData.classFeature : '-'}</li>
+            <li><strong>Proficiency:</strong> ${classData ? classData.proficiency : '-'}</li>
+          </ul>
+          <strong>Subclass Feature:</strong>
+          <ul style="margin: 0.3rem 0 0.7rem 1.2rem;">
+            <li><strong>${character.subclass || '-'}:</strong> ${subclassData ? subclassData.feature : '-'}</li>
+          </ul>
           <strong>Traits:</strong>
           <ul style="margin: 0.3rem 0 0.7rem 1.2rem;">
             ${character.traits && Object.keys(character.traits).length > 0 ? Object.entries(character.traits).map(([trait, value]) => `<li>${trait}: ${value}</li>`).join('') : '<li>-</li>'}

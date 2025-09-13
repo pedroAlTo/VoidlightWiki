@@ -1,3 +1,9 @@
+/* Green state for Next button in creator */
+.btn--next-green {
+  background: linear-gradient(135deg, #2ecc40, #27ae60) !important;
+  color: #fff !important;
+  border-color: #27ae60 !important;
+}
 :root {
   /* Primitive Color Tokens */
   --color-white: rgba(255, 255, 255, 1);
