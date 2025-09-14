@@ -461,3 +461,35 @@ button:hover, .btn:hover {
     box-shadow: none;
   }
 }
+/* Cookie Consent Banner Styles */
+#cookieConsentBanner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #222;
+  color: white;
+  padding: 15px 20px;
+  font-family: 'aller', Arial, sans-serif;
+  font-size: 14px;
+  z-index: 10000;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+}
+#cookieConsentBanner button {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 3px;
+}
+#cookieConsentBanner button:hover {
+  background: #45a049;
+}
+#cookieConsentBanner a {
+  color: #4caf50;
+  text-decoration: underline;
+}
