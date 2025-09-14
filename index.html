@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CJWRG4RSC2"></script>
 <script>
@@ -23,6 +24,38 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- Adobe Fonts: Aller -->
     <link rel="stylesheet" href="https://use.typekit.net/yourkitid.css">
         <style>
+/* Cookie Consent Banner Styles */
+#cookieConsentBanner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #222;
+  color: white;
+  padding: 15px 20px;
+  font-family: 'aller', Arial, sans-serif;
+  font-size: 14px;
+  z-index: 10000;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+}
+#cookieConsentBanner button {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 3px;
+}
+#cookieConsentBanner button:hover {
+  background: #45a049;
+}
+#cookieConsentBanner a {
+  color: #4caf50;
+  text-decoration: underline;
+}
             .header {
                 display: flex;
                 align-items: center;
@@ -71,6 +104,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </style>
 </head>
 <body>
+    <!-- Cookie Consent Banner -->
+<div id="cookieConsentBanner" aria-live="polite" role="dialog" aria-label="Cookie consent">
+  This website uses cookies to enhance your experience. By continuing to browse, you agree to our 
+  <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+  <button id="acceptCookiesBtn" aria-label="Accept cookies">Accept</button>
+</div>
     <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4LZR7DD"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -532,5 +571,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </footer>
 
     <script src="app.js"></script>
+<script>
+(function() {
+  function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days*24*60*60*1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Lax";
+  }
+
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+      var c = ca[i];
+      while (c.charAt(0)==' ') c = c.substring(1,c.length);
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+  }
+
+  var consent = getCookie("cookie_consent");
+
+  if (!consent) {
+    var banner = document.getElementById('cookieConsentBanner');
+    banner.style.display = 'flex';
+
+    document.getElementById('acceptCookiesBtn').onclick = function() {
+      setCookie("cookie_consent", "accepted", 365);
+      banner.style.display = 'none';
+      // Analytics will continue running as GTM is already loaded
+    };
+  }
+})();
+</script> 
 </body>
 </html>
