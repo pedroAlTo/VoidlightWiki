@@ -1018,25 +1018,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     document.getElementById('save-character').addEventListener('click', function() {
-    const characterName = prompt('Enter a name for your character:');
-    if (characterName) {
-        character.name = characterName;
-        updateCharacterSheet();
-
-        // TRACKING EVENT DE COMPLETADO
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            event: 'character_creator_completed',
-            character_ancestry: character.ancestry,
-            character_community: character.community,
-            character_class: character.class,
-            character_subclass: character.subclass
-        });
-
-        alert(`Character "${characterName}" saved!`);
+        const characterName = prompt('Enter a name for your character:');
+        if (characterName) {
+            character.name = characterName;
+            updateCharacterSheet();
+            alert(`Character "${characterName}" saved!`);
         }
     });
-
     
     // Ancestry selection
     const ancestryButtons = document.querySelectorAll('.select-ancestry');

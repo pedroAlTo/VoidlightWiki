@@ -968,60 +968,35 @@ function populateCreatorSelects() {
 }
 
 function updateAncestryDescription() {
-    const select = document.getElementById('ancestrySelect');
-    const description = document.getElementById('ancestryDescription');
-    const selected = VoidlightData.ancestries.find(c => c.name === select.value);
-    
-    if (selected && description) {
-        // TRACKING EVENT
-        if (select.value) {
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-                event: 'character_creator_selection',
-                selection_type: 'ancestry',
-                selection_value: select.value,
-                selection_name: selected.name
-            });
-        }
-        
-        description.innerHTML = `
-            <h4>${selected.name}</h4>
-            <p><strong>Common Archetypes:</strong> ${selected.archetypes.join(', ')}</p>
-            <p>${selected.description}</p>
-            <p><strong>Gifts:</strong> ${selected.gifts.join('')}</p>
-        `;
-    } else if (description) {
-        description.innerHTML = '';
-    }
+  const select = document.getElementById('ancestrySelect');
+  const description = document.getElementById('ancestryDescription');
+  const selected = VoidlightData.ancestries.find(a => a.name === select.value);
+  
+  if (selected && description) {
+    description.innerHTML = `
+      <p>${selected.description}</p>
+  <p><strong>Gifts:</strong> ${selected.gifts.join('')}</p>
+      <p><strong>Common Archetypes:</strong> ${selected.archetypes.join(', ')}</p>
+    `;
+  } else if (description) {
+    description.innerHTML = '';
+  }
 }
 
 function updateCommunityDescription() {
-    const select = document.getElementById('communitySelect');
-    const description = document.getElementById('communityDescription');
-    const selected = VoidlightData.communities.find(c => c.name === select.value);
-    
-    if (selected && description) {
-        // TRACKING EVENT  
-        if (select.value) {
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-                event: 'character_creator_selection',
-                selection_type: 'community',
-                selection_value: select.value,
-                selection_name: selected.name
-            });
-        }
-        
-        description.innerHTML = `
-            <h4>${selected.name}</h4>
-            <p>${selected.description}</p>
-            <p><strong>Benefit:</strong> ${selected.benefit}</p>
-        `;
-    } else if (description) {
-        description.innerHTML = '';
-    }
+  const select = document.getElementById('communitySelect');
+  const description = document.getElementById('communityDescription');
+  const selected = VoidlightData.communities.find(c => c.name === select.value);
+  
+  if (selected && description) {
+    description.innerHTML = `
+      <p>${selected.description}</p>
+      <p><strong>Benefit:</strong> ${selected.benefit}</p>
+    `;
+  } else if (description) {
+    description.innerHTML = '';
+  }
 }
-
 
 function updateClassDescription() {
   const select = document.getElementById('classSelect');
@@ -1030,18 +1005,6 @@ function updateClassDescription() {
   const selected = VoidlightData.classes.find(c => c.name === select.value);
   
   if (selected && description) {
-    if (selected && description) {
-    // TRACKING EVENT PARA CLASE
-    if (select.value) {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            event: 'character_creator_selection',
-            selection_type: 'class',
-            selection_value: select.value,
-            selection_name: selected.name
-        });
-    }
-  } 
     // Only update the main subclassSelect dropdown and show the feature below
     if (subclassSelect) {
       subclassSelect.disabled = false;
@@ -1061,26 +1024,14 @@ function updateClassDescription() {
       }
       // Always update feature display and button color on change
       if (!subclassSelect._hasListener) {
-    subclassSelect.addEventListener('change', function() {
-        // TRACKING EVENT PARA SUBCLASE
-        if (this.value) {
-            const sub = selected.subclasses.find(s => s.name === this.value);
-            if (sub) {
-                window.dataLayer = window.dataLayer || [];
-                window.dataLayer.push({
-                    event: 'character_creator_selection',
-                    selection_type: 'subclass',
-                    selection_value: this.value,
-                    selection_name: sub.name
-                });
-            }
-        }
-        
-        updateClassDescription();
-        updateCreatorUI();
-    });
-    subclassSelect._hasListener = true;
-}
+        subclassSelect.addEventListener('change', function() {
+          updateClassDescription();
+          updateCreatorUI();
+        });
+        subclassSelect._hasListener = true;
+      }
+    }
+
     // Find the selected foundation feature
     let foundationFeatureHtml = '';
     if (subclassSelect && subclassSelect.value) {
@@ -1155,7 +1106,6 @@ function setupCreatorValidation() {
     });
   });
 }
-window.setupCreatorValidation = setupCreatorValidation;
 
 function validateTraits() {
   const selects = document.querySelectorAll('.trait-select');
@@ -1417,8 +1367,6 @@ function validateCurrentStep() {
       return true;
   }
 }
-// Make validateCurrentStep globally accessible
-window.validateCurrentStep = validateCurrentStep;
 
 function saveCurrentStepData() {
   try {
@@ -1568,7 +1516,6 @@ function setupCharacterManager() {
   if (importFile) importFile.addEventListener('change', importCharacters);
   if (clearBtn) clearBtn.addEventListener('click', clearCharacters);
 }
-window.setupCharacterManager = setupCharacterManager;
 
 function loadSavedCharacters() {
   try {
@@ -1730,7 +1677,6 @@ function deleteCharacter(index) {
 window.deleteCharacter = deleteCharacter;
 
 // Initialize the application
-
 console.log(`
 ╔══════════════════════════════════════════════════════════════╗
 ║                     VOIDLIGHT WIKI                          ║
@@ -1740,9 +1686,9 @@ console.log(`
 ║  • Complete wiki with all game content                      ║
 ║  • Working character creator (8 steps)                      ║
 ║  • Character management with import/export                  ║
+// (Admin panel for data management removed)
 ║  • Local storage for character persistence                  ║
 ║                                                              ║
 ║  Ready to forge your stellar soul!                         ║
 ╚══════════════════════════════════════════════════════════════╝
 `);
-  }
