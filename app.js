@@ -240,6 +240,94 @@ let currentCharacter = {
 let currentStep = 1;
 let savedCharacters = [];
 
+// --- Funnel Analytics ---
+const FunnelAnalytics = {
+  sessionId: null,
+  startTime: null,
+  stepTimes: {},
+  currentStep: null,
+  completed: false,
+  abandoned: false,
+  characterData: {},
+};
+
+function startFunnel() {
+  FunnelAnalytics.sessionId = 'cc_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  FunnelAnalytics.startTime = Date.now();
+  FunnelAnalytics.stepTimes = {};
+  FunnelAnalytics.currentStep = 1;
+  FunnelAnalytics.completed = false;
+  FunnelAnalytics.abandoned = false;
+  FunnelAnalytics.characterData = {};
+  sendFunnelEvent('Funnel_Started', { step: 1 });
+}
+
+function sendFunnelEvent(action, extra = {}) {
+  const data = {
+    event: action,
+    sessionId: FunnelAnalytics.sessionId,
+    timestamp: new Date().toISOString(),
+    step: FunnelAnalytics.currentStep,
+    stepTimes: FunnelAnalytics.stepTimes,
+    completed: FunnelAnalytics.completed,
+    abandoned: FunnelAnalytics.abandoned,
+    ...extra
+  };
+  if (window.gtag) gtag('event', action, data);
+  if (window.analytics) window.analytics.track(action, data);
+  if (window.customAnalytics) window.customAnalytics.track(data);
+  // For debugging
+  console.log('Funnel Analytics:', data);
+}
+
+function trackStepChange(prevStep, newStep) {
+  const now = Date.now();
+  if (prevStep) {
+    const prevTime = FunnelAnalytics.stepTimes[prevStep]?.start || FunnelAnalytics.startTime;
+    FunnelAnalytics.stepTimes[prevStep] = {
+      ...FunnelAnalytics.stepTimes[prevStep],
+      end: now,
+      duration: now - prevTime
+    };
+  }
+  FunnelAnalytics.currentStep = newStep;
+  FunnelAnalytics.stepTimes[newStep] = { start: now };
+  sendFunnelEvent('Step_Entered', { step: newStep });
+}
+
+function trackFunnelCompletion() {
+  FunnelAnalytics.completed = true;
+  const now = Date.now();
+  // End last step
+  if (FunnelAnalytics.currentStep) {
+    const prevTime = FunnelAnalytics.stepTimes[FunnelAnalytics.currentStep]?.start || FunnelAnalytics.startTime;
+    FunnelAnalytics.stepTimes[FunnelAnalytics.currentStep] = {
+      ...FunnelAnalytics.stepTimes[FunnelAnalytics.currentStep],
+      end: now,
+      duration: now - prevTime
+    };
+  }
+  FunnelAnalytics.characterData = { ...currentCharacter };
+  sendFunnelEvent('Funnel_Completed', { character: FunnelAnalytics.characterData });
+}
+
+function trackFunnelAbandonment() {
+  if (FunnelAnalytics.completed || FunnelAnalytics.abandoned) return;
+  FunnelAnalytics.abandoned = true;
+  const now = Date.now();
+  if (FunnelAnalytics.currentStep) {
+    const prevTime = FunnelAnalytics.stepTimes[FunnelAnalytics.currentStep]?.start || FunnelAnalytics.startTime;
+    FunnelAnalytics.stepTimes[FunnelAnalytics.currentStep] = {
+      ...FunnelAnalytics.stepTimes[FunnelAnalytics.currentStep],
+      end: now,
+      duration: now - prevTime
+    };
+  }
+  FunnelAnalytics.characterData = { ...currentCharacter };
+  sendFunnelEvent('Funnel_Abandoned', { character: FunnelAnalytics.characterData });
+}
+// --- End Funnel Analytics ---
+
 // Initialize Application
 document.addEventListener('DOMContentLoaded', function() {
   console.log('Initializing Voidlight application...');
@@ -787,6 +875,7 @@ function renderCoreRules() {
 // Character Creator Setup
 function setupCharacterCreator() {
   try {
+    startFunnel();
     setupCreatorNavigation();
     populateCreatorSelects();
     setupCreatorValidation();
@@ -818,8 +907,10 @@ function setupCreatorNavigation() {
 function goToStep(stepNum) {
   if (stepNum < 1 || stepNum > 8) return;
   if (stepNum > currentStep && !validateCurrentStep()) return;
-  
+  // Track step change for analytics
+  const prevStep = currentStep;
   currentStep = stepNum;
+  trackStepChange(prevStep, stepNum);
   updateCreatorUI();
   saveCurrentStepData();
   console.log('Moved to step:', currentStep);
@@ -1443,6 +1534,9 @@ function finishCharacter() {
   // Add completion timestamp
   currentCharacter.created = new Date().toISOString();
 
+  // Track funnel completion
+  trackFunnelCompletion();
+
   // Save to localStorage
   savedCharacters.push({ ...currentCharacter });
   try {
@@ -1457,11 +1551,14 @@ function finishCharacter() {
   // Switch to character manager
   switchTab('manager');
   updateCharactersList();
-  
   alert('Character created successfully!');
 }
 
 function resetCharacterCreator() {
+  // If not completed, track abandonment
+  if (!FunnelAnalytics.completed && !FunnelAnalytics.abandoned && FunnelAnalytics.sessionId) {
+    trackFunnelAbandonment();
+  }
   currentCharacter = {
     name: "",
     ancestry: null,
