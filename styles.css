@@ -1,3 +1,134 @@
+.hero-overview {
+  width: 100%;
+  min-height: 340px;
+  background: url('img/Hero.png') center center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+.hero-content {
+  background: rgba(44, 44, 44, 0.589);
+  border-radius: 18px;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.12);
+  padding: 2.5rem 2rem 2rem 2rem;
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 12px #fff8;
+}
+.hero-content #ctaCreateCharacter {
+  margin-top: 0.5rem;
+}
+.cta-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 2.5rem;
+}
+.cta-main-container h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  color: #181c22;
+}
+#ctaStartCharacterCreation {
+  background: linear-gradient(90deg, #f2b94f 0%, #eeba5f 100%);
+  color: #000000;
+  border: none;
+  outline: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  border-radius: 12px;
+  box-shadow: 0 0 24px 4px rgba(189, 161, 5, 0.18), 0 2px 8px rgba(95, 73, 17, 0.12);
+  position: relative;
+  z-index: 2;
+  /*text-shadow: 0 0 8px #fff, 0 0 1px #fff;*/
+  padding: 1em 2.5em;
+  margin-top: 2.5rem;
+  transition: box-shadow 0.2s, background 0.2s, filter 0.2s;
+  overflow: hidden;
+}
+#ctaStartCharacterCreation:hover, #ctaStartCharacterCreation:focus {
+  background: linear-gradient(90deg, #014814 0%, #011d02 100%);
+  box-shadow: 0 0 48px 12px rgba(1, 68, 24, 0.45), 0 2px 16px rgba(0,0,0,0.18);
+  filter: brightness(1.15) drop-shadow(0 0 12px rgba(255, 255, 255, 0.346));
+  color: #ffffff;
+}
+#ctaStartCharacterCreation::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.2) 100%);
+  transform: skewX(-25deg);
+  transition: left 0.5s;
+  pointer-events: none;
+}
+#ctaStartCharacterCreation:hover::before {
+  left: 120%;
+  transition: left 0.5s;
+  animation: cta-shine-move 0.9s linear;
+}
+/* CTA Button: Start your Journey into VoidLight */
+#ctaCreateCharacter {
+  background: linear-gradient(90deg, #f2b94f 0%, #eeba5f 100%);
+  color: #000000;
+  border: none;
+  outline: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  border-radius: 12px;
+  box-shadow: 0 0 24px 4px rgba(189, 161, 5, 0.18), 0 2px 8px rgba(95, 73, 17, 0.12);
+  position: relative;
+  z-index: 2;
+  /*text-shadow: 0 0 8px #fff, 0 0 1px #fff;*/
+  padding: 1em 2.5em;
+  margin-top: 2.5rem;
+  transition: box-shadow 0.2s, background 0.2s, filter 0.2s;
+  overflow: hidden;
+}
+#ctaCreateCharacter:hover, #ctaCreateCharacter:focus {
+  background: linear-gradient(90deg, #014814 0%, #011d02 100%);
+  box-shadow: 0 0 48px 12px rgba(1, 68, 24, 0.45), 0 2px 16px rgba(0,0,0,0.18);
+  filter: brightness(1.15) drop-shadow(0 0 12px rgba(255, 255, 255, 0.346));
+    color: #ffffff;
+
+}
+#ctaCreateCharacter::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.2) 100%);
+  transform: skewX(-25deg);
+  transition: left 0.5s;
+  pointer-events: none;
+}
+#ctaCreateCharacter:hover::before {
+  left: 120%;
+  transition: left 0.5s;
+  animation: cta-shine-move 0.9s linear;
+}
+@keyframes cta-shine-move {
+  0% { left: -75%; }
+  100% { left: 120%; }
+}
 /* Sci-Fi Elite Wiki Section Menu */
 .wiki-nav {
   display: flex;

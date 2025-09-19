@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "tbsk61bla9");
-</script>
+    
+    <link rel="stylesheet" href="styles.css">
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CJWRG4RSC2"></script>
 <script>
@@ -177,6 +172,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="wiki-content">
                 <!-- Overview Section -->
                 <section id="overview" class="wiki-section active">
+                    <div class="hero-overview">
+                        <div class="hero-content">
+                            <h2 class="hero-title">Start your Journey into the VoidLight Galaxy</h2>
+                            <button id="ctaCreateCharacter">Create your character now!</button>
+                        </div>
+                    </div>
                     <h2>Overview</h2>
                     <div class="content-grid">
                         <div class="overview-text">
@@ -237,6 +238,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <!-- Character Creation Section -->
                 <section id="character-creation" class="wiki-section">
                     <h2>Forging Your Stellar Soul</h2>
+                    <button id="ctaStartCharacterCreation" class="btn btn--primary" style="margin-bottom:2rem; font-size:1.1rem; padding:0.6em 1.8em;">Start Character Creation</button>
                     <div class="creation-steps">
                         <div class="step">
                             <span class="step-number">1</span>
@@ -309,12 +311,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <section id="reputation" class="wiki-section">
                     <h2>Reputation System</h2>
                     <div id="reputationContent" class="reputation-content"></div>
-                </section>
-
-                <!-- Equipment Section -->
-                <section id="equipment" class="wiki-section">
-                    <h2>Equipment & Technology</h2>
-                    <div id="equipmentContent" class="equipment-content"></div>
                 </section>
 
                 <!-- Great Houses Section -->
@@ -576,7 +572,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </footer>
 
-    <script src="app.js"></script>
+        <script src="app.js"></script>
+        <script>
+        // CTA buttons to switch to character creator tab
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctaCreate = document.getElementById('ctaCreateCharacter');
+            var ctaStart = document.getElementById('ctaStartCharacterCreation');
+            function goToCreator() {
+                var creatorTab = document.querySelector('.tab-btn[data-tab="creator"]');
+                if (creatorTab) creatorTab.click();
+            }
+            if (ctaCreate) ctaCreate.addEventListener('click', goToCreator);
+            if (ctaStart) ctaStart.addEventListener('click', goToCreator);
+        });
+        </script>
 <script>
 (function() {
   function setCookie(name, value, days) {
